@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&family=News+Cycle:wght@400;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000;
+  color: #FFE81F; /* Classic Star Wars Yellow */
+  font-family: 'News Cycle', sans-serif;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Pathway Gothic One', sans-serif;
+  text-transform: uppercase;
+}

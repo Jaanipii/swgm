@@ -1,0 +1,5 @@
+1. Go to http://127.0.0.1:5173 
+2. Click any timeline event to dismiss the intro and reveal the galaxy map.
+3. Observe if there is a beautiful spread of thousands of stars (rendered by canvas) across the galaxy.
+4. Click on a specific timeline episode, ideally one with a somewhat obscure planet (e.g. "Obi-Wan Kenobi", "Ahsoka", "Andor" episodes, or an obscure Clone Wars one).
+5. Watch the map pan and verify it highlights the dynamically placed star on the map.

@@ -1,0 +1,846 @@
+<!DOCTYPE html><html lang="en"><head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>starwars-map</title>
+  <style type="text/css" data-vite-dev-id="/Users/jaani/Desktop/SW SEURAIN/starwars-map/src/index.css">@import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&family=News+Cycle:wght@400;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000;
+  color: #FFE81F; /* Classic Star Wars Yellow */
+  font-family: 'News Cycle', sans-serif;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Pathway Gothic One', sans-serif;
+  text-transform: uppercase;
+}
+</style><style type="text/css" data-vite-dev-id="/Users/jaani/Desktop/SW SEURAIN/starwars-map/src/App.css">.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #0B1021 0%, #000 100%);
+}
+
+/* Galaxy Map Section */
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ui-elements-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.ui-elements-container.transitioning {
+  opacity: 0;
+  pointer-events: none !important;
+}
+
+.ui-elements-container.transitioning > * {
+  pointer-events: none !important;
+}
+
+.ui-elements-container > * {
+  pointer-events: auto;
+}
+
+.galaxy-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Planet Tooltip Glassmorphism */
+.planet-tooltip {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  background: rgba(10, 20, 40, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 232, 31, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  color: white;
+  width: 300px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.planet-tooltip h3 {
+  color: #ffe81f;
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.planet-tooltip p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ccc;
+}
+
+/* Timeline Crawl Section */
+.crawl-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 450px;
+  height: 100%;
+  z-index: 10;
+  background: linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: visible;
+  padding-top: 0;
+  pointer-events: none;
+  transition: all 1s ease-in-out;
+}
+
+.crawl-container.fullscreen {
+  width: 100vw;
+  background: transparent;
+  padding-top: 0;
+  justify-content: center;
+}
+
+.crawl-container.fullscreen .timeline-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.crawl-container.fullscreen .timeline-item {
+  width: auto;
+  max-width: none;
+}
+
+.crawl-perspective {
+  perspective: 250px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 0;
+}
+
+.crawl-tilt {
+  width: calc(100% + 220px);
+  margin-left: -220px;
+  padding-left: 220px;
+  box-sizing: border-box;
+  height: 100%;
+  transform: rotateX(15deg);
+  transform-origin: 50% 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  pointer-events: auto;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 10%, black 25%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, transparent 10%, black 25%, black 100%);
+}
+
+.crawl-tilt::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.crawl-content {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 300px;
+  padding-top: 40vh; /* Provide empty space at the top so items don't start behind the title */
+}
+
+.crawl-title {
+  position: absolute;
+  top: 5vh;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+  z-index: 20;
+  pointer-events: none; /* Let clicks pass through to items if needed */
+}
+
+.crawl-title h1 {
+  font-size: 5rem;
+  line-height: 0.8;
+  margin: 0;
+  letter-spacing: 4px;
+  color: #FFE81F;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.crawl-title h2 {
+  font-size: 2rem;
+  margin: 10px 0;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.crawl-title p {
+  font-size: 1.2rem;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  margin-bottom: 20px;
+}
+
+.timeline-search-input {
+  width: 80%;
+  max-width: 400px;
+  padding: 12px 20px;
+  margin: 0 auto;
+  background: rgba(10, 20, 40, 0.6);
+  border: 1px solid rgba(255, 232, 31, 0.3);
+  border-radius: 20px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  outline: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  pointer-events: auto; /* Required since crawl-title is pointer-events: none */
+}
+
+.timeline-search-input:focus {
+  border-color: rgba(255, 232, 31, 0.8);
+  box-shadow: 0 0 15px rgba(255, 232, 31, 0.3);
+  background: rgba(10, 20, 40, 0.8);
+}
+
+.timeline-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.timeline-no-results {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255, 0, 0, 0.05);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-top: 20px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.timeline-no-results h3 {
+  color: #ff4a4a;
+  letter-spacing: 2px;
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+}
+
+.timeline-no-results p {
+  color: #aaa;
+  margin: 0;
+}
+
+/* Timeline Item styling */
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 20px; /* Space from search bar */
+  padding-left: 10px; /* Very tight gap between spine and cards */
+  padding-bottom: 50px;
+}
+
+.timeline-item {
+  display: flex;
+  background: rgba(255, 232, 31, 0.05);
+  border-left: 4px solid #FFE81F;
+  padding: 15px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(90deg, rgba(255,232,31,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.timeline-item:hover::before, .timeline-item.active::before {
+  opacity: 1;
+}
+
+.timeline-item.active {
+  background: rgba(255, 232, 31, 0.2);
+  border-left: 4px solid #fff;
+}
+
+.item-year {
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  min-width: 80px;
+  color: #fff;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item-title {
+  margin: 0 0 5px 0;
+  font-size: 1.5rem;
+  color: #FFE81F;
+  letter-spacing: 1px;
+}
+
+.timeline-item.active .item-title,
+.timeline-item:hover .item-title {
+  color: #fff;
+}
+
+.item-era {
+  font-size: 0.9rem;
+  color: #4af;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.item-planet {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+/* Event overlay — completely uncoupled from flex layout */
+.timeline-events-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Individual event marker — absolutely positioned at calculated Y */
+.timeline-event-marker {
+  position: absolute;
+  left: 0;
+  height: 0;
+  width: 100%; /* Spans the width for mouse events */
+  overflow: visible;
+  margin-left: 0; /* Align with inner padding edge */
+  z-index: 5;
+  pointer-events: none;
+}
+
+.event-marker-dot {
+  position: absolute;
+  left: -15px; /* -10px padding + -5px to hit border center */
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffe81f;
+  box-shadow: 0 0 6px rgba(255, 232, 31, 1); /* Made glow stronger */
+  transition: all 0.3s ease;
+  z-index: 6;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.timeline-event-marker:hover .event-marker-dot {
+  width: 10px;
+  height: 10px;
+  left: -16px;
+  top: -5px;
+  box-shadow: 0 0 14px rgba(255, 232, 31, 0.9), 0 0 24px rgba(255, 232, 31, 0.4);
+}
+
+.event-marker-name {
+  position: absolute;
+  right: calc(100% + 24px); /* Pushes text way over to the left of the border */
+  top: -6px;
+  font-size: 0.6rem;
+  color: rgba(255, 232, 31, 0.5); /* increased default opacity for readability */
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: right;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.timeline-event-marker:hover .event-marker-name {
+  color: #ffe81f;
+}
+
+/* Hover Tooltip for inline event markers */
+.event-marker-tooltip {
+  background: rgba(10, 20, 40, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 232, 31, 0.4);
+  border-radius: 8px;
+  padding: 16px 20px;
+  width: 320px;
+  z-index: 50;
+  pointer-events: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+}
+
+.event-marker-tooltip h4 {
+  color: #ffe81f;
+  font-size: 1rem;
+  margin: 0 0 4px 0;
+  letter-spacing: 1px;
+}
+
+.event-marker-tooltip span {
+  font-size: 0.8rem;
+  color: #82dcff;
+  letter-spacing: 1px;
+}
+
+.event-marker-tooltip p {
+  color: #ccc;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 8px 0 0 0;
+}
+
+/* Timeline Progress Bar */
+.timeline-progress-bar-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 20px 40px;
+  background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.progress-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 5px #000;
+}
+
+.watched-label {
+  color: #FFE81F;
+}
+
+.remaining-label {
+  color: #aaa;
+}
+
+.progress-bar-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #FFE81F;
+  box-shadow: 0 0 10px #FFE81F, 0 0 20px #FFE81F;
+  transition: width 0.1s ease-out;
+}
+
+/* Lore Archive Card */
+.lore-card {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 450px;
+  height: 100vh;
+  background: rgba(10, 20, 40, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-left: 2px solid rgba(255, 232, 31, 0.3);
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.8);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  scrollbar-width: none;
+}
+.lore-card::-webkit-scrollbar {
+  display: none;
+}
+
+.lore-card-header {
+  padding: 30px 40px 20px 40px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.close-btn:hover {
+  color: #FFE81F;
+}
+
+.lore-card-header h2 {
+  font-size: 2.2rem;
+  color: #FFE81F;
+  margin: 0 0 10px 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(255, 232, 31, 0.3);
+}
+
+.lore-meta {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.lore-tag {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.era-tag {
+  background: rgba(74, 186, 255, 0.15);
+  color: #4af;
+  border: 1px solid rgba(74, 186, 255, 0.3);
+}
+.type-tag {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lore-date {
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 1.2rem;
+  color: #ddd;
+}
+.lore-date .label {
+  color: #666;
+  margin-right: 8px;
+}
+.lore-date .value {
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.lore-card-body {
+  padding: 30px 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.lore-cover.placeholder {
+  width: 100%;
+  height: 200px;
+  background: #000;
+  border: 1px solid rgba(255,232,31,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  color: #FFE81F;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: inset 0 0 20px rgba(255,232,31,0.1);
+}
+.lore-cover.placeholder-logo {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.crest {
+  width: 80px;
+  height: 80px;
+  border: 4px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(255,255,255,0.05);
+}
+
+.lore-section h3 {
+  font-size: 0.9rem;
+  color: #666;
+  letter-spacing: 2px;
+  margin: 0 0 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 5px;
+}
+
+.lore-section .highlight-text {
+  font-size: 1.4rem;
+  color: #4af;
+  margin: 0 0 5px 0;
+  text-shadow: 0 0 10px rgba(74, 186, 255, 0.3);
+}
+.lore-section .sub-text {
+  color: #aaa;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.pill-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.character-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #ddd;
+  transition: all 0.2s;
+}
+.character-pill:hover {
+  background: rgba(255, 232, 31, 0.15);
+  border-color: rgba(255, 232, 31, 0.5);
+  color: #FFE81F;
+}
+
+.terminal-text {
+  font-family: monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ccc;
+  background: rgba(0,0,0,0.3);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid #4af;
+}
+
+.lore-card-footer {
+  padding: 20px 40px;
+  background: rgba(0,0,0,0.5);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.next-btn {
+  width: 100%;
+  padding: 15px;
+  background: rgba(74, 186, 255, 0.1);
+  border: 1px solid rgba(74, 186, 255, 0.3);
+  color: #4af;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.next-btn:hover {
+  background: rgba(74, 186, 255, 0.2);
+  box-shadow: 0 0 15px rgba(74, 186, 255, 0.2);
+}
+.next-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: rgba(255,255,255,0.1);
+  color: #666;
+}
+.next-btn.disabled:hover {
+  background: rgba(74, 186, 255, 0.1);
+  box-shadow: none;
+}
+
+/* Custom Scrollbar for Filter Panel */
+.filter-scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+.filter-scroll-area::-webkit-scrollbar-track {
+  background: rgba(10, 20, 40, 0.5);
+  border-radius: 4px;
+}
+.filter-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(255, 232, 31, 0.3);
+  border-radius: 4px;
+}
+.filter-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 232, 31, 0.6);
+}
+.filter-scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 232, 31, 0.3) rgba(10, 20, 40, 0.5);
+}
+
+/* Custom Checkbox Styling */
+.filter-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: rgba(10, 20, 40, 0.8);
+  margin: 0;
+  font: inherit;
+  color: #ffe81f;
+  width: 1.15em;
+  height: 1.15em;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.15em;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-checkbox:hover {
+  border-color: rgba(255, 232, 31, 0.6);
+}
+
+.filter-checkbox::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #ffe81f;
+  background-color: #ffe81f;
+  transform-origin: center;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.filter-checkbox:checked {
+  border-color: #ffe81f;
+  background-color: rgba(255, 232, 31, 0.1);
+}
+
+.filter-checkbox:checked::before {
+  transform: scale(1);
+}
+</style><style type="text/css">.transform-component-module_wrapper__SPB86 {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: hidden;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  transform: translate3d(0, 0, 0);
+}
+.transform-component-module_content__FBWxo {
+  display: flex;
+  flex-wrap: wrap;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 0;
+  padding: 0;
+  transform-origin: 0% 0%;
+}
+.transform-component-module_content__FBWxo img {
+  pointer-events: none;
+}
+</style></head>
+  <body>
+    <div id="root"><div id="error-boundary" style="padding: 50px; background: red; color: white; z-index: 999999; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"><h2>React Crash!</h2><pre id="error-text" style="white-space: pre-wrap;">ReferenceError: elapsed is not defined<br>
+    at HyperspaceOverlay (http://localhost:5173/src/components/Map/HyperspaceOverlay.jsx?t=1773932769177:7:20)
+    at div (&lt;anonymous&gt;)
+    at MotionDOMComponent (http://localhost:5173/node_modules/.vite/deps/framer-motion.js?v=00c52cc7:9676:35)
+    at PopChildMeasure (http://localhost:5173/node_modules/.vite/deps/framer-motion.js?v=00c52cc7:8545:23)
+    at PopChild (http://localhost:5173/node_modules/.vite/deps/framer-motion.js?v=00c52cc7:8571:21)
+    at PresenceChild (http://localhost:5173/node_modules/.vite/deps/framer-motion.js?v=00c52cc7:8627:24)
+    at AnimatePresence (http://localhost:5173/node_modules/.vite/deps/framer-motion.js?v=00c52cc7:8796:26)
+    at div (&lt;anonymous&gt;)
+    at App (http://localhost:5173/src/App.jsx?t=1773933012125:24:48)
+    at ErrorBoundary (http://localhost:5173/src/main.jsx?t=1773933912839:9:3)</pre></div></div>
+    <script type="module" src="/src/main.jsx?t=1773933912839"></script>
+  
+
+</body></html>
