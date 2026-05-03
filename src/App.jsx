@@ -28,6 +28,7 @@ function App() {
   const [activeEra, setActiveEra] = useState("Unknown");
   const [isIntroMode, setIsIntroMode] = useState(true);
   const [loreMode, setLoreMode] = useState(null);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isSnakeTimelineOpen, setIsSnakeTimelineOpen] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [isMapTransitioning, setIsMapTransitioning] = useState(false);
@@ -740,6 +741,87 @@ function App() {
             zIndex: 10,
             pointerEvents: 'none',
           }}>
+            {/* Info Button */}
+            <div style={{ position: 'absolute', top: '20px', right: '20px', pointerEvents: 'auto', zIndex: 20 }}>
+              <button 
+                onClick={() => setIsInfoOpen(true)}
+                style={{
+                  width: '40px', height: '40px', borderRadius: '50%',
+                  background: 'rgba(10, 20, 40, 0.6)', border: '1px solid rgba(56, 189, 248, 0.4)',
+                  color: '#38bdf8', fontSize: '1.2rem', fontFamily: 'Orbitron, sans-serif', fontStyle: 'italic',
+                  cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  boxShadow: '0 0 10px rgba(56, 189, 248, 0.2)', backdropFilter: 'blur(4px)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 0 20px rgba(56, 189, 248, 0.6)'; e.currentTarget.style.background = 'rgba(10, 20, 40, 0.9)'; e.currentTarget.style.transform = 'scale(1.05)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 0 10px rgba(56, 189, 248, 0.2)'; e.currentTarget.style.background = 'rgba(10, 20, 40, 0.6)'; e.currentTarget.style.transform = 'scale(1)'; }}
+                title="Information & Disclaimers"
+              >
+                i
+              </button>
+            </div>
+
+            {/* Info Modal */}
+            <AnimatePresence>
+              {isInfoOpen && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  style={{
+                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'rgba(5, 10, 20, 0.8)', backdropFilter: 'blur(8px)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    pointerEvents: 'auto', zIndex: 100
+                  }}
+                  onClick={() => setIsInfoOpen(false)}
+                >
+                  <div 
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      width: '90%', maxWidth: '600px', maxHeight: '85vh', overflowY: 'auto',
+                      background: 'linear-gradient(135deg, rgba(10, 20, 40, 0.95), rgba(5, 10, 20, 0.98))',
+                      border: '1px solid rgba(56, 189, 248, 0.5)', borderRadius: '8px',
+                      padding: 'clamp(20px, 4vw, 30px)', color: '#e2e8f0', fontFamily: 'Inter, sans-serif',
+                      boxShadow: '0 0 30px rgba(56, 189, 248, 0.2), inset 0 0 20px rgba(56, 189, 248, 0.1)',
+                      position: 'relative'
+                    }}
+                  >
+                    <button 
+                      onClick={() => setIsInfoOpen(false)}
+                      style={{
+                        position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none',
+                        color: '#38bdf8', fontSize: '1.5rem', cursor: 'pointer', padding: '5px',
+                        transition: 'transform 0.2s ease'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
+                      onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    >×</button>
+
+                    <h2 style={{ fontFamily: 'Orbitron, sans-serif', color: '#fff', fontSize: '1.4rem', marginTop: 0, letterSpacing: '2px', textTransform: 'uppercase', borderBottom: '1px solid rgba(56, 189, 248, 0.3)', paddingBottom: '10px' }}>
+                      Galactic Archives
+                    </h2>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', fontSize: '0.9rem', lineHeight: '1.6' }}>
+                      <p>Welcome to the <strong>Galactic Archives</strong>, a comprehensive interactive atlas and timeline of the Star Wars canon universe.</p>
+                      
+                      <ul style={{ paddingLeft: '20px', margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <li><strong style={{ color: '#38bdf8' }}>Interactive Map:</strong> Explore a pan-and-zoomable galaxy map featuring canon planet locations, regions, and hyperspace lanes. Note: The galaxy is represented on a 2D plane for navigation purposes.</li>
+                        <li><strong style={{ color: '#38bdf8' }}>Chronological Timeline:</strong> Navigate a comprehensive timeline of all canon media (Movies, Series, Books, Comics, and Games).</li>
+                        <li><strong style={{ color: '#38bdf8' }}>Progress Tracking:</strong> Log your watched/read items to track your completion progress in hours.</li>
+                        <li><strong style={{ color: '#38bdf8' }}>Disney+ Integration:</strong> Click the Disney+ icon on supported titles to launch directly into the episode or movie.</li>
+                      </ul>
+
+                      <div style={{ marginTop: '10px', padding: '15px', background: 'rgba(56, 189, 248, 0.05)', borderLeft: '3px solid #38bdf8', fontSize: '0.8rem', color: '#94a3b8' }}>
+                        <strong>DISCLAIMER:</strong> The Galactic Archives is an unofficial fan-made project. It is not endorsed by, sponsored by, or affiliated with Lucasfilm Ltd., The Walt Disney Company, or any of their affiliates. "Star Wars" and all related names, characters, vehicles, and locations are registered trademarks of their respective owners. This application is provided for free for educational and entertainment purposes only.
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             <div style={{
               position: 'absolute',
               top: 'clamp(15%, 20vh, 25%)',

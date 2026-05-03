@@ -93,7 +93,7 @@ export default function PlanetSearch({ allPlanets, onSelect, onHighlight, onResu
         </svg>
         <input
           type="text"
-          placeholder="Search 17,000+ star systems..."
+          placeholder="Search 2,000+ canon planets..."
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
