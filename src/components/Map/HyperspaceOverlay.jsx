@@ -12,11 +12,13 @@ export default function HyperspaceOverlay() {
     canvas.width = width;
     canvas.height = height;
 
+    const depth = Math.max(width, 1500);
+
     const stars = Array.from({ length: 500 }).map(() => ({
       x: (Math.random() - 0.5) * width,
       y: (Math.random() - 0.5) * height,
-      z: Math.random() * width,
-      pz: Math.random() * width
+      z: Math.random() * depth,
+      pz: Math.random() * depth
     }));
 
     let animationFrameId;
@@ -53,10 +55,10 @@ export default function HyperspaceOverlay() {
 
         // Reset star if it passes the camera
         if (star.z < 1) {
-          star.z = width;
+          star.z = depth;
           star.x = (Math.random() - 0.5) * width;
           star.y = (Math.random() - 0.5) * height;
-          star.pz = width;
+          star.pz = depth;
         }
 
         const sx = star.x / star.z * width;
@@ -73,7 +75,7 @@ export default function HyperspaceOverlay() {
         ctx.moveTo(px, py);
         ctx.lineTo(sx, sy);
         // Lines get thicker as they approach the camera
-        ctx.lineWidth = Math.max(1, (1 - star.z / width) * 4);
+        ctx.lineWidth = Math.max(1, (1 - star.z / depth) * 4);
         ctx.strokeStyle = color;
         ctx.stroke();
       });
