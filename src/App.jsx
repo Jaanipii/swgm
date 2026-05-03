@@ -780,8 +780,8 @@ function App() {
                 @keyframes cta-glow {
                   0%, 100% { box-shadow: 0 0 15px rgba(255, 232, 31, 0.15), inset 0 0 15px rgba(255, 232, 31, 0.05); }
                   50% { box-shadow: 0 0 25px rgba(255, 232, 31, 0.3), inset 0 0 20px rgba(255, 232, 31, 0.08); }
-              }
-            `}</style>
+                }
+              `}</style>
             <button
               onClick={jumpToHyperspace}
               style={{
@@ -826,6 +826,7 @@ function App() {
               </svg>
               ENTER THE GALAXY
             </button>
+            </div>
           </div>
         )}
 
