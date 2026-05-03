@@ -15,6 +15,13 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
   const [isWikiLoading, setIsWikiLoading] = useState(false);
   const [showSyncModal, setShowSyncModal] = useState(false);
   const [syncTypes, setSyncTypes] = useState(['movie', 'series']);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1023);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 1023);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -56,9 +63,9 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
       <AnimatePresence>
         <motion.div 
           className="lore-card"
-          initial={{ x: 400, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: 400, opacity: 0 }}
+          initial={isMobile ? { y: '100%', opacity: 0 } : { x: 400, opacity: 0 }}
+          animate={{ x: 0, y: 0, opacity: 1 }}
+          exit={isMobile ? { y: '100%', opacity: 0 } : { x: 400, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <div className="lore-card-header">
@@ -111,9 +118,9 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
       <AnimatePresence>
         <motion.div 
           className="lore-card"
-          initial={{ x: 400, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: 400, opacity: 0 }}
+          initial={isMobile ? { y: '100%', opacity: 0 } : { x: 400, opacity: 0 }}
+          animate={{ x: 0, y: 0, opacity: 1 }}
+          exit={isMobile ? { y: '100%', opacity: 0 } : { x: 400, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <div className="lore-card-header">
@@ -179,9 +186,9 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
       <AnimatePresence>
         <motion.div 
           className="lore-card"
-          initial={{ x: '100%', opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: '100%', opacity: 0 }}
+          initial={isMobile ? { y: '100%', opacity: 0 } : { x: '100%', opacity: 0 }}
+          animate={{ x: 0, y: 0, opacity: 1 }}
+          exit={isMobile ? { y: '100%', opacity: 0 } : { x: '100%', opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
           <div className="lore-card-header">
@@ -307,9 +314,9 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
     <AnimatePresence>
       <motion.div 
         className="lore-card"
-        initial={{ x: '100%', opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        exit={{ x: '100%', opacity: 0 }}
+        initial={isMobile ? { y: '100%', opacity: 0 } : { x: '100%', opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        exit={isMobile ? { y: '100%', opacity: 0 } : { x: '100%', opacity: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         <div className="lore-card-header">

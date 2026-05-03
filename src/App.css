@@ -792,7 +792,7 @@
   .crawl-container.fullscreen .timeline-list {
     max-width: 90vw;
     padding: 0 16px;
-    padding-top: 260px !important;
+    padding-top: 160px !important;
   }
 
   /* Compact episode cards on mobile */
