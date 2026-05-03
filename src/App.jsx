@@ -857,7 +857,7 @@ function App() {
           }}
           style={{
             position: 'absolute',
-            top: '20px',
+            bottom: '20px',
             left: '20px',
             zIndex: 40,
             background: 'rgba(10, 20, 40, 0.8)',
