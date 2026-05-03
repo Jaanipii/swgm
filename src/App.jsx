@@ -246,17 +246,17 @@ function App() {
             ))}
           </svg>
           
-          {/* Mini-Galaxy Tease (Penny-sized aesthetic element) */}
+          {/* Mini-Galaxy Tease (Aesthetic element) */}
           <div style={{
             position: 'relative',
-            width: '60px',
-            height: '60px',
+            width: '80px',
+            height: '80px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            opacity: 0.8,
+            opacity: 0.85,
             transformStyle: 'preserve-3d',
-            transform: 'perspective(300px) rotateX(65deg) rotateY(-10deg)',
+            transform: 'perspective(300px) rotateX(55deg) rotateY(-10deg)',
           }}>
             <div style={{
               width: '100%',
@@ -270,42 +270,55 @@ function App() {
                 <defs>
                   <radialGradient id="galaxyCore" cx="50%" cy="50%" r="50%">
                     <stop offset="0%" stopColor="#fff" />
-                    <stop offset="30%" stopColor="rgba(255, 232, 31, 1)" />
-                    <stop offset="100%" stopColor="rgba(255, 232, 31, 0)" />
+                    <stop offset="20%" stopColor="rgba(255, 240, 180, 1)" />
+                    <stop offset="60%" stopColor="rgba(255, 220, 100, 0.4)" />
+                    <stop offset="100%" stopColor="rgba(130, 220, 255, 0)" />
+                  </radialGradient>
+                  
+                  <radialGradient id="galaxyDisk" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="rgba(200, 230, 255, 0.4)" />
+                    <stop offset="40%" stopColor="rgba(100, 180, 255, 0.2)" />
+                    <stop offset="100%" stopColor="rgba(50, 100, 255, 0)" />
                   </radialGradient>
                 </defs>
+
+                {/* Background dense dust disk */}
+                <circle cx="50" cy="50" r="45" fill="url(#galaxyDisk)" filter="blur(4px)" />
+                <circle cx="50" cy="50" r="30" fill="url(#galaxyDisk)" filter="blur(2px)" />
                 
-                <g filter="blur(3px)">
+                <g filter="blur(4px)">
                   {/* Outer arms */}
-                  <path d="M50 50 Q 80 20 90 50 T 50 90" fill="none" stroke="rgba(130, 220, 255, 0.5)" strokeWidth="12" strokeLinecap="round" />
-                  <path d="M50 50 Q 20 80 10 50 T 50 10" fill="none" stroke="rgba(130, 220, 255, 0.5)" strokeWidth="12" strokeLinecap="round" />
+                  <path d="M50 50 Q 85 15 95 50 T 50 95" fill="none" stroke="rgba(130, 220, 255, 0.6)" strokeWidth="16" strokeLinecap="round" />
+                  <path d="M50 50 Q 15 85 5 50 T 50 5" fill="none" stroke="rgba(130, 220, 255, 0.6)" strokeWidth="16" strokeLinecap="round" />
                   
                   {/* Perpendicular arms for density */}
-                  <path d="M50 50 Q 80 80 50 90 T 10 50" fill="none" stroke="rgba(100, 150, 255, 0.5)" strokeWidth="8" strokeLinecap="round" />
-                  <path d="M50 50 Q 20 20 50 10 T 90 50" fill="none" stroke="rgba(100, 150, 255, 0.5)" strokeWidth="8" strokeLinecap="round" />
+                  <path d="M50 50 Q 85 85 50 95 T 5 50" fill="none" stroke="rgba(100, 150, 255, 0.5)" strokeWidth="14" strokeLinecap="round" />
+                  <path d="M50 50 Q 15 15 50 5 T 95 50" fill="none" stroke="rgba(100, 150, 255, 0.5)" strokeWidth="14" strokeLinecap="round" />
                 </g>
 
-                <g filter="blur(1.5px)">
+                <g filter="blur(2px)">
                   {/* Inner dense golden arms */}
-                  <path d="M50 50 Q 70 30 85 50" fill="none" stroke="rgba(255, 232, 31, 0.8)" strokeWidth="6" strokeLinecap="round" />
-                  <path d="M50 50 Q 30 70 15 50" fill="none" stroke="rgba(255, 232, 31, 0.8)" strokeWidth="6" strokeLinecap="round" />
+                  <path d="M50 50 Q 75 25 85 50" fill="none" stroke="rgba(255, 232, 31, 0.7)" strokeWidth="10" strokeLinecap="round" />
+                  <path d="M50 50 Q 25 75 15 50" fill="none" stroke="rgba(255, 232, 31, 0.7)" strokeWidth="10" strokeLinecap="round" />
                   
-                  {/* Random bright spots */}
-                  <circle cx="75" cy="35" r="2" fill="#fff" />
-                  <circle cx="25" cy="65" r="2" fill="#fff" />
-                  <circle cx="60" cy="80" r="2" fill="rgba(130,220,255,0.9)" />
-                  <circle cx="40" cy="20" r="2" fill="rgba(130,220,255,0.9)" />
+                  {/* Random bright spots / nebulae */}
+                  <circle cx="75" cy="35" r="4" fill="rgba(255,255,255,0.8)" />
+                  <circle cx="25" cy="65" r="4" fill="rgba(255,255,255,0.8)" />
+                  <circle cx="60" cy="80" r="5" fill="rgba(130,220,255,0.8)" />
+                  <circle cx="40" cy="20" r="5" fill="rgba(130,220,255,0.8)" />
+                  <circle cx="85" cy="60" r="3" fill="rgba(130,220,255,0.6)" />
+                  <circle cx="15" cy="40" r="3" fill="rgba(130,220,255,0.6)" />
                 </g>
                 
                 {/* Glow core */}
-                <circle cx="50" cy="50" r="22" fill="url(#galaxyCore)" filter="blur(4px)" />
-                <circle cx="50" cy="50" r="5" fill="#fff" filter="blur(1px)" />
+                <circle cx="50" cy="50" r="25" fill="url(#galaxyCore)" filter="blur(3px)" />
+                <circle cx="50" cy="50" r="8" fill="#fff" filter="blur(1px)" />
               </svg>
             </div>
             <style>{`
               @keyframes spin-slow {
                 from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
+                to { transform: rotate(-360deg); }
               }
             `}</style>
           </div>
