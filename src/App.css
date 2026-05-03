@@ -760,8 +760,9 @@
     border-top: 2px solid rgba(255, 232, 31, 0.3);
     top: auto;
     bottom: 0;
-    height: 60vh;
+    height: 70vh;
     border-radius: 16px 16px 0 0;
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important;
   }
 
   .lore-card-header {
