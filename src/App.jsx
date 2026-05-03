@@ -749,22 +749,38 @@ function App() {
               flexDirection: 'column',
               alignItems: 'center',
             }}>
-              <div style={{ fontFamily: 'Orbitron, sans-serif', border: '1px solid rgba(56, 189, 248, 0.2)', padding: 'clamp(14px, 3vw, 24px) clamp(24px, 5vw, 40px)', background: 'rgba(10, 20, 40, 0.7)', borderRadius: '2px', position: 'relative', display: 'inline-block', backdropFilter: 'blur(4px)' }}>
-                {/* Fake UI corners */}
-                <div style={{ position: 'absolute', top: -1, left: -1, width: '12px', height: '12px', borderTop: '2px solid #38bdf8', borderLeft: '2px solid #38bdf8' }} />
-                <div style={{ position: 'absolute', top: -1, right: -1, width: '12px', height: '12px', borderTop: '2px solid #38bdf8', borderRight: '2px solid #38bdf8' }} />
-                <div style={{ position: 'absolute', bottom: -1, left: -1, width: '12px', height: '12px', borderBottom: '2px solid #38bdf8', borderLeft: '2px solid #38bdf8' }} />
-                <div style={{ position: 'absolute', bottom: -1, right: -1, width: '12px', height: '12px', borderBottom: '2px solid #38bdf8', borderRight: '2px solid #38bdf8' }} />
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                  {/* Decorative Jedi Diamond */}
+                  <div style={{ width: '8px', height: '8px', background: '#38bdf8', transform: 'rotate(45deg)', boxShadow: '0 0 10px #38bdf8' }} />
+                  <h1 style={{
+                    fontFamily: 'Orbitron, sans-serif',
+                    fontSize: 'clamp(1.6rem, 5vw, 2.8rem)',
+                    letterSpacing: '8px',
+                    color: '#fff',
+                    textShadow: '0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(56, 189, 248, 0.3)',
+                    margin: 0,
+                    textAlign: 'center',
+                    fontWeight: 300,
+                    textTransform: 'uppercase'
+                  }}>GALACTIC ARCHIVES</h1>
+                  <div style={{ width: '8px', height: '8px', background: '#38bdf8', transform: 'rotate(45deg)', boxShadow: '0 0 10px #38bdf8' }} />
+                </div>
                 
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '8px' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#38bdf8', boxShadow: '0 0 12px #38bdf8', animation: 'holo-flicker 2s infinite' }} />
-                  <h1 style={{ margin: 0, fontSize: 'clamp(1.4rem, 5vw, 2.5rem)', letterSpacing: '6px', color: '#fff', textShadow: '0 0 15px rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>HOLONET TERMINAL</h1>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
-                  <span style={{ fontSize: 'clamp(0.5rem, 1.5vw, 0.75rem)', color: '#38bdf8', opacity: 0.5, letterSpacing: '2px' }}>[SEC:4]</span>
-                  <p style={{ margin: 0, fontSize: 'clamp(0.6rem, 2vw, 0.9rem)', color: '#38bdf8', letterSpacing: '3px', textTransform: 'uppercase' }}>Interactive Atlas & Historical Records</p>
-                  <span style={{ fontSize: 'clamp(0.5rem, 1.5vw, 0.75rem)', color: '#38bdf8', opacity: 0.5, letterSpacing: '2px' }}>[V:2.4]</span>
-                </div>
+                <p style={{
+                  fontFamily: 'Orbitron, sans-serif',
+                  fontSize: 'clamp(0.6rem, 2vw, 0.9rem)',
+                  color: '#82dcff',
+                  textTransform: 'uppercase',
+                  letterSpacing: '6px',
+                  textShadow: '0 0 8px rgba(56, 189, 248, 0.5)',
+                  margin: '8px 0 0 0',
+                  textAlign: 'center',
+                  opacity: 0.9
+                }}>Interactive Galaxy Map & Canon Timeline</p>
+                
+                {/* Thin glowing underline */}
+                <div style={{ width: '120px', height: '1px', background: 'linear-gradient(90deg, transparent, #38bdf8, transparent)', marginTop: '16px', opacity: 0.5 }} />
               </div>
             </div>
 
