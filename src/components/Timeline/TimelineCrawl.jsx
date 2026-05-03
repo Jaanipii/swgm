@@ -508,12 +508,33 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
       <div className={`crawl-container ${isFullscreen ? 'fullscreen' : ''}`}>
 
         <div className="crawl-title">
-          <div style={{ fontFamily: 'Orbitron, sans-serif', padding: '10px 15px', background: 'rgba(10, 20, 40, 0.4)', borderRadius: '2px', position: 'relative', display: 'inline-block', borderLeft: '2px solid #38bdf8' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#38bdf8', boxShadow: '0 0 8px #38bdf8', animation: 'holo-flicker 2s infinite' }} />
-              <h2 style={{ margin: 0, fontSize: '1rem', letterSpacing: '2px', color: '#fff', textTransform: 'uppercase' }}>HOLONET TERMINAL</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', paddingTop: '10px' }}>
+            <p style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: '0.65rem',
+              color: '#38bdf8',
+              fontStyle: 'italic',
+              margin: '0 0 -2px 0',
+              opacity: 0.8
+            }}>Historical Records Active</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{ width: '5px', height: '5px', background: '#38bdf8', transform: 'rotate(45deg)', boxShadow: '0 0 8px #38bdf8' }} />
+              <h2 style={{
+                fontFamily: 'Orbitron, sans-serif',
+                fontSize: '1.3rem',
+                letterSpacing: '4px',
+                color: '#fff',
+                textShadow: '0 0 10px rgba(56, 189, 248, 0.6), 0 0 20px rgba(56, 189, 248, 0.3)',
+                margin: 0,
+                textAlign: 'center',
+                fontWeight: 300,
+                textTransform: 'uppercase'
+              }}>
+                Holonet Terminal
+              </h2>
+              <div style={{ width: '5px', height: '5px', background: '#38bdf8', transform: 'rotate(45deg)', boxShadow: '0 0 8px #38bdf8' }} />
             </div>
-            <p style={{ margin: '2px 0 0 0', fontSize: '0.65rem', color: '#82dcff', letterSpacing: '1px', textTransform: 'uppercase', opacity: 0.8 }}>Historical Records Active</p>
+            <div style={{ width: '40px', height: '2px', background: '#38bdf8', boxShadow: '0 0 8px #38bdf8', marginTop: '2px' }} />
           </div>
           <div style={{ margin: '8px auto 0 auto', maxWidth: '300px', pointerEvents: 'none' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', letterSpacing: '1.5px', color: '#82dcff', marginBottom: '4px' }}>
