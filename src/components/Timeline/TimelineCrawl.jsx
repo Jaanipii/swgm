@@ -484,6 +484,7 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
 
   useEffect(() => {
     let scrollTimeout = null;
+    let focusDebounceTimer = null;
 
     const handleScroll = () => {
       if (scrollTimeout) return;
@@ -541,7 +542,10 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
             }
             
             if (onItemFocus) {
-              onItemFocus(itemId);
+              if (focusDebounceTimer) clearTimeout(focusDebounceTimer);
+              focusDebounceTimer = setTimeout(() => {
+                onItemFocus(itemId);
+              }, 400); // Only pan the massive 3D map AFTER the user pauses scrolling
             }
           }
           
@@ -550,7 +554,7 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
             setFocusedIndex(index);
           }
         }
-      }, 150); // Throttle to run max ~6 times a second to save mobile CPU
+      }, 150); // Throttle DOM querying to run max ~6 times a second
     };
 
     const container = crawlRef.current;
@@ -560,6 +564,7 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
     }
     return () => {
       if (scrollTimeout) clearTimeout(scrollTimeout);
+      if (focusDebounceTimer) clearTimeout(focusDebounceTimer);
       if (container) container.removeEventListener('scroll', handleScroll);
     };
   }, [onEraChange, filteredTimeline]);
