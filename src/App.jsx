@@ -762,6 +762,7 @@ function App() {
           onPlanetSelect={handlePlanetSelect}
           onSyncHistory={syncHistoryUpTo}
           watchedIds={watchedIds}
+          onToggleWatched={toggleWatchedStatus}
         />
 
         {/* 3 circular toggle buttons at bottom — all screen sizes */}

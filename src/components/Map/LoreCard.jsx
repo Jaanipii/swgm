@@ -10,7 +10,7 @@ import { historicalEvents } from '../../data/historicalEvents';
 import { cwNarrations } from '../../data/cwNarrations';
 import { disambiguationMap } from '../../utils/disambiguationMap';
 
-export default function LoreCard({ activeItemId, activePlanetId, activeHistoricalEvent, activeRoute, activeEra, loreMode, onSwitchMode, onClose, onNext, onPlanetSelect, onSyncHistory, watchedIds }) {
+export default function LoreCard({ activeItemId, activePlanetId, activeHistoricalEvent, activeRoute, activeEra, loreMode, onSwitchMode, onClose, onNext, onPlanetSelect, onSyncHistory, watchedIds, onToggleWatched }) {
   const [wikiData, setWikiData] = useState(null);
   const [isWikiLoading, setIsWikiLoading] = useState(false);
   const [showSyncModal, setShowSyncModal] = useState(false);
@@ -321,7 +321,35 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
       >
         <div className="lore-card-header">
           <button className="close-btn" onClick={onClose}>×</button>
-          <h2>{activeItem.title}</h2>
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px' }}>
+            <h2 style={{ flex: 1 }}>{activeItem.title}</h2>
+            {onToggleWatched && (
+              <div
+                onClick={(e) => { e.stopPropagation(); onToggleWatched(activeItem.id); }}
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  border: `2px solid ${watchedIds?.map(String).includes(String(activeItem.id)) ? '#ffe81f' : 'rgba(130, 220, 255, 0.4)'}`,
+                  background: watchedIds?.map(String).includes(String(activeItem.id)) ? '#ffe81f' : 'transparent',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  flexShrink: 0,
+                  marginTop: '4px'
+                }}
+                title={watchedIds?.map(String).includes(String(activeItem.id)) ? 'Mark as unseen' : 'Mark as watched'}
+              >
+                {watchedIds?.map(String).includes(String(activeItem.id)) && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                )}
+              </div>
+            )}
+          </div>
           <div className="lore-meta">
             <span className="lore-tag era-tag">{(activeEra && activeEra !== 'Unknown') ? activeEra : (activeItem.era && activeItem.era !== 'Unknown' ? activeItem.era : 'UNKNOWN ERA')}</span>
             <span className="lore-tag type-tag">{activeItem.type.toUpperCase()}</span>
@@ -498,7 +526,7 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
               →
             </button>
           </div>
-
+          <div style={{ height: 'calc(20px + env(safe-area-inset-bottom, 0px))' }} />
         </div>
       </motion.div>
     </AnimatePresence>
