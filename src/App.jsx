@@ -9,10 +9,10 @@ import LoreCard from './components/Map/LoreCard';
 import { determineEra } from './utils/determineEra';
 import './App.css';
 
-const introStars = Array.from({ length: 400 }).map((_, i) => ({
+const introStars = Array.from({ length: 800 }).map((_, i) => ({
   id: i,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
+  x: Math.random() * 400 - 150,
+  y: Math.random() * 400 - 150,
   size: Math.random() * 2 + 0.5,
   opacity: Math.random() * 0.8 + 0.2,
   blur: Math.random() // pre-computed, not in render path
@@ -245,7 +245,7 @@ function App() {
           transform: isJumping ? 'scale(0)' : 'scale(1)',
           transition: 'transform 0.4s cubic-bezier(0.9, 0, 1, 1), opacity 0.1s ease-out 0.3s'
         }}>
-          <svg width="100%" height="100%" style={{ position: 'absolute' }}>
+          <svg width="100%" height="100%" style={{ position: 'absolute', overflow: 'visible' }}>
             {introStars.map(star => (
                <circle 
                   key={star.id} 
