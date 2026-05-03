@@ -8,6 +8,96 @@ import { getShortSeriesName, getUniqueSeries, filterEras } from '../../utils/fil
 
 const ALL_TYPES = ['movie', 'series', 'book', 'comic', 'audio-drama', 'game', 'short-story'];
 
+const TimelineCard = React.memo(({ 
+  item, index, isActive, isFocused, isWatched, dynamicMarginTop, showLogCheckmarks, onSelect, onToggleWatched 
+}) => {
+  return (
+    <motion.div 
+      data-id={item.id}
+      className={`timeline-item ${isActive ? 'active' : ''} ${isFocused ? 'focused' : ''}`}
+      onClick={() => onSelect(item.id)}
+      whileHover={{ scale: 1.05, color: '#fff' }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: Math.min(index * 0.02, 1.5) }}
+      style={{ 
+        marginTop: dynamicMarginTop > 0 ? `${dynamicMarginTop}px` : undefined,
+        transform: isFocused ? 'scale(1.05)' : 'none',
+        boxShadow: isFocused ? '0 0 25px rgba(255, 232, 31, 0.4)' : 'none',
+        borderColor: isFocused ? 'rgba(255, 232, 31, 0.8)' : undefined,
+        zIndex: isFocused ? 10 : 1,
+        display: 'flex',
+        alignItems: 'flex-start',
+        paddingRight: '12px',
+        position: 'relative'
+      }}
+    >
+      <div style={{ flex: 1, display: 'flex' }}>
+        <div className="item-year" style={{ fontSize: item.year && (item.year.includes('BBY') || item.year.includes('ABY')) ? '2rem' : '1.2rem', opacity: item.year && (item.year.includes('BBY') || item.year.includes('ABY')) ? 1 : 0.5 }}>
+          {item.year && (item.year.includes('BBY') || item.year.includes('ABY')) ? item.year : 'DATE OBSCURED'}
+        </div>
+        <div className="item-details" style={{ flex: 1, paddingRight: '20px' }}>
+          <h3 className="item-title">{item.title}</h3>
+          <span className="item-era">{determineEra(item.year).toUpperCase()}</span>
+          <p className="item-planet">Location: {item.primaryPlanet === 'Unknown Spaces' ? 'Planet Unknown' : item.primaryPlanet}</p>
+        </div>
+      </div>
+      {showLogCheckmarks && (
+        <div 
+          className="watch-toggle-hitbox"
+          onPointerDown={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onToggleWatched(item.id);
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          style={{
+            padding: '12px',
+            marginTop: '13px',
+            marginRight: '-12px',
+            cursor: 'pointer',
+            pointerEvents: 'auto',
+            zIndex: 50,
+            flexShrink: 0
+          }}
+          title={isWatched ? "Mark as unseen" : "Mark as watched"}
+        >
+          <div
+            className="watch-toggle"
+            style={{
+              width: '28px',
+              height: '28px',
+              borderRadius: '50%',
+              border: `2px solid ${isWatched ? '#ffe81f' : 'rgba(130, 220, 255, 0.4)'}`,
+              background: isWatched ? '#ffe81f' : 'transparent',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            {isWatched && (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            )}
+          </div>
+        </div>
+      )}
+    </motion.div>
+  );
+}, (prev, next) => {
+  return prev.isActive === next.isActive &&
+         prev.isFocused === next.isFocused &&
+         prev.isWatched === next.isWatched &&
+         prev.showLogCheckmarks === next.showLogCheckmarks &&
+         prev.dynamicMarginTop === next.dynamicMarginTop &&
+         prev.item.id === next.item.id;
+});
+
 export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, onToggleFullscreen, onEraChange, onHistoricalEventSelect, onItemFocus, onJumpToHyperspace, watchedIds = [], onToggleWatched, onResetWatched, onSyncHistory, showLogCheckmarks, onToggleShowCheckmarks }) {
   const crawlRef = useRef(null);
   const timelineListRef = useRef(null);
@@ -757,83 +847,18 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
                     const isWatched = watchedIds?.map(String).includes(String(item.id));
 
                     return (
-                      <motion.div 
+                      <TimelineCard
                         key={item.id}
-                        data-id={item.id}
-                        className={`timeline-item ${isActive ? 'active' : ''} ${isFocused ? 'focused' : ''}`}
-                        onClick={() => onSelect(item.id)}
-                        whileHover={{ scale: 1.05, color: '#fff' }}
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: Math.min(index * 0.02, 1.5) }}
-                        style={{ 
-                          marginTop: dynamicMarginTop > 0 ? `${dynamicMarginTop}px` : undefined,
-                          transform: isFocused ? 'scale(1.05)' : 'none',
-                          boxShadow: isFocused ? '0 0 25px rgba(255, 232, 31, 0.4)' : 'none',
-                          borderColor: isFocused ? 'rgba(255, 232, 31, 0.8)' : undefined,
-                          zIndex: isFocused ? 10 : 1,
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          paddingRight: '12px',
-                          position: 'relative'
-                        }}
-                      >
-                        <div style={{ flex: 1, display: 'flex' }}>
-                          <div className="item-year" style={{ fontSize: item.year && (item.year.includes('BBY') || item.year.includes('ABY')) ? '2rem' : '1.2rem', opacity: item.year && (item.year.includes('BBY') || item.year.includes('ABY')) ? 1 : 0.5 }}>
-                            {item.year && (item.year.includes('BBY') || item.year.includes('ABY')) ? item.year : 'DATE OBSCURED'}
-                          </div>
-                          <div className="item-details" style={{ flex: 1, paddingRight: '20px' }}>
-                            <h3 className="item-title">{item.title}</h3>
-                            <span className="item-era">{determineEra(item.year).toUpperCase()}</span>
-                            <p className="item-planet">Location: {item.primaryPlanet === 'Unknown Spaces' ? 'Planet Unknown' : item.primaryPlanet}</p>
-                          </div>
-                        </div>
-                        {showLogCheckmarks && (
-                          <div 
-                            className="watch-toggle-hitbox"
-                            onPointerDown={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              onToggleWatched(item.id);
-                            }}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                            }}
-                            style={{
-                              padding: '12px',
-                              marginTop: '13px',
-                              marginRight: '-12px',
-                              cursor: 'pointer',
-                              pointerEvents: 'auto',
-                              zIndex: 50,
-                              flexShrink: 0
-                            }}
-                            title={isWatched ? "Mark as unseen" : "Mark as watched"}
-                          >
-                            <div
-                              className="watch-toggle"
-                              style={{
-                                width: '28px',
-                                height: '28px',
-                                borderRadius: '50%',
-                                border: `2px solid ${isWatched ? '#ffe81f' : 'rgba(130, 220, 255, 0.4)'}`,
-                                background: isWatched ? '#ffe81f' : 'transparent',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                transition: 'all 0.2s ease',
-                              }}
-                            >
-                              {isWatched && (
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-                                  <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                      </motion.div>
+                        item={item}
+                        index={index}
+                        isActive={isActive}
+                        isFocused={isFocused}
+                        isWatched={isWatched}
+                        dynamicMarginTop={dynamicMarginTop}
+                        showLogCheckmarks={showLogCheckmarks}
+                        onSelect={onSelect}
+                        onToggleWatched={onToggleWatched}
+                      />
                     );
                   })
                 )}
