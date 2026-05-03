@@ -850,7 +850,6 @@ export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra,
       </AnimatePresence>
 
       {/* Map Controls & Legend */}
-      {!hideControls && (
       <div 
         className="map-controls"
         style={{
@@ -869,8 +868,9 @@ export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra,
           flexDirection: 'column',
           gap: '16px',
           opacity: isMapTransitioning ? 0 : 1,
-          transition: 'opacity 0.5s ease',
-        pointerEvents: isMapTransitioning ? 'none' : 'auto'
+          transition: 'opacity 0.5s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: hideControls ? 'translateX(calc(-100% - 40px))' : 'translateX(0)',
+          pointerEvents: (isMapTransitioning || hideControls) ? 'none' : 'auto'
       }}
     >
       <PlanetSearch allPlanets={allPlanets} onSelect={onPlanetSelect} onHighlight={onPlanetHighlight} onResultsChange={setSearchResults} />
@@ -968,7 +968,6 @@ export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra,
           </div>
         </div>
       </div>
-      )}
 
     </div>
   );

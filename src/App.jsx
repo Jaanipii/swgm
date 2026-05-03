@@ -251,28 +251,6 @@ function App() {
       {/* Hide UI elements while physically jumping into the map */}
       <div className={`ui-elements-container ${isMapTransitioning ? 'transitioning' : ''}`}>
 
-        {/* Mobile: Sliding Legend Panel (from left) */}
-        {isMobile && !isIntroMode && (
-          <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '85vw',
-            maxWidth: '320px',
-            height: '100vh',
-            zIndex: 9997,
-            background: 'rgba(5, 10, 20, 0.95)',
-            backdropFilter: 'blur(12px)',
-            borderRight: '1px solid rgba(130, 220, 255, 0.2)',
-            transform: mobileViewMode === 'legend' ? 'translateX(0)' : 'translateX(-100%)',
-            transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-            overflowY: 'auto',
-            pointerEvents: mobileViewMode === 'legend' ? 'auto' : 'none',
-          }}>
-            {/* We render GalaxyMap's controls here via the hideControls=false when legend mode */}
-          </div>
-        )}
-
         {/* Mobile: Sliding Episode Guide Panel (from right) */}
         {isMobile && !isIntroMode && (
           <div style={{
@@ -294,7 +272,7 @@ function App() {
             <TimelineCrawl 
               activeItemId={activeEpisodeId} 
               onSelect={(id) => { handleTimelineSelect(id); setMobileViewMode('map'); }}
-              isFullscreen={true}
+              isFullscreen={false}
               onEraChange={handleEraChange}
               onHistoricalEventSelect={handleEventMarkerSelect}
               onItemFocus={handleTimelineFocus}
