@@ -857,8 +857,8 @@
 .hologram-btn {
   position: relative;
   background: rgba(10, 25, 40, 0.6);
-  border: 1px solid rgba(74, 222, 128, 0.4);
-  color: #4ade80;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
   font-size: 0.85rem;
   letter-spacing: 6px;
   font-family: 'Orbitron', sans-serif;
@@ -870,14 +870,14 @@
   gap: 14px;
   padding: 16px 40px;
   border-radius: 2px;
-  text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
   backdrop-filter: blur(8px);
   pointer-events: auto;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 
-    0 0 15px rgba(74, 222, 128, 0.15),
-    inset 0 0 20px rgba(74, 222, 128, 0.1);
+    0 0 15px rgba(56, 189, 248, 0.15),
+    inset 0 0 20px rgba(56, 189, 248, 0.1);
 }
 
 /* Corner brackets simulating a targeting UI */
@@ -887,14 +887,14 @@
   inset: 0;
   border: 2px solid transparent;
   background: 
-    linear-gradient(to right, #4ade80, #4ade80) top left no-repeat,
-    linear-gradient(to bottom, #4ade80, #4ade80) top left no-repeat,
-    linear-gradient(to left, #4ade80, #4ade80) top right no-repeat,
-    linear-gradient(to bottom, #4ade80, #4ade80) top right no-repeat,
-    linear-gradient(to right, #4ade80, #4ade80) bottom left no-repeat,
-    linear-gradient(to top, #4ade80, #4ade80) bottom left no-repeat,
-    linear-gradient(to left, #4ade80, #4ade80) bottom right no-repeat,
-    linear-gradient(to top, #4ade80, #4ade80) bottom right no-repeat;
+    linear-gradient(to right, #38bdf8, #38bdf8) top left no-repeat,
+    linear-gradient(to bottom, #38bdf8, #38bdf8) top left no-repeat,
+    linear-gradient(to left, #38bdf8, #38bdf8) top right no-repeat,
+    linear-gradient(to bottom, #38bdf8, #38bdf8) top right no-repeat,
+    linear-gradient(to right, #38bdf8, #38bdf8) bottom left no-repeat,
+    linear-gradient(to top, #38bdf8, #38bdf8) bottom left no-repeat,
+    linear-gradient(to left, #38bdf8, #38bdf8) bottom right no-repeat,
+    linear-gradient(to top, #38bdf8, #38bdf8) bottom right no-repeat;
   background-size: 10px 2px, 2px 10px;
   opacity: 0.8;
   transition: all 0.3s ease;
@@ -909,8 +909,8 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: rgba(74, 222, 128, 0.8);
-  box-shadow: 0 0 10px rgba(74, 222, 128, 1);
+  background: rgba(56, 189, 248, 0.8);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 1);
   animation: hologram-scan 3s linear infinite;
   pointer-events: none;
 }
@@ -926,10 +926,10 @@
   background: rgba(10, 25, 40, 0.8);
   color: #fff;
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-  border-color: rgba(74, 222, 128, 0.8);
+  border-color: rgba(56, 189, 248, 0.8);
   box-shadow: 
-    0 0 25px rgba(74, 222, 128, 0.4),
-    inset 0 0 30px rgba(74, 222, 128, 0.2);
+    0 0 25px rgba(56, 189, 248, 0.4),
+    inset 0 0 30px rgba(56, 189, 248, 0.2);
   letter-spacing: 8px;
 }
 
