@@ -749,6 +749,19 @@ function App() {
           />
         )}
 
+        {/* Click-outside backdrop for LoreCard */}
+        {loreMode && (
+          <div 
+            onClick={handleCloseLoreCard}
+            style={{
+              position: 'fixed',
+              top: 0, left: 0, right: 0, bottom: 0,
+              zIndex: 9998,
+              background: 'transparent',
+            }}
+          />
+        )}
+
         <LoreCard 
           activeItemId={activeEpisodeId}
           activePlanetId={activePlanetId}

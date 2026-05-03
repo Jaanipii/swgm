@@ -56,6 +56,20 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
     return () => { isMounted = false; };
   }, [activeItemId, activePlanetId, activeHistoricalEvent, activeRoute, loreMode]);
 
+  // Drag handle for mobile swipe-down-to-dismiss
+  const dragHandle = isMobile ? (
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 0 4px 0', cursor: 'grab' }}>
+      <div style={{ width: '40px', height: '4px', borderRadius: '2px', background: 'rgba(255, 255, 255, 0.3)' }} />
+    </div>
+  ) : null;
+
+  const dragProps = isMobile ? {
+    drag: 'y',
+    dragConstraints: { top: 0, bottom: 0 },
+    dragElastic: { top: 0, bottom: 0.6 },
+    onDragEnd: (_, info) => { if (info.offset.y > 100) onClose(); },
+  } : {};
+
   if (!loreMode) return null;
 
   if (loreMode === 'history' && activeHistoricalEvent) {
@@ -67,9 +81,10 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
           animate={{ x: 0, y: 0, opacity: 1 }}
           exit={isMobile ? { y: '100%', opacity: 0 } : { x: 400, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
+          {...dragProps}
         >
+          {dragHandle}
           <div className="lore-card-header">
-            <button className="close-btn" onClick={onClose}>×</button>
             <h2>{activeHistoricalEvent.title}</h2>
             <div className="lore-meta">
               <span className="lore-tag era-tag">{activeHistoricalEvent.year}</span>
@@ -122,9 +137,10 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
           animate={{ x: 0, y: 0, opacity: 1 }}
           exit={isMobile ? { y: '100%', opacity: 0 } : { x: 400, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
+          {...dragProps}
         >
+          {dragHandle}
           <div className="lore-card-header">
-            <button className="close-btn" onClick={onClose}>×</button>
             <h2>{activeRoute.toUpperCase()}</h2>
             <div className="lore-meta">
               <span className="lore-tag era-tag">TRADE ROUTE</span>
@@ -190,9 +206,10 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
           animate={{ x: 0, y: 0, opacity: 1 }}
           exit={isMobile ? { y: '100%', opacity: 0 } : { x: '100%', opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          {...dragProps}
         >
+          {dragHandle}
           <div className="lore-card-header">
-            <button className="close-btn" onClick={onClose}>×</button>
             <h2>{activePlanetId.toUpperCase()}</h2>
             <div className="lore-meta">
               <span className="lore-tag era-tag">PLANETARY RECORD</span>
@@ -318,9 +335,10 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
         animate={{ x: 0, y: 0, opacity: 1 }}
         exit={isMobile ? { y: '100%', opacity: 0 } : { x: '100%', opacity: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        {...dragProps}
       >
+        {dragHandle}
         <div className="lore-card-header">
-          <button className="close-btn" onClick={onClose}>×</button>
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px' }}>
             <h2 style={{ flex: 1 }}>{activeItem.title}</h2>
             {onToggleWatched && (
