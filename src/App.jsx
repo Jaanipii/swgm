@@ -418,21 +418,17 @@ function App() {
             background: 'rgba(10, 20, 40, 0.8)',
             border: '1px solid rgba(255, 232, 31, 0.4)',
             color: '#FFE81F',
-            padding: !isIntroMode ? '0' : '10px 20px',
-            borderRadius: !isIntroMode ? '50%' : '8px',
-            width: !isIntroMode ? '44px' : 'auto',
-            height: !isIntroMode ? '44px' : 'auto',
-            fontSize: '0.9rem',
-            letterSpacing: '2px',
+            padding: '0',
+            borderRadius: '50%',
+            width: '44px',
+            height: '44px',
             cursor: 'pointer',
-            textTransform: 'uppercase',
             backdropFilter: 'blur(10px)',
             boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)',
             transition: 'all 0.3s ease',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px',
             flexShrink: 0
           }}
           title={!isIntroMode ? "Return to Archives" : "Open Full Timeline"}
@@ -451,7 +447,11 @@ function App() {
               <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
           ) : (
-            "FULL TIMELINE"
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFE81F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4 L4 8 L20 8 L20 12 L4 12 L4 16 L20 16 L20 20" />
+              <circle cx="4" cy="4" r="1.5" fill="#FFE81F" />
+              <circle cx="20" cy="20" r="1.5" fill="#FFE81F" />
+            </svg>
           )}
         </button>
       </div>

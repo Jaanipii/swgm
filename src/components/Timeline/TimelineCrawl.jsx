@@ -467,31 +467,6 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
 
   return (
     <>
-      <AnimatePresence>
-        {isFullscreen && (
-          <motion.div 
-            className="timeline-progress-bar-container"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="progress-bar-labels">
-              <span className="watched-label" style={{ letterSpacing: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                HOURS LOGGED: {formatDuration(watchedMins)}
-              </span>
-              <span className="remaining-label">REMAINING: {formatDuration(totalMins - watchedMins)}</span>
-            </div>
-            <div className="progress-bar-track">
-              <div 
-                className="progress-bar-fill" 
-                style={{ width: `${scrollProgress}%` }}
-              ></div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <div className={`crawl-container ${isFullscreen ? 'fullscreen' : ''}`}>
         
         <div style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 100, display: 'flex', flexDirection: 'column', gap: '15px' }}>
@@ -794,45 +769,59 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
         </div>
 
         <div className="crawl-title">
-          <h1>STAR<br/>WARS</h1>
-          <h2>EPISODE GUIDE</h2>
-          <p>Chronological Timeline</p>
+          <h1>GALACTIC ARCHIVES</h1>
+          <p>Canon Timeline</p>
           {isFullscreen && (
-            <button 
-              className="hyperspace-jump-btn"
-              onClick={onJumpToHyperspace}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: '#ffe81f',
-                fontSize: '1.4rem',
-                letterSpacing: '6px',
-                fontFamily: '"Pathway Gothic One", sans-serif',
-                cursor: 'pointer',
-                textTransform: 'uppercase',
-                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '12px',
-                margin: '35px auto 0 auto',
-                textShadow: '0 0 10px rgba(255, 232, 31, 0.4)',
-                opacity: 0.85,
-                pointerEvents: 'auto'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.textShadow = '0 0 20px rgba(255, 232, 31, 1), 0 0 40px rgba(255, 232, 31, 0.6)';
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'scale(1.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.textShadow = '0 0 10px rgba(255, 232, 31, 0.4)';
-                e.currentTarget.style.opacity = '0.85';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-            >
-              JUMP TO HYPERSPACE
-            </button>
+            <>
+              <button 
+                className="hyperspace-jump-btn"
+                onClick={onJumpToHyperspace}
+                style={{
+                  background: 'rgba(255, 232, 31, 0.08)',
+                  border: '1px solid rgba(255, 232, 31, 0.5)',
+                  color: '#ffe81f',
+                  fontSize: '1rem',
+                  letterSpacing: '4px',
+                  fontFamily: 'Orbitron, sans-serif',
+                  cursor: 'pointer',
+                  textTransform: 'uppercase',
+                  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  margin: '20px auto 0 auto',
+                  padding: '12px 28px',
+                  borderRadius: '8px',
+                  textShadow: '0 0 10px rgba(255, 232, 31, 0.4)',
+                  backdropFilter: 'blur(5px)',
+                  pointerEvents: 'auto'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 232, 31, 0.15)';
+                  e.currentTarget.style.borderColor = '#ffe81f';
+                  e.currentTarget.style.boxShadow = '0 0 25px rgba(255, 232, 31, 0.4)';
+                  e.currentTarget.style.transform = 'scale(1.03)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 232, 31, 0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 232, 31, 0.5)';
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+              >
+                ▶ ENTER THE GALAXY
+              </button>
+              <div style={{ margin: '16px auto 0 auto', maxWidth: '300px', pointerEvents: 'none' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', letterSpacing: '1.5px', color: '#82dcff', marginBottom: '4px' }}>
+                  <span>LOGGED: {formatDuration(watchedMins)}</span>
+                  <span>REMAINING: {formatDuration(totalMins - watchedMins)}</span>
+                </div>
+                <div style={{ width: '100%', height: '3px', background: 'rgba(130, 220, 255, 0.15)', borderRadius: '2px' }}>
+                  <div style={{ width: `${scrollProgress}%`, height: '100%', background: 'linear-gradient(to right, #82dcff, #ffe81f)', borderRadius: '2px', transition: 'width 0.5s ease' }} />
+                </div>
+              </div>
+            </>
           )}
         </div>
 
@@ -846,7 +835,7 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
           >
             <div className="crawl-content">
               {/* timeline-list needs enough padding-top so ancient extrapolated events don't fall off the top! */}
-              <div className="timeline-list" ref={timelineListRef} style={{ paddingTop: '420px' }}>
+              <div className="timeline-list" ref={timelineListRef} style={{ paddingTop: '320px' }}>
                 
                 {/* Independent Absolutely-Positioned Event Overlay */}
                 <div className="timeline-events-overlay">

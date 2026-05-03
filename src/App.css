@@ -154,7 +154,7 @@
 
 .crawl-title {
   position: absolute;
-  top: 5vh;
+  top: 3vh;
   left: 0;
   width: 100%;
   text-align: center;
@@ -164,29 +164,21 @@
 }
 
 .crawl-title h1 {
-  font-size: 5rem;
-  line-height: 0.8;
+  font-size: 2.2rem;
+  line-height: 1;
   margin: 0;
-  letter-spacing: 4px;
+  letter-spacing: 6px;
   color: #FFE81F;
   text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
-.crawl-title h2 {
-  font-size: 2rem;
-  margin: 10px 0;
-  letter-spacing: 2px;
-  color: #fff;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-}
-
 .crawl-title p {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   color: #aaa;
   text-transform: uppercase;
   letter-spacing: 5px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-  margin-bottom: 20px;
+  margin: 6px 0 0 0;
 }
 
 .timeline-search-input {
