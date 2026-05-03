@@ -955,3 +955,14 @@ body[data-intro-mode="false"] [class*="kofi-"] {
   display: none !important;
   pointer-events: none !important;
 }
+
+/* Center the Ko-fi button on mobile devices */
+@media (max-width: 768px) {
+  body[data-intro-mode="true"] iframe.floatingchat-container-mobi,
+  body[data-intro-mode="true"] [id*="kofi-wo-container"] {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    bottom: 20px !important;
+  }
+}
