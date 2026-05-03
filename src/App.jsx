@@ -34,7 +34,8 @@ function App() {
   const [showGdprNotice, setShowGdprNotice] = useState(() => {
     try { return !localStorage.getItem('sw_gdpr_dismissed'); } catch { return true; }
   });
-  const [hideMapUI, setHideMapUI] = useState(() => window.innerWidth < 1024);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  const [mobileViewMode, setMobileViewMode] = useState('map'); // 'map' | 'legend' | 'guide'
 
   // Phase 10: Persistent Progress Tracking State
   const [watchedIds, setWatchedIds] = useState(() => {
@@ -217,13 +218,14 @@ function App() {
           activePlanetId={activePlanetId} 
           previousPlanetId={previousPlanetId}
           activeEra={activeEra}
+          activeEpisodeId={activeEpisodeId}
           onPlanetSelect={handlePlanetSelect} 
           onHistoricalEventSelect={handleEventMarkerSelect}
           onRouteSelect={handleRouteSelect}
           isMapTransitioning={isMapTransitioning}
           onPlanetHighlight={handlePlanetHighlight}
           panTrigger={panTrigger}
-          hideControls={hideMapUI}
+          hideControls={isMobile && !isIntroMode && mobileViewMode !== 'legend'}
         />
       </motion.div>
 
@@ -248,8 +250,8 @@ function App() {
 
       {/* Hide UI elements while physically jumping into the map */}
       <div className={`ui-elements-container ${isMapTransitioning ? 'transitioning' : ''}`}>
-        {/* Timeline & LoreCard hidden when user toggles "explore mode" */}
-        {!(hideMapUI && !isIntroMode) && (
+        {/* Timeline: hidden in map-only mode; shown in guide mode or on desktop (unless exploring) */}
+        {(isIntroMode || (isMobile ? mobileViewMode === 'guide' : mobileViewMode !== 'map')) && (
           <>
             <TimelineCrawl 
               activeItemId={activeEpisodeId} 
@@ -284,11 +286,71 @@ function App() {
           watchedIds={watchedIds}
         />
 
-        {/* Explore Mode toggle — only visible in map view */}
-        {!isIntroMode && (
+        {/* Mobile Bottom Nav Bar — 3 tabs: Legend / Map / Guide */}
+        {isMobile && !isIntroMode && (
+          <div style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 9998,
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '2px',
+            background: 'rgba(5, 10, 20, 0.95)',
+            borderTop: '1px solid rgba(130, 220, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+            padding: '8px 0 max(8px, env(safe-area-inset-bottom))',
+          }}>
+            {[
+              { mode: 'legend', label: 'LEGEND', icon: (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/>
+                </svg>
+              )},
+              { mode: 'map', label: 'MAP', icon: (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><ellipse cx="12" cy="12" rx="4" ry="10"/>
+                </svg>
+              )},
+              { mode: 'guide', label: 'GUIDE', icon: (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              )}
+            ].map(({ mode, label, icon }) => (
+              <button
+                key={mode}
+                onClick={() => setMobileViewMode(mode)}
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '3px',
+                  padding: '6px 0',
+                  background: 'transparent',
+                  border: 'none',
+                  color: mobileViewMode === mode ? '#ffe81f' : 'rgba(130, 220, 255, 0.5)',
+                  cursor: 'pointer',
+                  transition: 'color 0.2s ease',
+                  fontSize: '0.6rem',
+                  letterSpacing: '1.5px',
+                  fontFamily: 'Orbitron, sans-serif',
+                }}
+              >
+                {icon}
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Desktop: Explore Mode toggle (non-mobile only) */}
+        {!isMobile && !isIntroMode && (
           <button
-            onClick={() => setHideMapUI(!hideMapUI)}
-            title={hideMapUI ? 'Show Episode Guide' : 'Explore Map Only'}
+            onClick={() => setMobileViewMode(mobileViewMode === 'map' ? 'guide' : 'map')}
+            title={mobileViewMode === 'map' ? 'Show Episode Guide' : 'Explore Map Only'}
             style={{
               position: 'fixed',
               top: '20px',
@@ -297,9 +359,9 @@ function App() {
               width: '44px',
               height: '44px',
               borderRadius: '50%',
-              border: `1px solid ${hideMapUI ? '#ffe81f' : 'rgba(130, 220, 255, 0.4)'}`,
-              background: hideMapUI ? 'rgba(255, 232, 31, 0.15)' : 'rgba(10, 20, 40, 0.8)',
-              color: hideMapUI ? '#ffe81f' : '#82dcff',
+              border: `1px solid ${mobileViewMode === 'map' ? '#ffe81f' : 'rgba(130, 220, 255, 0.4)'}`,
+              background: mobileViewMode === 'map' ? 'rgba(255, 232, 31, 0.15)' : 'rgba(10, 20, 40, 0.8)',
+              color: mobileViewMode === 'map' ? '#ffe81f' : '#82dcff',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -309,7 +371,7 @@ function App() {
               boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)'
             }}
           >
-            {hideMapUI ? (
+            {mobileViewMode === 'map' ? (
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                 <circle cx="12" cy="12" r="3"></circle>

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { planets, starWarsTimeline } from '../../data/timeline';
 import { galacticRegions, hyperlanes, allPlanets, timelinePlanets } from '../../data/galacticData';
-import { historicalEvents } from '../../data/historicalEvents';
+import { historicalEvents, parseYear } from '../../data/historicalEvents';
 import planetFactions from '../../data/planetFactions.json';
 import { fetchWikiData } from '../../utils/wikiApi';
 import { planetLore } from '../../data/planetLore';
@@ -154,7 +154,7 @@ const regionLabels = {
   "Wild Space": { x: 2100, y: 1900 }
 };
 
-export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra, onPlanetSelect, onHistoricalEventSelect, onRouteSelect, isMapTransitioning, onPlanetHighlight, panTrigger, hideControls }) {
+export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra, activeEpisodeId, onPlanetSelect, onHistoricalEventSelect, onRouteSelect, isMapTransitioning, onPlanetHighlight, panTrigger, hideControls }) {
   const canvasRef = useRef(null);
   const transformComponentRef = useRef(null);
   const bgCanvasRef = useRef(null);
@@ -681,8 +681,29 @@ export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra,
         )}
         {/* Interactive Historical Events — with offset for co-located markers */}
         {showHistoricalEvents && (() => {
+           // Find the active episode
+           const activeEpisode = activeEpisodeId ? starWarsTimeline.find(ep => String(ep.id) === String(activeEpisodeId)) : null;
+
            // Pre-compute offsets: group events by planetId so co-located ones fan out
-           const battles = historicalEvents.filter(e => e.type === 'battle' || e.category === 'battle');
+           let battles = historicalEvents.filter(e => e.type === 'battle' || e.category === 'battle');
+
+           if (activeEpisodeId && activeEpisode) {
+             const activeYear = parseYear(activeEpisode.year);
+             battles = battles.filter(e => {
+               if (e.timelineEpisodeId) {
+                 return String(e.timelineEpisodeId) === String(activeEpisodeId);
+               }
+               if (e.year) {
+                 return parseYear(e.year) === activeYear;
+               }
+               return false;
+             });
+           } else {
+             battles = [];
+           }
+
+           if (battles.length === 0) return null;
+
            const planetGroups = {};
            battles.forEach(evt => {
              const key = evt.planetId;
