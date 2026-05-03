@@ -66,6 +66,11 @@ function App() {
     localStorage.setItem('sw_show_checkmarks', JSON.stringify(showLogCheckmarks));
   }, [showLogCheckmarks]);
 
+  // Sync intro mode to body for global CSS overrides (e.g. hiding Ko-Fi)
+  useEffect(() => {
+    document.body.setAttribute('data-intro-mode', isIntroMode);
+  }, [isIntroMode]);
+
   const toggleWatchedStatus = (id) => {
     const strId = String(id);
     setWatchedIds(prev => prev.map(String).includes(strId) ? prev.filter(i => String(i) !== strId) : [...prev, strId]);

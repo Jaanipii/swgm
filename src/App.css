@@ -948,3 +948,9 @@
   50% { opacity: 0.8; transform: scale(0.98) translateX(1px); }
   75% { opacity: 0.9; transform: scale(1.02) translateY(-1px); }
 }
+
+/* Hide Ko-fi widget when not in intro mode */
+body[data-intro-mode="false"] .floatingchat-container-wrap,
+body[data-intro-mode="false"] iframe[src*="ko-fi.com"] {
+  display: none !important;
+}
