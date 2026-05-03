@@ -154,7 +154,7 @@ const regionLabels = {
   "Wild Space": { x: 2100, y: 1900 }
 };
 
-export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra, onPlanetSelect, onHistoricalEventSelect, onRouteSelect, isMapTransitioning, onPlanetHighlight, panTrigger }) {
+export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra, onPlanetSelect, onHistoricalEventSelect, onRouteSelect, isMapTransitioning, onPlanetHighlight, panTrigger, hideControls }) {
   const canvasRef = useRef(null);
   const transformComponentRef = useRef(null);
   const bgCanvasRef = useRef(null);
@@ -829,6 +829,7 @@ export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra,
       </AnimatePresence>
 
       {/* Map Controls & Legend */}
+      {!hideControls && (
       <div 
         className="map-controls"
         style={{
@@ -946,6 +947,7 @@ export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra,
           </div>
         </div>
       </div>
+      )}
 
     </div>
   );

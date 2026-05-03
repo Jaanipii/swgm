@@ -34,6 +34,7 @@ function App() {
   const [showGdprNotice, setShowGdprNotice] = useState(() => {
     try { return !localStorage.getItem('sw_gdpr_dismissed'); } catch { return true; }
   });
+  const [hideMapUI, setHideMapUI] = useState(false);
 
   // Phase 10: Persistent Progress Tracking State
   const [watchedIds, setWatchedIds] = useState(() => {
@@ -222,6 +223,7 @@ function App() {
           isMapTransitioning={isMapTransitioning}
           onPlanetHighlight={handlePlanetHighlight}
           panTrigger={panTrigger}
+          hideControls={hideMapUI}
         />
       </motion.div>
 
@@ -246,36 +248,81 @@ function App() {
 
       {/* Hide UI elements while physically jumping into the map */}
       <div className={`ui-elements-container ${isMapTransitioning ? 'transitioning' : ''}`}>
-        <TimelineCrawl 
-          activeItemId={activeEpisodeId} 
-          onSelect={handleTimelineSelect} 
-          isFullscreen={isIntroMode}
-          onEraChange={handleEraChange}
-          onHistoricalEventSelect={handleEventMarkerSelect}
-          onItemFocus={handleTimelineFocus}
-          onJumpToHyperspace={jumpToHyperspace}
-          watchedIds={watchedIds}
-          onToggleWatched={toggleWatchedStatus}
-          onResetWatched={resetWatchedHistory}
-          onSyncHistory={syncHistoryUpTo}
-          showLogCheckmarks={showLogCheckmarks}
-          onToggleShowCheckmarks={() => setShowLogCheckmarks(!showLogCheckmarks)}
-        />
+        {/* Timeline & LoreCard hidden when user toggles "explore mode" */}
+        {!(hideMapUI && !isIntroMode) && (
+          <>
+            <TimelineCrawl 
+              activeItemId={activeEpisodeId} 
+              onSelect={handleTimelineSelect} 
+              isFullscreen={isIntroMode}
+              onEraChange={handleEraChange}
+              onHistoricalEventSelect={handleEventMarkerSelect}
+              onItemFocus={handleTimelineFocus}
+              onJumpToHyperspace={jumpToHyperspace}
+              watchedIds={watchedIds}
+              onToggleWatched={toggleWatchedStatus}
+              onResetWatched={resetWatchedHistory}
+              onSyncHistory={syncHistoryUpTo}
+              showLogCheckmarks={showLogCheckmarks}
+              onToggleShowCheckmarks={() => setShowLogCheckmarks(!showLogCheckmarks)}
+            />
+          </>
+        )}
 
-        <LoreCard 
-          activeItemId={activeEpisodeId}
-          activePlanetId={activePlanetId}
-          activeHistoricalEvent={activeHistoricalEvent}
-          activeRoute={activeRoute}
-          activeEra={activeEra}
-          loreMode={loreMode}
-          onSwitchMode={setLoreMode}
-          onClose={handleCloseLoreCard}
-          onNext={handleTimelineSelect}
-          onPlanetSelect={handlePlanetSelect}
-          onSyncHistory={syncHistoryUpTo}
-          watchedIds={watchedIds}
-        />
+        {!(hideMapUI && !isIntroMode) && (
+          <LoreCard 
+            activeItemId={activeEpisodeId}
+            activePlanetId={activePlanetId}
+            activeHistoricalEvent={activeHistoricalEvent}
+            activeRoute={activeRoute}
+            activeEra={activeEra}
+            loreMode={loreMode}
+            onSwitchMode={setLoreMode}
+            onClose={handleCloseLoreCard}
+            onNext={handleTimelineSelect}
+            onPlanetSelect={handlePlanetSelect}
+            onSyncHistory={syncHistoryUpTo}
+            watchedIds={watchedIds}
+          />
+        )}
+
+        {/* Explore Mode toggle — only visible in map view */}
+        {!isIntroMode && (
+          <button
+            onClick={() => setHideMapUI(!hideMapUI)}
+            title={hideMapUI ? 'Show Episode Guide' : 'Explore Map Only'}
+            style={{
+              position: 'absolute',
+              bottom: '20px',
+              left: '20px',
+              zIndex: 200,
+              width: '44px',
+              height: '44px',
+              borderRadius: '50%',
+              border: `1px solid ${hideMapUI ? '#ffe81f' : 'rgba(130, 220, 255, 0.4)'}`,
+              background: hideMapUI ? 'rgba(255, 232, 31, 0.15)' : 'rgba(10, 20, 40, 0.8)',
+              color: hideMapUI ? '#ffe81f' : '#82dcff',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backdropFilter: 'blur(5px)',
+              transition: 'all 0.3s ease'
+            }}
+          >
+            {hideMapUI ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            )}
+          </button>
+        )}
 
         <button
           onClick={() => {
