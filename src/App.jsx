@@ -730,23 +730,91 @@ function App() {
           </div>
         )}
 
-        {/* Intro mode: Timeline always visible (full crawl view) */}
+        {/* Intro mode: Simple start screen (old TimelineCrawl fullscreen is reversible — just replace this block) */}
         {isIntroMode && (
-          <TimelineCrawl 
-            activeItemId={activeEpisodeId} 
-            onSelect={handleTimelineSelect} 
-            isFullscreen={true}
-            onEraChange={handleEraChange}
-            onHistoricalEventSelect={handleEventMarkerSelect}
-            onItemFocus={handleTimelineFocus}
-            onJumpToHyperspace={jumpToHyperspace}
-            watchedIds={watchedIds}
-            onToggleWatched={toggleWatchedStatus}
-            onResetWatched={resetWatchedHistory}
-            onSyncHistory={syncHistoryUpTo}
-            showLogCheckmarks={showLogCheckmarks}
-            onToggleShowCheckmarks={() => setShowLogCheckmarks(!showLogCheckmarks)}
-          />
+          <div style={{
+            position: 'fixed',
+            top: 0, left: 0, right: 0, bottom: 0,
+            zIndex: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            pointerEvents: 'none',
+          }}>
+            <h1 style={{
+              fontFamily: 'Orbitron, sans-serif',
+              fontSize: 'clamp(1.6rem, 5vw, 2.8rem)',
+              letterSpacing: '6px',
+              color: '#FFE81F',
+              textShadow: '0 4px 10px rgba(0, 0, 0, 0.8)',
+              margin: '0 0 6px 0',
+              textAlign: 'center',
+            }}>GALACTIC ARCHIVES</h1>
+            <p style={{
+              fontFamily: 'Orbitron, sans-serif',
+              fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
+              color: '#aaa',
+              textTransform: 'uppercase',
+              letterSpacing: '5px',
+              textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)',
+              margin: '0 0 0 0',
+            }}>Canon Timeline</p>
+
+            {/* Spacer for the mini galaxy (rendered in the stars layer behind) */}
+            <div style={{ height: '120px' }} />
+
+            <style>{`
+              @keyframes cta-glow {
+                0%, 100% { box-shadow: 0 0 15px rgba(255, 232, 31, 0.15), inset 0 0 15px rgba(255, 232, 31, 0.05); }
+                50% { box-shadow: 0 0 25px rgba(255, 232, 31, 0.3), inset 0 0 20px rgba(255, 232, 31, 0.08); }
+              }
+            `}</style>
+            <button
+              onClick={jumpToHyperspace}
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 232, 31, 0.06) 0%, rgba(255, 232, 31, 0.12) 50%, rgba(255, 232, 31, 0.06) 100%)',
+                border: '1px solid rgba(255, 232, 31, 0.4)',
+                color: '#ffe81f',
+                fontSize: '0.85rem',
+                letterSpacing: '6px',
+                fontFamily: 'Orbitron, sans-serif',
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '14px',
+                padding: '14px 36px',
+                borderRadius: '4px',
+                textShadow: '0 0 12px rgba(255, 232, 31, 0.5)',
+                backdropFilter: 'blur(8px)',
+                pointerEvents: 'auto',
+                animation: 'cta-glow 3s ease-in-out infinite',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 232, 31, 0.12) 0%, rgba(255, 232, 31, 0.2) 50%, rgba(255, 232, 31, 0.12) 100%)';
+                e.currentTarget.style.borderColor = '#ffe81f';
+                e.currentTarget.style.transform = 'scale(1.03)';
+                e.currentTarget.style.letterSpacing = '8px';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 232, 31, 0.06) 0%, rgba(255, 232, 31, 0.12) 50%, rgba(255, 232, 31, 0.06) 100%)';
+                e.currentTarget.style.borderColor = 'rgba(255, 232, 31, 0.4)';
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.letterSpacing = '6px';
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                <line x1="2" y1="12" x2="10" y2="12" stroke="#ffe81f" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+                <line x1="6" y1="7" x2="14" y2="7" stroke="#ffe81f" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+                <line x1="4" y1="17" x2="12" y2="17" stroke="#ffe81f" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+                <polygon points="14,6 22,12 14,18" fill="#ffe81f" opacity="0.9" />
+              </svg>
+              ENTER THE GALAXY
+            </button>
+          </div>
         )}
 
         {/* Click-outside backdrop for LoreCard */}
