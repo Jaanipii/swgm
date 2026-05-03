@@ -773,15 +773,25 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
           <p>Canon Timeline</p>
           {isFullscreen && (
             <>
+              <style>{`
+                @keyframes cta-glow {
+                  0%, 100% { box-shadow: 0 0 15px rgba(255, 232, 31, 0.15), inset 0 0 15px rgba(255, 232, 31, 0.05); }
+                  50% { box-shadow: 0 0 25px rgba(255, 232, 31, 0.3), inset 0 0 20px rgba(255, 232, 31, 0.08); }
+                }
+                @keyframes cta-shimmer {
+                  0% { background-position: -200% center; }
+                  100% { background-position: 200% center; }
+                }
+              `}</style>
               <button 
                 className="hyperspace-jump-btn"
                 onClick={onJumpToHyperspace}
                 style={{
-                  background: 'rgba(255, 232, 31, 0.08)',
-                  border: '1px solid rgba(255, 232, 31, 0.5)',
+                  background: 'linear-gradient(135deg, rgba(255, 232, 31, 0.06) 0%, rgba(255, 232, 31, 0.12) 50%, rgba(255, 232, 31, 0.06) 100%)',
+                  border: '1px solid rgba(255, 232, 31, 0.4)',
                   color: '#ffe81f',
-                  fontSize: '1rem',
-                  letterSpacing: '4px',
+                  fontSize: '0.85rem',
+                  letterSpacing: '6px',
                   fontFamily: 'Orbitron, sans-serif',
                   cursor: 'pointer',
                   textTransform: 'uppercase',
@@ -789,28 +799,38 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '10px',
-                  margin: '20px auto 0 auto',
-                  padding: '12px 28px',
-                  borderRadius: '8px',
-                  textShadow: '0 0 10px rgba(255, 232, 31, 0.4)',
-                  backdropFilter: 'blur(5px)',
-                  pointerEvents: 'auto'
+                  gap: '14px',
+                  margin: '24px auto 0 auto',
+                  padding: '14px 36px',
+                  borderRadius: '4px',
+                  textShadow: '0 0 12px rgba(255, 232, 31, 0.5)',
+                  backdropFilter: 'blur(8px)',
+                  pointerEvents: 'auto',
+                  animation: 'cta-glow 3s ease-in-out infinite',
+                  position: 'relative',
+                  overflow: 'hidden',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 232, 31, 0.15)';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 232, 31, 0.12) 0%, rgba(255, 232, 31, 0.2) 50%, rgba(255, 232, 31, 0.12) 100%)';
                   e.currentTarget.style.borderColor = '#ffe81f';
-                  e.currentTarget.style.boxShadow = '0 0 25px rgba(255, 232, 31, 0.4)';
                   e.currentTarget.style.transform = 'scale(1.03)';
+                  e.currentTarget.style.letterSpacing = '8px';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 232, 31, 0.08)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 232, 31, 0.5)';
-                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 232, 31, 0.06) 0%, rgba(255, 232, 31, 0.12) 50%, rgba(255, 232, 31, 0.06) 100%)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 232, 31, 0.4)';
                   e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.letterSpacing = '6px';
                 }}
               >
-                ▶ ENTER THE GALAXY
+                {/* Hyperspace streaks icon */}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                  <line x1="2" y1="12" x2="10" y2="12" stroke="#ffe81f" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+                  <line x1="6" y1="7" x2="14" y2="7" stroke="#ffe81f" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+                  <line x1="4" y1="17" x2="12" y2="17" stroke="#ffe81f" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+                  <polygon points="14,6 22,12 14,18" fill="#ffe81f" opacity="0.9" />
+                </svg>
+                ENTER THE GALAXY
               </button>
               <div style={{ margin: '16px auto 0 auto', maxWidth: '300px', pointerEvents: 'none' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', letterSpacing: '1.5px', color: '#82dcff', marginBottom: '4px' }}>
@@ -931,6 +951,10 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
                               e.preventDefault();
                               e.stopPropagation();
                               onToggleWatched(item.id);
+                            }}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
                             }}
                             style={{
                               width: '28px',
