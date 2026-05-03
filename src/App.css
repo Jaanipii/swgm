@@ -794,8 +794,8 @@
     margin-left: 0 !important;
     padding-left: 0 !important;
     width: 100% !important;
-    mask-image: none !important;
-    -webkit-mask-image: none !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 12%, black 22%, black 100%) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, transparent 12%, black 22%, black 100%) !important;
     will-change: scroll-position;
   }
 
