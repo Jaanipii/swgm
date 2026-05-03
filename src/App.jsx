@@ -242,7 +242,7 @@ function App() {
           position: 'fixed', top: 0, left: 0, width: '100vw', height: '100dvh', 
           zIndex: 0, pointerEvents: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center',
           opacity: isJumping ? 0 : 1,
-          transform: isJumping ? 'scale(4)' : 'scale(1)',
+          transform: isJumping ? 'scale(0)' : 'scale(1)',
           transition: 'transform 0.4s cubic-bezier(0.9, 0, 1, 1), opacity 0.1s ease-out 0.3s'
         }}>
           <svg width="100%" height="100%" style={{ position: 'absolute' }}>
