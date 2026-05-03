@@ -530,7 +530,7 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
                 fontWeight: 300,
                 textTransform: 'uppercase'
               }}>
-                Holonet Terminal
+                Galactic Archives
               </h2>
               <div style={{ width: '5px', height: '5px', background: '#38bdf8', transform: 'rotate(45deg)', boxShadow: '0 0 8px #38bdf8' }} />
             </div>
