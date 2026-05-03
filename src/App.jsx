@@ -236,7 +236,7 @@ function App() {
           zIndex: 0, pointerEvents: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center',
           opacity: isJumping ? 0 : 1,
           transform: isJumping ? 'scale(4)' : 'scale(1)',
-          transition: 'transform 0.9s cubic-bezier(0.85, 0, 1, 1), opacity 0.3s ease-out 0.6s'
+          transition: 'transform 0.4s cubic-bezier(0.9, 0, 1, 1), opacity 0.1s ease-out 0.3s'
         }}>
           <svg width="100%" height="100%" style={{ position: 'absolute' }}>
             {introStars.map(star => (
