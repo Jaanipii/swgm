@@ -101,6 +101,7 @@ const TimelineCard = React.memo(({
 export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, onToggleFullscreen, onEraChange, onHistoricalEventSelect, onItemFocus, onJumpToHyperspace, watchedIds = [], onToggleWatched, onResetWatched, onSyncHistory, showLogCheckmarks, onToggleShowCheckmarks }) {
   const crawlRef = useRef(null);
   const timelineListRef = useRef(null);
+  const itemPositionsRef = useRef({});
   const [activeEvent, setActiveEvent] = useState(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [searchQuery, setSearchQuery] = useState("");
@@ -267,6 +268,8 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
         });
       }
     });
+
+    itemPositionsRef.current = episodeYMap; // Cache for ultra-fast scroll lookups
 
     if (yearPositions.length === 0) return;
 
@@ -492,40 +495,61 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
       scrollTimeout = setTimeout(() => {
         scrollTimeout = null;
         
-        if (!crawlRef.current) return;
+        const container = crawlRef.current;
+        if (!container) return;
+
+        const targetY = container.scrollTop + container.clientHeight / 3;
         
-        const items = crawlRef.current.querySelectorAll('.timeline-item');
-        if (items.length === 0) return;
-
-        const containerRect = crawlRef.current.getBoundingClientRect();
-        const targetY = containerRect.top + containerRect.height / 3;
-
-        let closestItem = null;
+        let closestId = null;
         let minDistance = Infinity;
+        
+        const positions = itemPositionsRef.current;
+        const keys = Object.keys(positions);
+        
+        if (keys.length > 0) {
+          // Zero-DOM pure math lookup using cached positions
+          for (let i = 0; i < keys.length; i++) {
+            const id = keys[i];
+            const yCenter = positions[id];
+            const dist = Math.abs(yCenter - targetY);
+            
+            if (dist < minDistance) {
+              minDistance = dist;
+              closestId = id;
+            } else if (dist > minDistance + 200) {
+               // Since items are usually sequential, we can't reliably break early 
+               // because keys might not be perfectly sorted by Y, but we can try
+               // Actually, it's so fast we don't even need to break early. 400 keys = 0ms.
+            }
+          }
+        } else {
+          // Fallback if cache isn't ready
+          const items = container.querySelectorAll('.timeline-item');
+          if (items.length === 0) return;
 
-        // Optimization: Items are sorted top-to-bottom.
-        // Distance decreases until we hit the target, then increases.
-        for (let i = 0; i < items.length; i++) {
-          const item = items[i];
-          const rect = item.getBoundingClientRect();
-          
-          // Skip elements way above the viewport quickly
-          if (rect.bottom < containerRect.top) continue;
+          const containerRect = container.getBoundingClientRect();
+          const targetY_DOM = containerRect.top + containerRect.height / 3;
 
-          const yCenter = rect.top + rect.height / 2;
-          const dist = Math.abs(yCenter - targetY);
+          for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const rect = item.getBoundingClientRect();
+            
+            if (rect.bottom < containerRect.top) continue;
 
-          if (dist < minDistance) {
-            minDistance = dist;
-            closestItem = item;
-          } else if (dist > minDistance + 100) {
-            // Passed the target area, distance is growing. Stop checking.
-            break;
+            const yCenter = rect.top + rect.height / 2;
+            const dist = Math.abs(yCenter - targetY_DOM);
+
+            if (dist < minDistance) {
+              minDistance = dist;
+              closestId = item.getAttribute('data-id');
+            } else if (dist > minDistance + 100) {
+              break;
+            }
           }
         }
 
-        if (closestItem) {
-          const itemId = closestItem.getAttribute('data-id');
+        if (closestId) {
+          const itemId = closestId;
           const episode = filteredTimeline.find(i => i.id === itemId);
           if (episode) {
             const yearNum = parseYear(episode.year);
