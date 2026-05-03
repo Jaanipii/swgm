@@ -792,6 +792,37 @@
   .crawl-container.fullscreen .timeline-list {
     max-width: 90vw;
     padding: 0 16px;
+    padding-top: 260px !important;
+  }
+
+  /* Compact episode cards on mobile */
+  .timeline-item {
+    padding: 10px 14px !important;
+    margin-top: 12px !important;
+  }
+
+  .item-year {
+    font-size: 1.3rem !important;
+    min-width: 55px !important;
+  }
+
+  .item-title {
+    font-size: 1.1rem !important;
+    margin-bottom: 3px !important;
+  }
+
+  .item-era {
+    font-size: 0.75rem !important;
+    margin-bottom: 3px !important;
+  }
+
+  .item-planet {
+    font-size: 0.7rem !important;
+  }
+
+  /* Hide event marker text on mobile, keep only glowing dots */
+  .event-marker-name {
+    display: none !important;
   }
 
   /* Map controls panel */

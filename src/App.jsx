@@ -210,8 +210,8 @@ function App() {
 
       <motion.div
         initial={{ opacity: 0 }}
-        animate={isIntroMode ? { opacity: 0 } : { opacity: 1 }}
-        transition={isIntroMode ? { duration: 0 } : { duration: 0.5, delay: 3.5, ease: "easeOut" }}
+        animate={isIntroMode ? { opacity: 0.25 } : { opacity: 1 }}
+        transition={isIntroMode ? { duration: 3, ease: "easeInOut" } : { duration: 0.5, delay: 3.5, ease: "easeOut" }}
         style={{ width: '100%', height: '100%', position: 'absolute', pointerEvents: isIntroMode ? 'none' : 'auto' }}
       >
         <GalaxyMap 
@@ -223,6 +223,7 @@ function App() {
           onHistoricalEventSelect={handleEventMarkerSelect}
           onRouteSelect={handleRouteSelect}
           isMapTransitioning={isMapTransitioning}
+          isIntroMode={isIntroMode}
           onPlanetHighlight={handlePlanetHighlight}
           panTrigger={panTrigger}
           hideControls={!isIntroMode && !showLegend}

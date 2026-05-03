@@ -468,305 +468,6 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
   return (
     <>
       <div className={`crawl-container ${isFullscreen ? 'fullscreen' : ''}`}>
-        
-        <div style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 100, display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          
-          {/* SEARCH BAR ROW */}
-          <div style={{ display: 'flex', alignItems: 'center', pointerEvents: 'none' }}>
-            <button 
-              onClick={() => {
-                setIsSearchOpen(!isSearchOpen);
-                if (!isSearchOpen) setTimeout(() => searchInputRef.current?.focus(), 100);
-              }}
-              style={{ ...roundBtnStyle, pointerEvents: 'auto' }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </button>
-            <AnimatePresence>
-              {isSearchOpen && (
-                <motion.input
-                  ref={searchInputRef}
-                  initial={{ width: 0, opacity: 0, marginLeft: 0, paddingLeft: 0, paddingRight: 0 }}
-                  animate={{ width: 250, opacity: 1, marginLeft: 10, paddingLeft: 20, paddingRight: 20 }}
-                  exit={{ width: 0, opacity: 0, marginLeft: 0, paddingLeft: 0, paddingRight: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  type="text" 
-                  className="timeline-search-input" 
-                  placeholder="Search archives..." 
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  style={{
-                    margin: 0,
-                    pointerEvents: 'auto',
-                    transition: 'background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease'
-                  }}
-                />
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* FILTER ROW */}
-          <div style={{ display: 'flex', alignItems: 'flex-start', pointerEvents: 'none', position: 'relative' }}>
-            <button 
-              onClick={() => setIsFilterOpen(!isFilterOpen)}
-              style={{ ...roundBtnStyle, pointerEvents: 'auto', background: isFilterOpen ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.6)' }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-              </svg>
-            </button>
-            
-            <AnimatePresence>
-              {isFilterOpen && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20, y: -20, scale: 0.9 }}
-                  animate={{ opacity: 1, x: 0, y: 0, scale: 1, marginLeft: 10 }}
-                  exit={{ opacity: 0, x: -20, y: -20, scale: 0.9, marginLeft: 0 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="timeline-filter-panel"
-                  style={{
-                    pointerEvents: 'auto',
-                    background: 'rgba(10, 20, 40, 0.85)',
-                    border: '1px solid rgba(255, 232, 31, 0.3)',
-                    borderRadius: '8px',
-                    padding: '15px',
-                    color: '#e0e0e0',
-                    width: '320px',
-                    backdropFilter: 'blur(10px)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '15px',
-                    maxHeight: '60vh',
-                    overflowY: 'auto'
-                  }}
-                >
-                  <div className="filter-group">
-                    <h4 style={{ margin: '0 0 8px 0', color: '#ffe81f', fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Type</h4>
-                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                      {ALL_TYPES.map(t => (
-                        <button 
-                          key={t}
-                          onClick={() => toggleFilter('type', t)}
-                          style={{
-                            background: selectedTypes.includes(t) ? 'rgba(255,232,31,0.2)' : 'transparent',
-                            border: `1px solid ${selectedTypes.includes(t) ? '#ffe81f' : 'rgba(255,255,255,0.2)'}`,
-                            color: selectedTypes.includes(t) ? '#ffe81f' : '#ccc',
-                            padding: '4px 10px',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            textTransform: 'capitalize',
-                            fontSize: '0.8rem'
-                          }}
-                        >
-                          {t}
-                        </button>
-                      ))}
-                    </div>
-                    <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
-                      <button 
-                        onClick={() => setSelectedTypes(ALL_TYPES)}
-                        style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}
-                      >
-                        Select All
-                      </button>
-                      <button 
-                        onClick={() => setSelectedTypes([])}
-                        style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}
-                      >
-                        Deselect All
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="filter-group">
-                    <h4 style={{ margin: '0 0 8px 0', color: '#ffe81f', fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Eras</h4>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      {filterEras.map(era => (
-                        <label key={era} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', cursor: 'pointer' }}>
-                          <input 
-                            type="checkbox" 
-                            className="filter-checkbox"
-                            checked={selectedEras.includes(era)}
-                            onChange={() => toggleFilter('era', era)}
-                          />
-                          {era}
-                        </label>
-                      ))}
-                    </div>
-                    <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
-                      <button 
-                        onClick={() => setSelectedEras(filterEras)}
-                        style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}
-                      >
-                        Select All
-                      </button>
-                      <button 
-                        onClick={() => setSelectedEras([])}
-                        style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}
-                      >
-                        Deselect All
-                      </button>
-                    </div>
-                  </div>
-
-                  {uniqueSeriesList.length > 0 && (
-                    <div className="filter-group">
-                      <h4 style={{ margin: '0 0 8px 0', color: '#ffe81f', fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Series</h4>
-                      <div className="filter-scroll-area" style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '150px', overflowY: 'auto', paddingRight: '10px' }}>
-                        {uniqueSeriesList.map(series => (
-                          <label key={series} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', cursor: 'pointer' }}>
-                            <input 
-                              type="checkbox"
-                              className="filter-checkbox" 
-                              checked={selectedSeries.includes(series)}
-                              onChange={() => toggleFilter('series', series)}
-                            />
-                            {series}
-                          </label>
-                        ))}
-                      </div>
-                      <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
-                        <button 
-                          onClick={() => setSelectedSeries(uniqueSeriesList)}
-                          style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}
-                        >
-                          Select All
-                        </button>
-                        <button 
-                          onClick={() => setSelectedSeries([])}
-                          style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}
-                        >
-                          Deselect All
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {(selectedTypes.length !== ALL_TYPES.length || selectedEras.length !== filterEras.length || selectedSeries.length !== uniqueSeriesList.length) && (
-                    <button 
-                      onClick={() => { setSelectedTypes(ALL_TYPES); setSelectedEras(filterEras); setSelectedSeries(uniqueSeriesList); }}
-                      style={{
-                        background: 'transparent',
-                        border: 'none',
-                        color: 'rgba(255, 232, 31, 0.7)',
-                        textDecoration: 'underline',
-                        cursor: 'pointer',
-                        fontSize: '0.8rem',
-                        alignSelf: 'flex-start',
-                        padding: 0,
-                        marginTop: '5px'
-                      }}
-                    >
-                      Clear all filters
-                    </button>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* SYNC SETTINGS ROW */}
-          <div style={{ display: 'flex', alignItems: 'flex-start', pointerEvents: 'none', position: 'relative' }}>
-            <button 
-              onClick={() => setIsSyncSettingsOpen(!isSyncSettingsOpen)}
-              style={{ ...roundBtnStyle, pointerEvents: 'auto', background: isSyncSettingsOpen ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.6)' }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 11 12 14 22 4"></polyline>
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-              </svg>
-            </button>
-
-            <AnimatePresence>
-              {isSyncSettingsOpen && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20, y: -20, scale: 0.9 }}
-                  animate={{ opacity: 1, x: 0, y: 0, scale: 1, marginLeft: 10 }}
-                  exit={{ opacity: 0, x: -20, y: -20, scale: 0.9, marginLeft: 0 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="timeline-filter-panel"
-                  style={{
-                    pointerEvents: 'auto',
-                    background: 'rgba(10, 20, 40, 0.85)',
-                    border: '1px solid rgba(255, 232, 31, 0.3)',
-                    borderRadius: '8px',
-                    padding: '15px',
-                    color: '#e0e0e0',
-                    width: '320px',
-                    backdropFilter: 'blur(10px)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '15px'
-                  }}
-                >
-                  <h4 style={{ margin: 0, color: '#ffe81f', fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Database Sync</h4>
-                  
-                  <div className="filter-group">
-                    <p style={{ margin: '0 0 8px 0', fontSize: '0.8rem', color: '#ccc' }}>
-                      {activeItemId ? `Auto-Log canon preceding: ${filteredTimeline.find(i=>i.id===activeItemId)?.title || 'Selected Item'}` : 'Select a timeline item to enable bulk auto-logging.'}
-                    </p>
-                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', opacity: activeItemId ? 1 : 0.5, pointerEvents: activeItemId ? 'auto' : 'none' }}>
-                       {['movie', 'series', 'book', 'comic', 'audio-drama', 'game'].map(type => (
-                          <label key={type} style={{ fontSize: '0.75rem', color: '#ccc', display: 'flex', alignItems: 'center', cursor: 'pointer', background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '4px' }}>
-                            <input 
-                              type="checkbox" 
-                              checked={globalSyncTypes.includes(type)}
-                              onChange={(e) => {
-                                if (e.target.checked) setGlobalSyncTypes([...globalSyncTypes, type]);
-                                else setGlobalSyncTypes(globalSyncTypes.filter(t => t !== type));
-                              }}
-                              style={{ marginRight: '6px' }}
-                            />
-                            {type.toUpperCase()}
-                          </label>
-                        ))}
-                    </div>
-                    {activeItemId && (
-                      <button 
-                        onClick={() => {
-                           if (onSyncHistory) onSyncHistory(activeItemId, globalSyncTypes);
-                           setIsSyncSettingsOpen(false);
-                        }}
-                        style={{ marginTop: '10px', width: '100%', background: 'rgba(255, 232, 31, 0.2)', border: '1px solid #ffe81f', color: '#ffe81f', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontFamily: 'Orbitron, sans-serif' }}
-                      >
-                        SYNC HIGHLIGHTED
-                      </button>
-                    )}
-                  </div>
-                  
-                  <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '15px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem', color: '#ccc' }}>
-                      <input 
-                        type="checkbox" 
-                        checked={showLogCheckmarks}
-                        onChange={onToggleShowCheckmarks}
-                        className="filter-checkbox"
-                      />
-                      Show Log Checkmarks on Cards
-                    </label>
-
-                    <button 
-                      onClick={() => {
-                        if (window.confirm("Are you sure you want to completely erase your watched history?")) {
-                          if (onResetWatched) onResetWatched();
-                        }
-                      }}
-                      style={{ width: '100%', background: 'rgba(255, 60, 60, 0.1)', border: '1px solid rgba(255, 60, 60, 0.4)', color: 'rgba(255, 60, 60, 0.8)', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontFamily: 'Orbitron, sans-serif' }}
-                    >
-                      ERASE ALL LOGS
-                    </button>
-                  </div>
-
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
 
         <div className="crawl-title">
           <h1>GALACTIC ARCHIVES</h1>
@@ -841,6 +542,200 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
                   <div style={{ width: `${scrollProgress}%`, height: '100%', background: 'linear-gradient(to right, #82dcff, #ffe81f)', borderRadius: '2px', transition: 'width 0.5s ease' }} />
                 </div>
               </div>
+
+              {/* Icon buttons row — search, filter, sync */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', margin: '16px auto 0 auto', pointerEvents: 'auto', position: 'relative' }}>
+                {/* Search */}
+                <button 
+                  onClick={() => {
+                    setIsSearchOpen(!isSearchOpen);
+                    if (!isSearchOpen) setTimeout(() => searchInputRef.current?.focus(), 100);
+                  }}
+                  style={{ ...roundBtnStyle }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </button>
+                {/* Filter */}
+                <button 
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                  style={{ ...roundBtnStyle, background: isFilterOpen ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.6)' }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                  </svg>
+                </button>
+                {/* Sync/Log Settings */}
+                <button 
+                  onClick={() => setIsSyncSettingsOpen(!isSyncSettingsOpen)}
+                  style={{ ...roundBtnStyle, background: isSyncSettingsOpen ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.6)' }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 11 12 14 22 4"></polyline>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                  </svg>
+                </button>
+              </div>
+
+              {/* Search input (expands below buttons) */}
+              <AnimatePresence>
+                {isSearchOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', pointerEvents: 'auto' }}
+                  >
+                    <input
+                      ref={searchInputRef}
+                      type="text" 
+                      className="timeline-search-input" 
+                      placeholder="Search archives..." 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      style={{ margin: '8px 0 0 0', width: '280px', maxWidth: '80vw' }}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Filter panel (expands below buttons) */}
+              <AnimatePresence>
+                {isFilterOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', pointerEvents: 'auto' }}
+                  >
+                    <div
+                      className="timeline-filter-panel"
+                      style={{
+                        background: 'rgba(10, 20, 40, 0.9)',
+                        border: '1px solid rgba(255, 232, 31, 0.3)',
+                        borderRadius: '8px',
+                        padding: '15px',
+                        color: '#e0e0e0',
+                        width: '320px',
+                        maxWidth: '85vw',
+                        backdropFilter: 'blur(10px)',
+                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '15px',
+                        maxHeight: '50vh',
+                        overflowY: 'auto',
+                        marginTop: '8px'
+                      }}
+                    >
+                      <div className="filter-group">
+                        <h4 style={{ margin: '0 0 8px 0', color: '#ffe81f', fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Type</h4>
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                          {ALL_TYPES.map(t => (
+                            <button key={t} onClick={() => toggleFilter('type', t)} style={{ background: selectedTypes.includes(t) ? 'rgba(255,232,31,0.2)' : 'transparent', border: `1px solid ${selectedTypes.includes(t) ? '#ffe81f' : 'rgba(255,255,255,0.2)'}`, color: selectedTypes.includes(t) ? '#ffe81f' : '#ccc', padding: '4px 10px', borderRadius: '4px', cursor: 'pointer', textTransform: 'capitalize', fontSize: '0.8rem' }}>{t}</button>
+                          ))}
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
+                          <button onClick={() => setSelectedTypes(ALL_TYPES)} style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}>Select All</button>
+                          <button onClick={() => setSelectedTypes([])} style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}>Deselect All</button>
+                        </div>
+                      </div>
+                      <div className="filter-group">
+                        <h4 style={{ margin: '0 0 8px 0', color: '#ffe81f', fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Eras</h4>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                          {filterEras.map(era => (
+                            <label key={era} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', cursor: 'pointer' }}>
+                              <input type="checkbox" className="filter-checkbox" checked={selectedEras.includes(era)} onChange={() => toggleFilter('era', era)} />{era}
+                            </label>
+                          ))}
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
+                          <button onClick={() => setSelectedEras(filterEras)} style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}>Select All</button>
+                          <button onClick={() => setSelectedEras([])} style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}>Deselect All</button>
+                        </div>
+                      </div>
+                      {uniqueSeriesList.length > 0 && (
+                        <div className="filter-group">
+                          <h4 style={{ margin: '0 0 8px 0', color: '#ffe81f', fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Series</h4>
+                          <div className="filter-scroll-area" style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '150px', overflowY: 'auto', paddingRight: '10px' }}>
+                            {uniqueSeriesList.map(series => (
+                              <label key={series} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', cursor: 'pointer' }}>
+                                <input type="checkbox" className="filter-checkbox" checked={selectedSeries.includes(series)} onChange={() => toggleFilter('series', series)} />{series}
+                              </label>
+                            ))}
+                          </div>
+                          <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
+                            <button onClick={() => setSelectedSeries(uniqueSeriesList)} style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}>Select All</button>
+                            <button onClick={() => setSelectedSeries([])} style={{ background: 'none', border: 'none', color: '#82dcff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}>Deselect All</button>
+                          </div>
+                        </div>
+                      )}
+                      {(selectedTypes.length !== ALL_TYPES.length || selectedEras.length !== filterEras.length || selectedSeries.length !== uniqueSeriesList.length) && (
+                        <button onClick={() => { setSelectedTypes(ALL_TYPES); setSelectedEras(filterEras); setSelectedSeries(uniqueSeriesList); }} style={{ background: 'transparent', border: 'none', color: 'rgba(255, 232, 31, 0.7)', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.8rem', alignSelf: 'flex-start', padding: 0, marginTop: '5px' }}>Clear all filters</button>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Sync settings panel (expands below buttons) */}
+              <AnimatePresence>
+                {isSyncSettingsOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', pointerEvents: 'auto' }}
+                  >
+                    <div
+                      className="timeline-filter-panel"
+                      style={{
+                        background: 'rgba(10, 20, 40, 0.9)',
+                        border: '1px solid rgba(255, 232, 31, 0.3)',
+                        borderRadius: '8px',
+                        padding: '15px',
+                        color: '#e0e0e0',
+                        width: '320px',
+                        maxWidth: '85vw',
+                        backdropFilter: 'blur(10px)',
+                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '15px',
+                        marginTop: '8px'
+                      }}
+                    >
+                      <h4 style={{ margin: 0, color: '#ffe81f', fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Database Sync</h4>
+                      <div className="filter-group">
+                        <p style={{ margin: '0 0 8px 0', fontSize: '0.8rem', color: '#ccc' }}>
+                          {activeItemId ? `Auto-Log canon preceding: ${filteredTimeline.find(i=>i.id===activeItemId)?.title || 'Selected Item'}` : 'Select a timeline item to enable bulk auto-logging.'}
+                        </p>
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', opacity: activeItemId ? 1 : 0.5, pointerEvents: activeItemId ? 'auto' : 'none' }}>
+                          {['movie', 'series', 'book', 'comic', 'audio-drama', 'game'].map(type => (
+                            <label key={type} style={{ fontSize: '0.75rem', color: '#ccc', display: 'flex', alignItems: 'center', cursor: 'pointer', background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '4px' }}>
+                              <input type="checkbox" checked={globalSyncTypes.includes(type)} onChange={(e) => { if (e.target.checked) setGlobalSyncTypes([...globalSyncTypes, type]); else setGlobalSyncTypes(globalSyncTypes.filter(t => t !== type)); }} style={{ marginRight: '6px' }} />{type.toUpperCase()}
+                            </label>
+                          ))}
+                        </div>
+                        {activeItemId && (
+                          <button onClick={() => { if (onSyncHistory) onSyncHistory(activeItemId, globalSyncTypes); setIsSyncSettingsOpen(false); }} style={{ marginTop: '10px', width: '100%', background: 'rgba(255, 232, 31, 0.2)', border: '1px solid #ffe81f', color: '#ffe81f', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontFamily: 'Orbitron, sans-serif' }}>SYNC HIGHLIGHTED</button>
+                        )}
+                      </div>
+                      <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '15px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem', color: '#ccc' }}>
+                          <input type="checkbox" checked={showLogCheckmarks} onChange={onToggleShowCheckmarks} className="filter-checkbox" />Show Log Checkmarks on Cards
+                        </label>
+                        <button onClick={() => { if (window.confirm("Are you sure you want to completely erase your watched history?")) { if (onResetWatched) onResetWatched(); } }} style={{ width: '100%', background: 'rgba(255, 60, 60, 0.1)', border: '1px solid rgba(255, 60, 60, 0.4)', color: 'rgba(255, 60, 60, 0.8)', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontFamily: 'Orbitron, sans-serif' }}>ERASE ALL LOGS</button>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </>
           )}
         </div>
@@ -946,7 +841,7 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
                         </div>
                         {showLogCheckmarks && (
                           <div 
-                            className="watch-toggle"
+                            className="watch-toggle-hitbox"
                             onPointerDown={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
@@ -957,28 +852,36 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
                               e.stopPropagation();
                             }}
                             style={{
-                              width: '28px',
-                              height: '28px',
-                              borderRadius: '50%',
-                              border: `2px solid ${isWatched ? '#ffe81f' : 'rgba(130, 220, 255, 0.4)'}`,
-                              background: isWatched ? '#ffe81f' : 'transparent',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
+                              padding: '12px',
+                              marginTop: '13px',
+                              marginRight: '-12px',
                               cursor: 'pointer',
-                              marginTop: '25px',
-                              transition: 'all 0.2s ease',
-                              flexShrink: 0,
                               pointerEvents: 'auto',
-                              zIndex: 50
+                              zIndex: 50,
+                              flexShrink: 0
                             }}
                             title={isWatched ? "Mark as unseen" : "Mark as watched"}
                           >
-                            {isWatched && (
-                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                              </svg>
-                            )}
+                            <div
+                              className="watch-toggle"
+                              style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                border: `2px solid ${isWatched ? '#ffe81f' : 'rgba(130, 220, 255, 0.4)'}`,
+                                background: isWatched ? '#ffe81f' : 'transparent',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                transition: 'all 0.2s ease',
+                              }}
+                            >
+                              {isWatched && (
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              )}
+                            </div>
                           </div>
                         )}
                       </motion.div>
