@@ -269,22 +269,20 @@ function App() {
           </>
         )}
 
-        {!(hideMapUI && !isIntroMode) && (
-          <LoreCard 
-            activeItemId={activeEpisodeId}
-            activePlanetId={activePlanetId}
-            activeHistoricalEvent={activeHistoricalEvent}
-            activeRoute={activeRoute}
-            activeEra={activeEra}
-            loreMode={loreMode}
-            onSwitchMode={setLoreMode}
-            onClose={handleCloseLoreCard}
-            onNext={handleTimelineSelect}
-            onPlanetSelect={handlePlanetSelect}
-            onSyncHistory={syncHistoryUpTo}
-            watchedIds={watchedIds}
-          />
-        )}
+        <LoreCard 
+          activeItemId={activeEpisodeId}
+          activePlanetId={activePlanetId}
+          activeHistoricalEvent={activeHistoricalEvent}
+          activeRoute={activeRoute}
+          activeEra={activeEra}
+          loreMode={loreMode}
+          onSwitchMode={setLoreMode}
+          onClose={handleCloseLoreCard}
+          onNext={handleTimelineSelect}
+          onPlanetSelect={handlePlanetSelect}
+          onSyncHistory={syncHistoryUpTo}
+          watchedIds={watchedIds}
+        />
 
         {/* Explore Mode toggle — only visible in map view */}
         {!isIntroMode && (
