@@ -36,6 +36,7 @@ function App() {
   });
   const [showLegend, setShowLegend] = useState(false);
   const [showGuide, setShowGuide] = useState(false);
+  const [isTimelineFullscreen, setIsTimelineFullscreen] = useState(false);
 
   // Phase 10: Persistent Progress Tracking State
   const [watchedIds, setWatchedIds] = useState(() => {
@@ -715,7 +716,8 @@ function App() {
             <TimelineCrawl 
               activeItemId={activeEpisodeId} 
               onSelect={(id) => { handleTimelineSelect(id); }}
-              isFullscreen={false}
+              isFullscreen={isTimelineFullscreen}
+              onToggleFullscreen={() => setIsTimelineFullscreen(!isTimelineFullscreen)}
               onEraChange={handleEraChange}
               onHistoricalEventSelect={handleEventMarkerSelect}
               onItemFocus={handleTimelineFocus}

@@ -8,7 +8,7 @@ import { getShortSeriesName, getUniqueSeries, filterEras } from '../../utils/fil
 
 const ALL_TYPES = ['movie', 'series', 'book', 'comic', 'audio-drama', 'game', 'short-story'];
 
-export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, onEraChange, onHistoricalEventSelect, onItemFocus, onJumpToHyperspace, watchedIds = [], onToggleWatched, onResetWatched, onSyncHistory, showLogCheckmarks, onToggleShowCheckmarks }) {
+export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, onToggleFullscreen, onEraChange, onHistoricalEventSelect, onItemFocus, onJumpToHyperspace, watchedIds = [], onToggleWatched, onResetWatched, onSyncHistory, showLogCheckmarks, onToggleShowCheckmarks }) {
   const crawlRef = useRef(null);
   const timelineListRef = useRef(null);
   const [activeEvent, setActiveEvent] = useState(null);
@@ -457,8 +457,22 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
                 </div>
               </div>
 
-              {/* Icon buttons row — search, filter, sync */}
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', margin: '16px auto 0 auto', pointerEvents: 'auto', position: 'relative' }}>
+              {/* Icon buttons row — search, filter, sync, fullscreen */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', margin: '16px auto 0 auto', pointerEvents: 'auto', position: 'relative', flexWrap: 'wrap' }}>
+                {/* Fullscreen Toggle */}
+                <button
+                  onClick={onToggleFullscreen}
+                  style={{ ...roundBtnStyle, background: isFullscreen ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.6)' }}
+                  title="Toggle Fullscreen"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    {isFullscreen ? (
+                      <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" />
+                    ) : (
+                      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                    )}
+                  </svg>
+                </button>
                 {/* Search */}
                 <button 
                   onClick={() => {
