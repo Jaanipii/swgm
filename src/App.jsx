@@ -858,8 +858,8 @@ function App() {
           style={{
             position: 'absolute',
             top: '20px',
-            right: loreMode ? '420px' : '20px',
-            zIndex: 100,
+            left: '20px',
+            zIndex: 40,
             background: 'rgba(10, 20, 40, 0.8)',
             border: '1px solid rgba(255, 232, 31, 0.4)',
             color: '#FFE81F',
