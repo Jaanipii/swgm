@@ -674,8 +674,8 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
             ref={crawlRef}
           >
             <div className="crawl-content">
-              {/* timeline-list needs enough padding-top so ancient extrapolated events don't fall off the top! */}
-              <div className="timeline-list" ref={timelineListRef} style={{ paddingTop: '320px' }}>
+              {/* timeline-list needs enough padding-top so ancient extrapolated events don't fall off the top on desktop! */}
+              <div className="timeline-list" ref={timelineListRef}>
                 
                 {/* Independent Absolutely-Positioned Event Overlay */}
                 <div className="timeline-events-overlay">

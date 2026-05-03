@@ -241,6 +241,7 @@
   margin-left: 20px; /* Space from search bar */
   padding-left: 10px; /* Very tight gap between spine and cards */
   padding-bottom: 50px;
+  padding-top: 320px; /* Enough space so ancient extrapolated events don't fall off the top */
 }
 
 .timeline-item {
@@ -788,11 +789,13 @@
 
   .crawl-content {
     width: 96% !important;
+    padding-top: 220px !important;
   }
 
   .timeline-list {
     margin-left: 5px !important;
     padding-left: 5px !important;
+    padding-top: 0 !important;
   }
 
   .crawl-container.fullscreen {
