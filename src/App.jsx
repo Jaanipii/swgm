@@ -210,8 +210,8 @@ function App() {
 
       <motion.div
         initial={{ opacity: 0 }}
-        animate={isIntroMode ? { opacity: 0.25 } : { opacity: 1 }}
-        transition={isIntroMode ? { duration: 3, ease: "easeInOut" } : { duration: 0.5, delay: 3.5, ease: "easeOut" }}
+        animate={isIntroMode ? { opacity: 0 } : { opacity: 1 }}
+        transition={isIntroMode ? { duration: 0 } : { duration: 0.5, delay: 3.5, ease: "easeOut" }}
         style={{ width: '100%', height: '100%', position: 'absolute', pointerEvents: isIntroMode ? 'none' : 'auto' }}
       >
         <GalaxyMap 
@@ -223,7 +223,6 @@ function App() {
           onHistoricalEventSelect={handleEventMarkerSelect}
           onRouteSelect={handleRouteSelect}
           isMapTransitioning={isMapTransitioning}
-          isIntroMode={isIntroMode}
           onPlanetHighlight={handlePlanetHighlight}
           panTrigger={panTrigger}
           hideControls={!isIntroMode && !showLegend}
@@ -232,8 +231,8 @@ function App() {
 
       {/* The star background should only be visible during intro mode */}
       {isIntroMode && (
-        <div className="map-container intro-stars" style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
-          <svg width="100%" height="100%">
+        <div className="map-container intro-stars" style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <svg width="100%" height="100%" style={{ position: 'absolute' }}>
             {introStars.map(star => (
                <circle 
                   key={star.id} 
@@ -246,6 +245,29 @@ function App() {
                />
             ))}
           </svg>
+          
+          {/* Mini-Galaxy Tease (Penny-sized aesthetic element) */}
+          <div style={{
+            position: 'relative',
+            width: '40px',
+            height: '40px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            opacity: 0.65,
+            animation: 'spin-slow 120s linear infinite'
+          }}>
+            <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#fff', borderRadius: '50%', boxShadow: '0 0 8px 3px rgba(255, 255, 255, 0.9), 0 0 15px 6px rgba(130, 220, 255, 0.6)' }}></div>
+            <div style={{ position: 'absolute', width: '36px', height: '8px', background: 'radial-gradient(ellipse at center, rgba(130, 220, 255, 0.8) 0%, rgba(130, 220, 255, 0) 70%)', transform: 'rotate(25deg)', borderRadius: '50%', filter: 'blur(1px)' }}></div>
+            <div style={{ position: 'absolute', width: '28px', height: '6px', background: 'radial-gradient(ellipse at center, rgba(255, 232, 31, 0.5) 0%, rgba(255, 232, 31, 0) 70%)', transform: 'rotate(-20deg)', borderRadius: '50%', filter: 'blur(1px)' }}></div>
+            <div style={{ position: 'absolute', width: '45px', height: '2px', background: 'radial-gradient(ellipse at center, rgba(100, 150, 255, 0.4) 0%, rgba(100, 150, 255, 0) 70%)', transform: 'rotate(60deg)', borderRadius: '50%' }}></div>
+            <style>{`
+              @keyframes spin-slow {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+            `}</style>
+          </div>
         </div>
       )}
 
