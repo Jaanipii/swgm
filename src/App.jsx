@@ -34,7 +34,7 @@ function App() {
   const [showGdprNotice, setShowGdprNotice] = useState(() => {
     try { return !localStorage.getItem('sw_gdpr_dismissed'); } catch { return true; }
   });
-  const [hideMapUI, setHideMapUI] = useState(false);
+  const [hideMapUI, setHideMapUI] = useState(() => window.innerWidth < 1024);
 
   // Phase 10: Persistent Progress Tracking State
   const [watchedIds, setWatchedIds] = useState(() => {
@@ -290,10 +290,10 @@ function App() {
             onClick={() => setHideMapUI(!hideMapUI)}
             title={hideMapUI ? 'Show Episode Guide' : 'Explore Map Only'}
             style={{
-              position: 'absolute',
-              bottom: '20px',
+              position: 'fixed',
+              top: '20px',
               left: '20px',
-              zIndex: 200,
+              zIndex: 9998,
               width: '44px',
               height: '44px',
               borderRadius: '50%',
@@ -305,7 +305,8 @@ function App() {
               alignItems: 'center',
               justifyContent: 'center',
               backdropFilter: 'blur(5px)',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)'
             }}
           >
             {hideMapUI ? (
