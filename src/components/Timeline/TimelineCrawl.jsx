@@ -362,64 +362,83 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
   }, [calculateEventPositions]);
 
   useEffect(() => {
+    let scrollTimeout = null;
+
     const handleScroll = () => {
-      if (!crawlRef.current) return;
+      if (scrollTimeout) return;
       
-      const items = crawlRef.current.querySelectorAll('.timeline-item');
-      if (items.length === 0) return;
-
-      const containerRect = crawlRef.current.getBoundingClientRect();
-      const targetY = containerRect.top + containerRect.height / 3;
-
-      let closestItem = null;
-      let minDistance = Infinity;
-
-      items.forEach(item => {
-        const rect = item.getBoundingClientRect();
-        const yCenter = rect.top + rect.height / 2;
-        const dist = Math.abs(yCenter - targetY);
-
-        if (dist < minDistance) {
-          minDistance = dist;
-          closestItem = item;
-        }
-      });
-
-      if (closestItem) {
-        const itemId = closestItem.getAttribute('data-id');
-        const episode = filteredTimeline.find(i => i.id === itemId);
-        if (episode) {
-          const yearNum = parseYear(episode.year);
-          const historyEvent = getHistoricalEventForYear(yearNum);
-          
-          setActiveEvent(prev => {
-            if (prev?.id !== historyEvent?.id) return historyEvent;
-            return prev;
-          });
-
-          if (onEraChange) {
-            const era = determineEra(episode.year);
-            onEraChange(era);
-          }
-          
-          if (onItemFocus) {
-            onItemFocus(itemId);
-          }
-        }
+      scrollTimeout = setTimeout(() => {
+        scrollTimeout = null;
         
-        const index = filteredTimeline.findIndex(i => i.id === itemId);
-        if (index !== -1) {
-          setFocusedIndex(index);
+        if (!crawlRef.current) return;
+        
+        const items = crawlRef.current.querySelectorAll('.timeline-item');
+        if (items.length === 0) return;
+
+        const containerRect = crawlRef.current.getBoundingClientRect();
+        const targetY = containerRect.top + containerRect.height / 3;
+
+        let closestItem = null;
+        let minDistance = Infinity;
+
+        // Optimization: Items are sorted top-to-bottom.
+        // Distance decreases until we hit the target, then increases.
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          const rect = item.getBoundingClientRect();
+          
+          // Skip elements way above the viewport quickly
+          if (rect.bottom < containerRect.top) continue;
+
+          const yCenter = rect.top + rect.height / 2;
+          const dist = Math.abs(yCenter - targetY);
+
+          if (dist < minDistance) {
+            minDistance = dist;
+            closestItem = item;
+          } else if (dist > minDistance + 100) {
+            // Passed the target area, distance is growing. Stop checking.
+            break;
+          }
         }
-      }
+
+        if (closestItem) {
+          const itemId = closestItem.getAttribute('data-id');
+          const episode = filteredTimeline.find(i => i.id === itemId);
+          if (episode) {
+            const yearNum = parseYear(episode.year);
+            const historyEvent = getHistoricalEventForYear(yearNum);
+            
+            setActiveEvent(prev => {
+              if (prev?.id !== historyEvent?.id) return historyEvent;
+              return prev;
+            });
+
+            if (onEraChange) {
+              const era = determineEra(episode.year);
+              onEraChange(era);
+            }
+            
+            if (onItemFocus) {
+              onItemFocus(itemId);
+            }
+          }
+          
+          const index = filteredTimeline.findIndex(i => i.id === itemId);
+          if (index !== -1) {
+            setFocusedIndex(index);
+          }
+        }
+      }, 150); // Throttle to run max ~6 times a second to save mobile CPU
     };
 
     const container = crawlRef.current;
     if (container) {
-      container.addEventListener('scroll', handleScroll);
+      container.addEventListener('scroll', handleScroll, { passive: true });
       setTimeout(handleScroll, 100);
     }
     return () => {
+      if (scrollTimeout) clearTimeout(scrollTimeout);
       if (container) container.removeEventListener('scroll', handleScroll);
     };
   }, [onEraChange, filteredTimeline]);
