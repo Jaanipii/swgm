@@ -310,7 +310,8 @@ function App() {
         )}
 
         {/* Desktop: Timeline (always visible unless map-only explore mode) */}
-        {!isMobile && (isIntroMode || mobileViewMode !== 'map') && (
+        {/* Also renders on mobile during intro mode (before jumping to map) */}
+        {(isIntroMode || (!isMobile && mobileViewMode !== 'map')) && (
           <TimelineCrawl 
             activeItemId={activeEpisodeId} 
             onSelect={handleTimelineSelect} 
