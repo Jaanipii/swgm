@@ -950,7 +950,8 @@
 }
 
 /* Hide Ko-fi widget when not in intro mode */
-body[data-intro-mode="false"] .floatingchat-container-wrap,
-body[data-intro-mode="false"] iframe[src*="ko-fi.com"] {
+body[data-intro-mode="false"] [id*="kofi-"],
+body[data-intro-mode="false"] [class*="kofi-"] {
   display: none !important;
+  pointer-events: none !important;
 }
