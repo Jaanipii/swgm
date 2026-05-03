@@ -472,7 +472,7 @@
   top: 0;
   right: 0;
   width: 450px;
-  height: 100vh;
+  height: 100dvh;
   background: rgba(10, 20, 40, 0.85);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -761,9 +761,9 @@
     border-top: 2px solid rgba(255, 232, 31, 0.3);
     top: auto;
     bottom: 0;
-    height: 70vh;
+    height: 70dvh;
     border-radius: 16px 16px 0 0;
-    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
   }
 
   .lore-card-header {

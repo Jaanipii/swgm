@@ -498,52 +498,72 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
                ASTROGRAPHIC DATA UNAVAILABLE
             </button>
           )}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', width: '100%', margin: '4px 0 12px 0' }}>
-            <button 
-              className={`nav-arrow ${!prevItem ? 'disabled' : ''}`} 
-              onClick={() => prevItem && onNext(prevItem.id)}
-              title="Previous Chronological Event"
-              style={{ 
-                background: 'rgba(130, 220, 255, 0.05)', 
-                border: '1px solid rgba(130, 220, 255, 0.2)', 
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: prevItem ? '#82dcff' : '#444', 
-                fontSize: '1.2rem', 
-                cursor: prevItem ? 'pointer' : 'default', 
-                transition: 'all 0.2s',
-                opacity: prevItem ? 1 : 0.4
-              }}
-            >
-              ←
-            </button>
-            <button 
-              className={`nav-arrow ${!nextItem ? 'disabled' : ''}`} 
-              onClick={() => nextItem && onNext(nextItem.id)}
-              title="Next Chronological Event"
-              style={{ 
-                background: 'rgba(130, 220, 255, 0.05)', 
-                border: '1px solid rgba(130, 220, 255, 0.2)', 
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: nextItem ? '#82dcff' : '#444', 
-                fontSize: '1.2rem', 
-                cursor: nextItem ? 'pointer' : 'default', 
-                transition: 'all 0.2s',
-                opacity: nextItem ? 1 : 0.4
-              }}
-            >
-              →
-            </button>
-          </div>
+          {/* Fixed Prev/Next Buttons pinned to the LoreCard viewport */}
+          <button 
+            className={`nav-arrow ${!prevItem ? 'disabled' : ''}`} 
+            onClick={() => prevItem && onNext(prevItem.id)}
+            title="Previous Chronological Event"
+            style={{ 
+              position: 'fixed',
+              bottom: 'max(16px, env(safe-area-inset-bottom))',
+              left: '16px',
+              zIndex: 10000,
+              background: 'rgba(10, 20, 40, 0.8)',
+              border: '1px solid rgba(255, 232, 31, 0.4)',
+              color: '#FFE81F',
+              padding: '0',
+              borderRadius: '50%',
+              width: '44px',
+              height: '44px',
+              cursor: prevItem ? 'pointer' : 'default',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)',
+              transition: 'all 0.3s ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              opacity: prevItem ? 1 : 0.4,
+              pointerEvents: prevItem ? 'auto' : 'none'
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFE81F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <button 
+            className={`nav-arrow ${!nextItem ? 'disabled' : ''}`} 
+            onClick={() => nextItem && onNext(nextItem.id)}
+            title="Next Chronological Event"
+            style={{ 
+              position: 'fixed',
+              bottom: 'max(16px, env(safe-area-inset-bottom))',
+              right: '16px',
+              zIndex: 10000,
+              background: 'rgba(10, 20, 40, 0.8)',
+              border: '1px solid rgba(255, 232, 31, 0.4)',
+              color: '#FFE81F',
+              padding: '0',
+              borderRadius: '50%',
+              width: '44px',
+              height: '44px',
+              cursor: nextItem ? 'pointer' : 'default',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)',
+              transition: 'all 0.3s ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              opacity: nextItem ? 1 : 0.4,
+              pointerEvents: nextItem ? 'auto' : 'none'
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFE81F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
           <div style={{ height: 'calc(20px + env(safe-area-inset-bottom, 0px))' }} />
         </div>
       </motion.div>
