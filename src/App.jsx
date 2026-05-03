@@ -829,6 +829,26 @@ function App() {
 
             <div style={{
               position: 'absolute',
+              top: 'clamp(7.5%, 10vh, 12.5%)',
+              left: 0,
+              right: 0,
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+              <p style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 'clamp(0.7rem, 2vw, 0.95rem)',
+                color: '#38bdf8',
+                fontStyle: 'italic',
+                margin: 0,
+                opacity: 0.8,
+                whiteSpace: 'nowrap',
+                letterSpacing: '1px'
+              }}>In a galaxy far, far away...</p>
+            </div>
+
+            <div style={{
+              position: 'absolute',
               top: 'clamp(15%, 20vh, 25%)',
               left: 0,
               right: 0,
@@ -837,17 +857,6 @@ function App() {
               alignItems: 'center',
             }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', position: 'relative' }}>
-                <p style={{
-                  position: 'absolute',
-                  top: '-20px',
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: 'clamp(0.7rem, 2vw, 0.95rem)',
-                  color: '#38bdf8',
-                  fontStyle: 'italic',
-                  margin: 0,
-                  opacity: 0.8,
-                  whiteSpace: 'nowrap'
-                }}>In a galaxy far, far away...</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                   {/* Decorative Jedi Diamond */}
                   <div style={{ width: '8px', height: '8px', background: '#38bdf8', transform: 'rotate(45deg)', boxShadow: '0 0 10px #38bdf8' }} />
