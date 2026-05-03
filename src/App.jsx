@@ -261,7 +261,6 @@ function App() {
             justifyContent: 'center',
             alignItems: 'center',
             opacity: 0.85,
-            transform: 'translateY(-8vh)',
           }}>
             {/* The 3D spinning disk */}
             <div style={{
