@@ -445,28 +445,12 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
       <div className={`crawl-container ${isFullscreen ? 'fullscreen' : ''}`}>
 
         <div className="crawl-title">
-          {/* HEADER OPTIONS */}
-          {/* 1: Holonet Nav-Computer (Technical) */}
-          {/* 2: Jedi Holocron (Mystical) */}
-          {/* 3: Minimalist HUD */}
-          {/* 4: The Cinematic Atlas */}
-          
-          <div style={{ fontFamily: 'Orbitron, sans-serif', border: '1px solid rgba(130, 220, 255, 0.2)', padding: '14px 24px', background: 'rgba(10, 20, 40, 0.7)', borderRadius: '2px', position: 'relative', display: 'inline-block', backdropFilter: 'blur(4px)' }}>
-            {/* Fake UI corners */}
-            <div style={{ position: 'absolute', top: -1, left: -1, width: '8px', height: '8px', borderTop: '2px solid #82dcff', borderLeft: '2px solid #82dcff' }} />
-            <div style={{ position: 'absolute', top: -1, right: -1, width: '8px', height: '8px', borderTop: '2px solid #82dcff', borderRight: '2px solid #82dcff' }} />
-            <div style={{ position: 'absolute', bottom: -1, left: -1, width: '8px', height: '8px', borderBottom: '2px solid #82dcff', borderLeft: '2px solid #82dcff' }} />
-            <div style={{ position: 'absolute', bottom: -1, right: -1, width: '8px', height: '8px', borderBottom: '2px solid #82dcff', borderRight: '2px solid #82dcff' }} />
-            
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '6px' }}>
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#38bdf8', boxShadow: '0 0 10px #38bdf8', animation: 'holo-flicker 2s infinite' }} />
-              <h1 style={{ margin: 0, fontSize: '1.4rem', letterSpacing: '4px', color: '#fff', textShadow: '0 0 10px rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>HOLONET TERMINAL</h1>
+          <div style={{ fontFamily: 'Orbitron, sans-serif', padding: '10px 15px', background: 'rgba(10, 20, 40, 0.4)', borderRadius: '2px', position: 'relative', display: 'inline-block', borderLeft: '2px solid #38bdf8' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#38bdf8', boxShadow: '0 0 8px #38bdf8', animation: 'holo-flicker 2s infinite' }} />
+              <h2 style={{ margin: 0, fontSize: '1rem', letterSpacing: '2px', color: '#fff', textTransform: 'uppercase' }}>HOLONET TERMINAL</h2>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
-              <span style={{ fontSize: '0.65rem', color: '#82dcff', opacity: 0.5, letterSpacing: '2px' }}>[SEC:4]</span>
-              <p style={{ margin: 0, fontSize: '0.75rem', color: '#82dcff', letterSpacing: '2px', textTransform: 'uppercase' }}>Interactive Atlas & Historical Records</p>
-              <span style={{ fontSize: '0.65rem', color: '#82dcff', opacity: 0.5, letterSpacing: '2px' }}>[V:2.4]</span>
-            </div>
+            <p style={{ margin: '2px 0 0 0', fontSize: '0.65rem', color: '#82dcff', letterSpacing: '1px', textTransform: 'uppercase', opacity: 0.8 }}>Historical Records Active</p>
           </div>
           <div style={{ margin: '8px auto 0 auto', maxWidth: '300px', pointerEvents: 'none' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', letterSpacing: '1.5px', color: '#82dcff', marginBottom: '4px' }}>

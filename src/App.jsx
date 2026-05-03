@@ -749,24 +749,23 @@ function App() {
               flexDirection: 'column',
               alignItems: 'center',
             }}>
-              <h1 style={{
-                fontFamily: 'Orbitron, sans-serif',
-                fontSize: 'clamp(1.6rem, 5vw, 2.8rem)',
-                letterSpacing: '6px',
-                color: '#FFE81F',
-                textShadow: '0 4px 10px rgba(0, 0, 0, 0.8)',
-                margin: '0 0 6px 0',
-                textAlign: 'center',
-              }}>GALACTIC ARCHIVES</h1>
-              <p style={{
-                fontFamily: 'Orbitron, sans-serif',
-                fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
-                color: '#aaa',
-                textTransform: 'uppercase',
-                letterSpacing: '5px',
-                textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)',
-                margin: '0 0 0 0',
-              }}>Canon Timeline</p>
+              <div style={{ fontFamily: 'Orbitron, sans-serif', border: '1px solid rgba(56, 189, 248, 0.2)', padding: 'clamp(14px, 3vw, 24px) clamp(24px, 5vw, 40px)', background: 'rgba(10, 20, 40, 0.7)', borderRadius: '2px', position: 'relative', display: 'inline-block', backdropFilter: 'blur(4px)' }}>
+                {/* Fake UI corners */}
+                <div style={{ position: 'absolute', top: -1, left: -1, width: '12px', height: '12px', borderTop: '2px solid #38bdf8', borderLeft: '2px solid #38bdf8' }} />
+                <div style={{ position: 'absolute', top: -1, right: -1, width: '12px', height: '12px', borderTop: '2px solid #38bdf8', borderRight: '2px solid #38bdf8' }} />
+                <div style={{ position: 'absolute', bottom: -1, left: -1, width: '12px', height: '12px', borderBottom: '2px solid #38bdf8', borderLeft: '2px solid #38bdf8' }} />
+                <div style={{ position: 'absolute', bottom: -1, right: -1, width: '12px', height: '12px', borderBottom: '2px solid #38bdf8', borderRight: '2px solid #38bdf8' }} />
+                
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '8px' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#38bdf8', boxShadow: '0 0 12px #38bdf8', animation: 'holo-flicker 2s infinite' }} />
+                  <h1 style={{ margin: 0, fontSize: 'clamp(1.4rem, 5vw, 2.5rem)', letterSpacing: '6px', color: '#fff', textShadow: '0 0 15px rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>HOLONET TERMINAL</h1>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
+                  <span style={{ fontSize: 'clamp(0.5rem, 1.5vw, 0.75rem)', color: '#38bdf8', opacity: 0.5, letterSpacing: '2px' }}>[SEC:4]</span>
+                  <p style={{ margin: 0, fontSize: 'clamp(0.6rem, 2vw, 0.9rem)', color: '#38bdf8', letterSpacing: '3px', textTransform: 'uppercase' }}>Interactive Atlas & Historical Records</p>
+                  <span style={{ fontSize: 'clamp(0.5rem, 1.5vw, 0.75rem)', color: '#38bdf8', opacity: 0.5, letterSpacing: '2px' }}>[V:2.4]</span>
+                </div>
+              </div>
             </div>
 
             <div style={{
