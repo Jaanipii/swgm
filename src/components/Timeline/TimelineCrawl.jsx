@@ -47,7 +47,13 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
   };
 
   const sortedTimeline = useMemo(() => {
-    return [...starWarsTimeline].sort((a, b) => parseYear(a.year) - parseYear(b.year));
+    return [...starWarsTimeline]
+      .filter(item => {
+        // Hide unreleased movies (no runtime data)
+        if (item.type === 'movie' && (!item.runtime || item.runtime === 'null')) return false;
+        return true;
+      })
+      .sort((a, b) => parseYear(a.year) - parseYear(b.year));
   }, []);
 
   const filteredTimeline = useMemo(() => {

@@ -31,6 +31,9 @@ function App() {
   const [isSnakeTimelineOpen, setIsSnakeTimelineOpen] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [isMapTransitioning, setIsMapTransitioning] = useState(false);
+  const [showGdprNotice, setShowGdprNotice] = useState(() => {
+    try { return !localStorage.getItem('sw_gdpr_dismissed'); } catch { return true; }
+  });
 
   // Phase 10: Persistent Progress Tracking State
   const [watchedIds, setWatchedIds] = useState(() => {
@@ -341,9 +344,55 @@ function App() {
         )}
       </AnimatePresence>
 
+      {/* GDPR Notice & Disclaimer Footer */}
+      {showGdprNotice && (
+        <div style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          background: 'rgba(5, 10, 20, 0.95)',
+          backdropFilter: 'blur(8px)',
+          borderTop: '1px solid rgba(255, 232, 31, 0.15)',
+          padding: '10px 20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '16px',
+          fontSize: '0.7rem',
+          color: 'rgba(200, 210, 220, 0.7)',
+          letterSpacing: '0.5px'
+        }}>
+          <span style={{ flex: 1, maxWidth: '800px', lineHeight: '1.4' }}>
+            This site uses your browser's local storage to save your viewing progress. No personal data is collected, transmitted, or shared.
+            This is an independent fan project — not affiliated with, endorsed by, or sponsored by Disney or Lucasfilm.
+          </span>
+          <button 
+            onClick={() => {
+              setShowGdprNotice(false);
+              try { localStorage.setItem('sw_gdpr_dismissed', 'true'); } catch {}
+            }}
+            style={{
+              background: 'rgba(255, 232, 31, 0.15)',
+              border: '1px solid rgba(255, 232, 31, 0.4)',
+              color: '#ffe81f',
+              padding: '5px 16px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '0.7rem',
+              letterSpacing: '1px',
+              flexShrink: 0,
+              whiteSpace: 'nowrap'
+            }}
+          >
+            UNDERSTOOD
+          </button>
+        </div>
+      )}
+
     </div>
   );
 }
 
 export default App;
- 

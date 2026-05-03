@@ -23,3 +23,52 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Dev scripts & temp files
+scripts/
+temp_*.cjs
+test_*.cjs
+test_*.mjs
+test_*.js
+test_*.py
+test_plan.txt
+*.py
+get_logs.js
+get_logs.mjs
+run_scraper*.cjs
+run_scraper*.py
+run_scraper*.js
+network_scraper.cjs
+fetch_planets.cjs
+fix_coordinates.cjs
+generate_map_data.cjs
+parse_json.cjs
+clean_timeline.cjs
+inject_runtimes.cjs
+analyze_datasets.cjs
+audit_data.cjs
+check_crash.cjs
+check_json.cjs
+check_all_fields.cjs
+
+# Scraped/raw data
+scraped_*.json
+parsed_systems.json
+sampled_planets.json
+condensed_map_data.json
+raw_data.txt
+pdf_extracted.txt
+new_planets.txt
+all_urls.txt
+dom_dump.html
+star_systems.pdf
+unmapped_planets_report.md
+=
+
+# Debug screenshots
+before_click.png
+after_click.png
+
+# Datasets submodule
+datasets/
+
