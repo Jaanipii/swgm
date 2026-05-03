@@ -63,7 +63,20 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
   const dragHandle = isMobile ? (
     <div 
       onPointerDown={(e) => dragControls.start(e)}
-      style={{ display: 'flex', justifyContent: 'center', padding: '15px 0 10px 0', cursor: 'grab', touchAction: 'none' }}
+      style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        padding: '15px 0 10px 0', 
+        cursor: 'grab', 
+        touchAction: 'none',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        background: 'rgba(10, 20, 40, 0.95)',
+        borderTopLeftRadius: '16px',
+        borderTopRightRadius: '16px',
+        boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+      }}
     >
       <div style={{ width: '50px', height: '5px', borderRadius: '3px', background: 'rgba(255, 255, 255, 0.4)' }} />
     </div>
