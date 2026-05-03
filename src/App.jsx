@@ -232,7 +232,7 @@ function App() {
       {/* The star background should only be visible during intro mode, but stay mounted while jumping to animate out */}
       {(isIntroMode || isJumping) && (
         <div className="map-container intro-stars" style={{ 
-          position: 'fixed', top: 0, left: 0, width: '100vw', height: '100%', 
+          position: 'fixed', top: 0, left: 0, width: '100vw', height: '100dvh', 
           zIndex: 0, pointerEvents: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center',
           opacity: isJumping ? 0 : 1,
           transform: isJumping ? 'scale(4)' : 'scale(1)',
@@ -261,6 +261,7 @@ function App() {
             justifyContent: 'center',
             alignItems: 'center',
             opacity: 0.85,
+            transform: 'translateY(-8vh)',
           }}>
             {/* The 3D spinning disk */}
             <div style={{
@@ -769,7 +770,7 @@ function App() {
 
             <div style={{
               position: 'absolute',
-              bottom: 'clamp(15%, 20vh, 25%)',
+              bottom: 'clamp(8%, 12vh, 20%)',
               left: 0,
               right: 0,
               display: 'flex',
