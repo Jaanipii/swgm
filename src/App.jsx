@@ -777,55 +777,17 @@ function App() {
               display: 'flex',
               justifyContent: 'center',
             }}>
-              <style>{`
-                @keyframes cta-glow {
-                  0%, 100% { box-shadow: 0 0 15px rgba(255, 232, 31, 0.15), inset 0 0 15px rgba(255, 232, 31, 0.05); }
-                  50% { box-shadow: 0 0 25px rgba(255, 232, 31, 0.3), inset 0 0 20px rgba(255, 232, 31, 0.08); }
-                }
-              `}</style>
             <button
               onClick={jumpToHyperspace}
-              style={{
-                background: 'linear-gradient(135deg, rgba(255, 232, 31, 0.06) 0%, rgba(255, 232, 31, 0.12) 50%, rgba(255, 232, 31, 0.06) 100%)',
-                border: '1px solid rgba(255, 232, 31, 0.4)',
-                color: '#ffe81f',
-                fontSize: '0.85rem',
-                letterSpacing: '6px',
-                fontFamily: 'Orbitron, sans-serif',
-                cursor: 'pointer',
-                textTransform: 'uppercase',
-                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '14px',
-                padding: '14px 36px',
-                borderRadius: '4px',
-                textShadow: '0 0 12px rgba(255, 232, 31, 0.5)',
-                backdropFilter: 'blur(8px)',
-                pointerEvents: 'auto',
-                animation: 'cta-glow 3s ease-in-out infinite',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 232, 31, 0.12) 0%, rgba(255, 232, 31, 0.2) 50%, rgba(255, 232, 31, 0.12) 100%)';
-                e.currentTarget.style.borderColor = '#ffe81f';
-                e.currentTarget.style.transform = 'scale(1.03)';
-                e.currentTarget.style.letterSpacing = '8px';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 232, 31, 0.06) 0%, rgba(255, 232, 31, 0.12) 50%, rgba(255, 232, 31, 0.06) 100%)';
-                e.currentTarget.style.borderColor = 'rgba(255, 232, 31, 0.4)';
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.letterSpacing = '6px';
-              }}
+              className="hologram-btn"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-                <line x1="2" y1="12" x2="10" y2="12" stroke="#ffe81f" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
-                <line x1="6" y1="7" x2="14" y2="7" stroke="#ffe81f" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-                <line x1="4" y1="17" x2="12" y2="17" stroke="#ffe81f" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-                <polygon points="14,6 22,12 14,18" fill="#ffe81f" opacity="0.9" />
+              <svg className="holo-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" opacity="0.5" />
+                <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="1.5" />
+                <circle cx="12" cy="12" r="2" fill="currentColor" />
+                <path d="M12 2v4 M12 18v4 M2 12h4 M18 12h4" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
               </svg>
-              ENTER THE GALAXY
+              <span className="holo-text">ENTER THE GALAXY</span>
             </button>
             </div>
           </div>

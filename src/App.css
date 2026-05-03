@@ -849,3 +849,102 @@
     font-size: 0.85rem;
   }
 }
+
+/* ==========================================================================
+   HOLOGRAPHIC PROJECTOR BUTTON (JEDI ARCHIVES STYLE)
+   ========================================================================== */
+
+.hologram-btn {
+  position: relative;
+  background: rgba(10, 25, 40, 0.6);
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  color: #4ade80;
+  font-size: 0.85rem;
+  letter-spacing: 6px;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px 40px;
+  border-radius: 2px;
+  text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 0 15px rgba(74, 222, 128, 0.15),
+    inset 0 0 20px rgba(74, 222, 128, 0.1);
+}
+
+/* Corner brackets simulating a targeting UI */
+.hologram-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(to right, #4ade80, #4ade80) top left no-repeat,
+    linear-gradient(to bottom, #4ade80, #4ade80) top left no-repeat,
+    linear-gradient(to left, #4ade80, #4ade80) top right no-repeat,
+    linear-gradient(to bottom, #4ade80, #4ade80) top right no-repeat,
+    linear-gradient(to right, #4ade80, #4ade80) bottom left no-repeat,
+    linear-gradient(to top, #4ade80, #4ade80) bottom left no-repeat,
+    linear-gradient(to left, #4ade80, #4ade80) bottom right no-repeat,
+    linear-gradient(to top, #4ade80, #4ade80) bottom right no-repeat;
+  background-size: 10px 2px, 2px 10px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Scanning laser line */
+.hologram-btn::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(74, 222, 128, 0.8);
+  box-shadow: 0 0 10px rgba(74, 222, 128, 1);
+  animation: hologram-scan 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes hologram-scan {
+  0% { top: -10%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
+
+.hologram-btn:hover {
+  background: rgba(10, 25, 40, 0.8);
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  border-color: rgba(74, 222, 128, 0.8);
+  box-shadow: 
+    0 0 25px rgba(74, 222, 128, 0.4),
+    inset 0 0 30px rgba(74, 222, 128, 0.2);
+  letter-spacing: 8px;
+}
+
+.hologram-btn:hover::before {
+  opacity: 1;
+  background-size: 15px 3px, 3px 15px;
+}
+
+.hologram-btn:hover .holo-icon {
+  animation: holo-flicker 0.2s infinite;
+  color: #fff;
+}
+
+@keyframes holo-flicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(0.98) translateX(1px); }
+  75% { opacity: 0.9; transform: scale(1.02) translateY(-1px); }
+}
