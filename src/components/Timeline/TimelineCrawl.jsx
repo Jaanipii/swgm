@@ -461,6 +461,7 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
               <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', margin: '16px auto 0 auto', pointerEvents: 'auto', position: 'relative', flexWrap: 'wrap' }}>
                 {/* Fullscreen Toggle */}
                 <button
+                  className="desktop-only-btn"
                   onClick={onToggleFullscreen}
                   style={{ ...roundBtnStyle, background: isFullscreen ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.6)' }}
                   title="Toggle Fullscreen"

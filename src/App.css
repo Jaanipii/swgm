@@ -786,6 +786,15 @@
     width: 100vw !important;
   }
 
+  .crawl-content {
+    width: 96% !important;
+  }
+
+  .timeline-list {
+    margin-left: 5px !important;
+    padding-left: 5px !important;
+  }
+
   .crawl-container.fullscreen {
     width: 100vw !important;
   }
@@ -821,8 +830,12 @@
     font-size: 0.7rem !important;
   }
 
-  /* Hide event marker text on mobile, keep only glowing dots */
-  .event-marker-name {
+  /* Hide event markers entirely on mobile, and hide desktop-only buttons */
+  .timeline-event-marker {
+    display: none !important;
+  }
+
+  .desktop-only-btn {
     display: none !important;
   }
 
