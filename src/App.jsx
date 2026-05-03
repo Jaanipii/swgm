@@ -249,18 +249,59 @@ function App() {
           {/* Mini-Galaxy Tease (Penny-sized aesthetic element) */}
           <div style={{
             position: 'relative',
-            width: '40px',
-            height: '40px',
+            width: '60px',
+            height: '60px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            opacity: 0.65,
-            animation: 'spin-slow 120s linear infinite'
+            opacity: 0.8,
+            transformStyle: 'preserve-3d',
+            transform: 'perspective(300px) rotateX(65deg) rotateY(-10deg)',
           }}>
-            <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#fff', borderRadius: '50%', boxShadow: '0 0 8px 3px rgba(255, 255, 255, 0.9), 0 0 15px 6px rgba(130, 220, 255, 0.6)' }}></div>
-            <div style={{ position: 'absolute', width: '36px', height: '8px', background: 'radial-gradient(ellipse at center, rgba(130, 220, 255, 0.8) 0%, rgba(130, 220, 255, 0) 70%)', transform: 'rotate(25deg)', borderRadius: '50%', filter: 'blur(1px)' }}></div>
-            <div style={{ position: 'absolute', width: '28px', height: '6px', background: 'radial-gradient(ellipse at center, rgba(255, 232, 31, 0.5) 0%, rgba(255, 232, 31, 0) 70%)', transform: 'rotate(-20deg)', borderRadius: '50%', filter: 'blur(1px)' }}></div>
-            <div style={{ position: 'absolute', width: '45px', height: '2px', background: 'radial-gradient(ellipse at center, rgba(100, 150, 255, 0.4) 0%, rgba(100, 150, 255, 0) 70%)', transform: 'rotate(60deg)', borderRadius: '50%' }}></div>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              animation: 'spin-slow 60s linear infinite',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <svg viewBox="0 0 100 100" width="100%" height="100%" style={{ overflow: 'visible' }}>
+                <defs>
+                  <radialGradient id="galaxyCore" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#fff" />
+                    <stop offset="30%" stopColor="rgba(255, 232, 31, 1)" />
+                    <stop offset="100%" stopColor="rgba(255, 232, 31, 0)" />
+                  </radialGradient>
+                </defs>
+                
+                <g filter="blur(3px)">
+                  {/* Outer arms */}
+                  <path d="M50 50 Q 80 20 90 50 T 50 90" fill="none" stroke="rgba(130, 220, 255, 0.5)" strokeWidth="12" strokeLinecap="round" />
+                  <path d="M50 50 Q 20 80 10 50 T 50 10" fill="none" stroke="rgba(130, 220, 255, 0.5)" strokeWidth="12" strokeLinecap="round" />
+                  
+                  {/* Perpendicular arms for density */}
+                  <path d="M50 50 Q 80 80 50 90 T 10 50" fill="none" stroke="rgba(100, 150, 255, 0.5)" strokeWidth="8" strokeLinecap="round" />
+                  <path d="M50 50 Q 20 20 50 10 T 90 50" fill="none" stroke="rgba(100, 150, 255, 0.5)" strokeWidth="8" strokeLinecap="round" />
+                </g>
+
+                <g filter="blur(1.5px)">
+                  {/* Inner dense golden arms */}
+                  <path d="M50 50 Q 70 30 85 50" fill="none" stroke="rgba(255, 232, 31, 0.8)" strokeWidth="6" strokeLinecap="round" />
+                  <path d="M50 50 Q 30 70 15 50" fill="none" stroke="rgba(255, 232, 31, 0.8)" strokeWidth="6" strokeLinecap="round" />
+                  
+                  {/* Random bright spots */}
+                  <circle cx="75" cy="35" r="2" fill="#fff" />
+                  <circle cx="25" cy="65" r="2" fill="#fff" />
+                  <circle cx="60" cy="80" r="2" fill="rgba(130,220,255,0.9)" />
+                  <circle cx="40" cy="20" r="2" fill="rgba(130,220,255,0.9)" />
+                </g>
+                
+                {/* Glow core */}
+                <circle cx="50" cy="50" r="22" fill="url(#galaxyCore)" filter="blur(4px)" />
+                <circle cx="50" cy="50" r="5" fill="#fff" filter="blur(1px)" />
+              </svg>
+            </div>
             <style>{`
               @keyframes spin-slow {
                 from { transform: rotate(0deg); }
