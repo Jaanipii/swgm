@@ -206,6 +206,37 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
     return { totalMins: total, watchedMins: watched, scrollProgress: progress };
   }, [filteredTimeline, watchedIds]);
 
+  const watchedIdsSet = useMemo(() => {
+    return new Set(watchedIds?.map(String) || []);
+  }, [watchedIds]);
+
+  const timelineItemsWithMargin = useMemo(() => {
+    return filteredTimeline.map((item, index) => {
+      let dynamicMarginTop = 0;
+      if (index > 0) {
+        const prevItem = filteredTimeline[index-1];
+        const yr1 = parseYear(prevItem.year);
+        const yr2 = parseYear(item.year);
+        if (yr1 !== yr2) {
+          let exactPrev = 0;
+          let exactCur = 0;
+          let gapItems = 0;
+          
+          historicalEvents.forEach(evt => {
+             const eYr = parseYear(evt.year);
+             if (eYr === yr1) exactPrev++;
+             else if (eYr === yr2) exactCur++;
+             else if (eYr > yr1 && eYr < yr2) gapItems++;
+          });
+          
+          const neededSpace = (gapItems + exactPrev/2 + exactCur/2) * 26;
+          dynamicMarginTop = Math.max(0, neededSpace - 60);
+        }
+      }
+      return { item, dynamicMarginTop };
+    });
+  }, [filteredTimeline]);
+
   const calculateEventPositions = useCallback(() => {
     if (!timelineListRef.current) return;
     const listEl = timelineListRef.current;
@@ -809,42 +840,16 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
                   ))}
                 </div>
 
-                {filteredTimeline.length === 0 ? (
+                {timelineItemsWithMargin.length === 0 ? (
                   <div className="timeline-no-results">
                     <h3>No entries found in the Archives.</h3>
                     <p>Try adjusting your search query.</p>
                   </div>
                 ) : (
-                  filteredTimeline.map((item, index) => {
+                  timelineItemsWithMargin.map(({ item, dynamicMarginTop }, index) => {
                     const isActive = item.id === activeItemId;
-                    
-                    // Predict and inject physical pixel space for dense clusters of historical events
-                    let dynamicMarginTop = 0;
-                    if (index > 0) {
-                        const prevItem = filteredTimeline[index-1];
-                        const yr1 = parseYear(prevItem.year);
-                        const yr2 = parseYear(item.year);
-                        if (yr1 !== yr2) {
-                            let exactPrev = 0;
-                            let exactCur = 0;
-                            let gapItems = 0;
-                            
-                            historicalEvents.forEach(evt => {
-                               const eYr = parseYear(evt.year);
-                               if (eYr === yr1) exactPrev++;
-                               else if (eYr === yr2) exactCur++;
-                               else if (eYr > yr1 && eYr < yr2) gapItems++;
-                            });
-                            
-                            // Each event needs ~26px of vertical reading space
-                            const neededSpace = (gapItems + exactPrev/2 + exactCur/2) * 26;
-                            // Natural timeline CSS gap gives us ~60px of free room
-                            dynamicMarginTop = Math.max(0, neededSpace - 60);
-                        }
-                    }
-
                     const isFocused = index === focusedIndex;
-                    const isWatched = watchedIds?.map(String).includes(String(item.id));
+                    const isWatched = watchedIdsSet.has(String(item.id));
 
                     return (
                       <TimelineCard
