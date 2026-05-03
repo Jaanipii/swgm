@@ -353,10 +353,10 @@ const SnakeTimelineOverlay = ({ onClose }) => {
   };
 
   const containerWidth = Math.min(windowWidth, 1600); // Respect the 1600px maxWidth of the parent constraints
-  const paddingX = windowWidth < 768 ? 40 : 100;
-  const colSpacing = windowWidth < 768 ? 140 : 200;
-  // Ensure at least 2 columns on mobile so it snakes instead of rendering a straight vertical line
-  const COLS = Math.max(windowWidth < 768 ? 2 : 1, Math.floor((containerWidth - paddingX * 2) / colSpacing));
+  const paddingX = windowWidth < 768 ? 25 : 100;
+  const colSpacing = 200;
+  // Force exactly 4 columns on mobile so it snakes tightly
+  const COLS = windowWidth < 768 ? 4 : Math.max(1, Math.floor((containerWidth - paddingX * 2) / colSpacing));
   const COL_WIDTH = COLS > 1 ? (containerWidth - paddingX * 2) / (COLS - 1) : 0;
 
   const layout = useMemo(() => {
