@@ -233,9 +233,9 @@ function App() {
       {(isIntroMode || isJumping) && (
         <div className="map-container intro-stars" style={{ 
           position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', 
-          zIndex: isJumping ? 10000 : 0, pointerEvents: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center',
+          zIndex: 0, pointerEvents: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center',
           opacity: isJumping ? 0 : 1,
-          transform: isJumping ? 'scale(15)' : 'scale(1)',
+          transform: isJumping ? 'scale(3)' : 'scale(1)',
           transition: 'transform 0.3s ease-in, opacity 0.3s ease-in'
         }}>
           <svg width="100%" height="100%" style={{ position: 'absolute' }}>
