@@ -28,9 +28,12 @@ export default function HyperspaceOverlay() {
     const duration = 4000; // time until full flash
 
     const loop = () => {
-      // Use semi-transparent black for motion trails
+      // Use destination-out to fade existing stars to transparent, creating motion trails
+      ctx.globalCompositeOperation = 'destination-out';
       ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
       ctx.fillRect(0, 0, width, height);
+      // Reset to default for drawing new stars
+      ctx.globalCompositeOperation = 'source-over';
 
       const elapsed = Date.now() - startTime;
 

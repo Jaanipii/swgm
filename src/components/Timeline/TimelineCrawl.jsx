@@ -19,7 +19,7 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
   const [hoveredGalacticEvent, setHoveredGalacticEvent] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [eventPositions, setEventPositions] = useState([]);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSyncSettingsOpen, setIsSyncSettingsOpen] = useState(false);
@@ -424,31 +424,6 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
     };
   }, [onEraChange, filteredTimeline]);
 
-  // Cinematic Auto-Scroll Effect 
-  useEffect(() => {
-    let animationFrameId;
-    
-    const autoScroll = () => {
-      // Intentionally slow crawl like the Star Wars opening (0.35px per frame)
-      if (isAutoScrolling && crawlRef.current) {
-        crawlRef.current.scrollTop += 0.35;
-        animationFrameId = requestAnimationFrame(autoScroll);
-      }
-    };
-
-    // Only start Auto-Scroll if we aren't actively searching or filtering heavily
-    if (isAutoScrolling && !searchQuery) {
-      animationFrameId = requestAnimationFrame(autoScroll);
-    }
-
-    return () => {
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
-    };
-  }, [isAutoScrolling, searchQuery]);
-
-  const stopAutoScroll = () => {
-    if (isAutoScrolling) setIsAutoScrolling(false);
-  };
 
   const roundBtnStyle = { 
     background: 'rgba(10, 20, 40, 0.6)', 
@@ -744,9 +719,6 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
           <div 
             className="crawl-tilt" 
             ref={crawlRef}
-            onWheel={stopAutoScroll}
-            onTouchStart={stopAutoScroll}
-            onMouseDown={stopAutoScroll}
           >
             <div className="crawl-content">
               {/* timeline-list needs enough padding-top so ancient extrapolated events don't fall off the top! */}
