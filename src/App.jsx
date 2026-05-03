@@ -837,6 +837,14 @@ function App() {
               alignItems: 'center',
             }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                <p style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: 'clamp(0.7rem, 2vw, 0.95rem)',
+                  color: '#38bdf8',
+                  fontStyle: 'italic',
+                  margin: '0 0 -4px 0',
+                  opacity: 0.8
+                }}>In a galaxy far, far away...</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                   {/* Decorative Jedi Diamond */}
                   <div style={{ width: '8px', height: '8px', background: '#38bdf8', transform: 'rotate(45deg)', boxShadow: '0 0 10px #38bdf8' }} />
