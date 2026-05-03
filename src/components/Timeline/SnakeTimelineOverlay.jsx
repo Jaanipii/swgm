@@ -165,29 +165,30 @@ const InfoModal = ({ item, color, onClose }) => {
            style={{
               width: '100%',
               maxWidth: '800px',
-              maxHeight: '90vh',
+              maxHeight: '85vh',
               overflowY: 'auto',
+              boxSizing: 'border-box',
               background: 'rgba(5, 15, 30, 0.98)',
               backdropFilter: 'blur(20px)',
               border: `1px solid ${color}60`,
               borderTop: `4px solid ${color}`,
               borderRadius: '16px',
-              padding: '30px',
+              padding: 'clamp(16px, 4vw, 30px)',
               boxShadow: `0 25px 60px rgba(0,0,0,0.9), 0 0 40px ${color}30`,
               color: '#fff',
               display: 'flex',
               flexDirection: 'column',
-              gap: '20px'
+              gap: 'clamp(12px, 3vw, 20px)'
            }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '20px' }}>
              <div>
-                <div style={{ fontSize: '0.9rem', color: '#aaa', textTransform: 'uppercase', letterSpacing: '2px', display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+                <div style={{ fontSize: 'clamp(0.7rem, 2vw, 0.9rem)', color: '#aaa', textTransform: 'uppercase', letterSpacing: '1px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                    <span>{item.type.replace('-', ' ')}</span>
                    <span style={{ color }}>{item.year === '999999' ? 'Unknown' : item.year}</span>
                    {item.canon_state && <span style={{ color: item.canon_state === 'Canon' ? '#32cd32' : '#ff4500' }}>{item.canon_state}</span>}
                 </div>
-                <h2 style={{ margin: '10px 0', fontSize: '2.5rem', color: '#FFE81F', lineHeight: '1.2', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>{item.title}</h2>
+                <h2 style={{ margin: '8px 0', fontSize: 'clamp(1.4rem, 6vw, 2.5rem)', color: '#FFE81F', lineHeight: '1.2', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>{item.title}</h2>
              </div>
              <button 
                 onClick={onClose} 
@@ -205,7 +206,7 @@ const InfoModal = ({ item, color, onClose }) => {
              </div>
           )}
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
              {item.director && item.director.length > 0 && (
                 <div>
                    <strong style={{ color: '#FFE81F', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '1px' }}>Director / Artist</strong>
