@@ -255,66 +255,65 @@ function App() {
             justifyContent: 'center',
             alignItems: 'center',
             opacity: 0.85,
-            transformStyle: 'preserve-3d',
-            transform: 'perspective(300px) rotateX(55deg) rotateY(-10deg)',
           }}>
+            {/* The 3D spinning disk */}
             <div style={{
+              position: 'absolute',
               width: '100%',
               height: '100%',
-              animation: 'spin-slow 60s linear infinite',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
+              transformStyle: 'preserve-3d',
+              transform: 'perspective(300px) rotateX(55deg) rotateY(-10deg)',
             }}>
-              <svg viewBox="0 0 100 100" width="100%" height="100%" style={{ overflow: 'visible' }}>
-                <defs>
-                  <radialGradient id="galaxyCore" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#fff" />
-                    <stop offset="20%" stopColor="rgba(255, 240, 180, 1)" />
-                    <stop offset="60%" stopColor="rgba(255, 220, 100, 0.4)" />
-                    <stop offset="100%" stopColor="rgba(130, 220, 255, 0)" />
-                  </radialGradient>
-                  
-                  <radialGradient id="galaxyDisk" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="rgba(200, 230, 255, 0.4)" />
-                    <stop offset="40%" stopColor="rgba(100, 180, 255, 0.2)" />
-                    <stop offset="100%" stopColor="rgba(50, 100, 255, 0)" />
-                  </radialGradient>
-                </defs>
+              <div style={{
+                width: '100%',
+                height: '100%',
+                animation: 'spin-slow 60s linear infinite',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <svg viewBox="0 0 100 100" width="100%" height="100%" style={{ overflow: 'visible' }}>
+                  <defs>
+                    <radialGradient id="galaxyDisk" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="rgba(200, 230, 255, 0.4)" />
+                      <stop offset="40%" stopColor="rgba(100, 180, 255, 0.2)" />
+                      <stop offset="100%" stopColor="rgba(50, 100, 255, 0)" />
+                    </radialGradient>
+                  </defs>
 
-                {/* Background dense dust disk */}
-                <circle cx="50" cy="50" r="45" fill="url(#galaxyDisk)" filter="blur(4px)" />
-                <circle cx="50" cy="50" r="30" fill="url(#galaxyDisk)" filter="blur(2px)" />
-                
-                <g filter="blur(4px)">
-                  {/* Outer arms */}
-                  <path d="M50 50 Q 85 15 95 50 T 50 95" fill="none" stroke="rgba(130, 220, 255, 0.6)" strokeWidth="16" strokeLinecap="round" />
-                  <path d="M50 50 Q 15 85 5 50 T 50 5" fill="none" stroke="rgba(130, 220, 255, 0.6)" strokeWidth="16" strokeLinecap="round" />
+                  {/* Background dense dust disk */}
+                  <circle cx="50" cy="50" r="45" fill="url(#galaxyDisk)" filter="blur(4px)" />
+                  <circle cx="50" cy="50" r="30" fill="url(#galaxyDisk)" filter="blur(2px)" />
                   
-                  {/* Perpendicular arms for density */}
-                  <path d="M50 50 Q 85 85 50 95 T 5 50" fill="none" stroke="rgba(100, 150, 255, 0.5)" strokeWidth="14" strokeLinecap="round" />
-                  <path d="M50 50 Q 15 15 50 5 T 95 50" fill="none" stroke="rgba(100, 150, 255, 0.5)" strokeWidth="14" strokeLinecap="round" />
-                </g>
+                  <g filter="blur(3px)">
+                    {/* Outer main arms */}
+                    <path d="M 50 50 L 50.3 50.1 L 50.8 50.2 L 51.2 50.6 L 51.6 51.0 L 51.8 51.6 L 51.9 52.3 L 51.9 53.1 L 51.7 53.9 L 51.2 54.8 L 50.6 55.6 L 49.7 56.3 L 48.7 56.8 L 47.5 57.2 L 46.1 57.4 L 44.7 57.4 L 43.1 57.0 L 41.6 56.4 L 40.1 55.5 L 38.7 54.2 L 37.4 52.7 L 36.4 50.9 L 35.7 48.8 L 35.2 46.5 L 35.1 44.1 L 35.5 41.6 L 36.2 39.1 L 37.4 36.6 L 39.0 34.2 L 41.1 32.0 L 43.5 30.1 L 46.4 28.6 L 49.5 27.4 L 52.9 26.8 L 56.5 26.6 L 60.2 27.0 L 63.9 28.0 L 67.6 29.7 L 71.0 31.9 L 74.2 34.7 L 77.0 38.0 L 79.3 41.8 L 81.0 46.1 L 82.2 50.7 L 82.6 55.5 L 82.3 60.5 L 81.3 65.5 L 79.4 70.4 L 76.8 75.1 L 73.4 79.5 L 69.3 83.4 L 64.5 86.7 L 59.2 89.4 L 53.5 91.2 L 47.3 92.2 L 41.0 92.3 L 34.6 91.4 L 28.3 89.6 L 22.1 86.7 L 16.4 82.9 L 11.2 78.2" fill="none" stroke="rgba(130, 220, 255, 0.5)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M 50 50 L 49.7 49.9 L 49.2 49.8 L 48.8 49.4 L 48.4 49.0 L 48.2 48.4 L 48.1 47.7 L 48.1 46.9 L 48.3 46.1 L 48.8 45.2 L 49.4 44.4 L 50.3 43.7 L 51.3 43.2 L 52.5 42.8 L 53.9 42.6 L 55.3 42.6 L 56.9 43.0 L 58.4 43.6 L 59.9 44.5 L 61.3 45.8 L 62.6 47.3 L 63.6 49.1 L 64.3 51.2 L 64.8 53.5 L 64.9 55.9 L 64.5 58.4 L 63.8 60.9 L 62.6 63.4 L 61.0 65.8 L 58.9 68.0 L 56.5 69.9 L 53.6 71.4 L 50.5 72.6 L 47.1 73.2 L 43.5 73.4 L 39.8 73.0 L 36.1 72.0 L 32.4 70.3 L 29.0 68.1 L 25.8 65.3 L 23.0 62.0 L 20.7 58.2 L 19.0 53.9 L 17.8 49.3 L 17.4 44.5 L 17.7 39.5 L 18.7 34.5 L 20.6 29.6 L 23.2 24.9 L 26.6 20.5 L 30.7 16.6 L 35.5 13.3 L 40.8 10.6 L 46.5 8.8 L 52.7 7.8 L 59.0 7.7 L 65.4 8.6 L 71.7 10.4 L 77.9 13.3 L 83.6 17.1 L 88.8 21.8" fill="none" stroke="rgba(130, 220, 255, 0.5)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+                    
+                    {/* Perpendicular dense arms */}
+                    <path d="M 50 50 L 50.0 50.3 L 49.8 50.6 L 49.5 51.0 L 49.1 51.3 L 48.6 51.5 L 48.1 51.6 L 47.4 51.6 L 46.7 51.4 L 46.0 51.0 L 45.4 50.5 L 44.8 49.8 L 44.3 48.9 L 44.0 47.9 L 43.8 46.8 L 43.9 45.5 L 44.1 44.3 L 44.7 43.0 L 45.5 41.7 L 46.5 40.6 L 47.8 39.5 L 49.3 38.7 L 51.0 38.0 L 52.9 37.7 L 54.9 37.6 L 57.0 37.9 L 59.1 38.5 L 61.2 39.5 L 63.2 40.9 L 65.0 42.6 L 66.6 44.6 L 67.9 47.0 L 68.8 49.6 L 69.4 52.4 L 69.5 55.4 L 69.1 58.5 L 68.3 61.6 L 67.0 64.6 L 65.1 67.5 L 62.8 70.1 L 60.0 72.5 L 56.8 74.4 L 53.3 75.9 L 49.4 76.8 L 45.4 77.2 L 41.2 76.9 L 37.1 76.0 L 33.0 74.5 L 29.1 72.3 L 25.4 69.5 L 22.2 66.1 L 19.4 62.1 L 17.2 57.7 L 15.7 52.9 L 14.8 47.8 L 14.8 42.5 L 15.5 37.2 L 17.0 31.9 L 19.4 26.8 L 22.6 22.0 L 26.5 17.6" fill="none" stroke="rgba(100, 150, 255, 0.4)" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M 50 50 L 50.0 49.7 L 50.2 49.4 L 50.5 49.0 L 50.9 48.7 L 51.4 48.5 L 51.9 48.4 L 52.6 48.4 L 53.3 48.6 L 54.0 49.0 L 54.6 49.5 L 55.2 50.2 L 55.7 51.1 L 56.0 52.1 L 56.2 53.2 L 56.1 54.5 L 55.9 55.7 L 55.3 57.0 L 54.5 58.3 L 53.5 59.4 L 52.2 60.5 L 50.7 61.3 L 49.0 62.0 L 47.1 62.3 L 45.1 62.4 L 43.0 62.1 L 40.9 61.5 L 38.8 60.5 L 36.8 59.1 L 35.0 57.4 L 33.4 55.4 L 32.1 53.0 L 31.2 50.4 L 30.6 47.6 L 30.5 44.6 L 30.9 41.5 L 31.7 38.4 L 33.0 35.4 L 34.9 32.5 L 37.2 29.9 L 40.0 27.5 L 43.2 25.6 L 46.7 24.1 L 50.6 23.2 L 54.6 22.8 L 58.8 23.1 L 62.9 24.0 L 67.0 25.5 L 70.9 27.7 L 74.6 30.5 L 77.8 33.9 L 80.6 37.9 L 82.8 42.3 L 84.3 47.1 L 85.2 52.2 L 85.2 57.5 L 84.5 62.8 L 83.0 68.1 L 80.6 73.2 L 77.4 78.0 L 73.5 82.4" fill="none" stroke="rgba(100, 150, 255, 0.4)" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
+                  </g>
 
-                <g filter="blur(2px)">
-                  {/* Inner dense golden arms */}
-                  <path d="M50 50 Q 75 25 85 50" fill="none" stroke="rgba(255, 232, 31, 0.7)" strokeWidth="10" strokeLinecap="round" />
-                  <path d="M50 50 Q 25 75 15 50" fill="none" stroke="rgba(255, 232, 31, 0.7)" strokeWidth="10" strokeLinecap="round" />
-                  
-                  {/* Random bright spots / nebulae */}
-                  <circle cx="75" cy="35" r="4" fill="rgba(255,255,255,0.8)" />
-                  <circle cx="25" cy="65" r="4" fill="rgba(255,255,255,0.8)" />
-                  <circle cx="60" cy="80" r="5" fill="rgba(130,220,255,0.8)" />
-                  <circle cx="40" cy="20" r="5" fill="rgba(130,220,255,0.8)" />
-                  <circle cx="85" cy="60" r="3" fill="rgba(130,220,255,0.6)" />
-                  <circle cx="15" cy="40" r="3" fill="rgba(130,220,255,0.6)" />
-                </g>
-                
-                {/* Glow core */}
-                <circle cx="50" cy="50" r="25" fill="url(#galaxyCore)" filter="blur(3px)" />
-                <circle cx="50" cy="50" r="8" fill="#fff" filter="blur(1px)" />
-              </svg>
+                  <g filter="blur(1.5px)">
+                    {/* Inner dense golden arms */}
+                    <path d="M 50 50 L 50.4 50.0 L 51.0 50.1 L 51.5 50.5 L 52.0 51.0 L 52.3 51.7 L 52.5 52.6 L 52.5 53.6 L 52.1 54.7 L 51.5 55.7 L 50.6 56.7 L 49.5 57.5 L 48.0 58.1 L 46.4 58.4 L 44.6 58.4 L 42.6 58.0 L 40.7 57.2 L 38.9 56.0 L 37.2 54.3 L 35.7 52.3 L 34.6 49.9 L 34.0 47.1 L 33.8 44.2 L 34.2 41.1 L 35.1 38.0 L 36.7 34.9 L 38.9 32.1 L 41.7 29.6 L 45.0 27.5 L 48.7 26.0 L 52.8 25.2" fill="none" stroke="rgba(255, 232, 31, 0.7)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M 50 50 L 49.6 50.0 L 49.0 49.9 L 48.5 49.5 L 48.0 49.0 L 47.7 48.3 L 47.5 47.4 L 47.5 46.4 L 47.9 45.3 L 48.5 44.3 L 49.4 43.3 L 50.5 42.5 L 52.0 41.9 L 53.6 41.6 L 55.4 41.6 L 57.4 42.0 L 59.3 42.8 L 61.1 44.0 L 62.8 45.7 L 64.3 47.7 L 65.4 50.1 L 66.0 52.9 L 66.2 55.8 L 65.8 58.9 L 64.9 62.0 L 63.3 65.1 L 61.1 67.9 L 58.3 70.4 L 55.0 72.5 L 51.3 74.0 L 47.2 74.8" fill="none" stroke="rgba(255, 232, 31, 0.7)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+                  </g>
+                </svg>
+              </div>
             </div>
+
+            {/* The perfectly spherical non-rotating core */}
+            <div style={{
+              position: 'absolute',
+              width: '12px',
+              height: '12px',
+              background: '#fff',
+              borderRadius: '50%',
+              boxShadow: '0 0 10px 4px #fff, 0 0 20px 10px rgba(255, 232, 31, 0.8), 0 0 35px 15px rgba(130, 220, 255, 0.5)',
+              zIndex: 2,
+            }}></div>
             <style>{`
               @keyframes spin-slow {
                 from { transform: rotate(0deg); }
