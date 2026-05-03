@@ -787,7 +787,7 @@ function App() {
                 <circle cx="12" cy="12" r="2" fill="currentColor" />
                 <path d="M12 2v4 M12 18v4 M2 12h4 M18 12h4" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
               </svg>
-              <span className="holo-text">ENTER THE GALAXY</span>
+              <span className="holo-text">ENTER HYPERSPACE</span>
             </button>
             </div>
           </div>
