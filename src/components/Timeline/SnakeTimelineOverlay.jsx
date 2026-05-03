@@ -353,8 +353,11 @@ const SnakeTimelineOverlay = ({ onClose }) => {
   };
 
   const containerWidth = Math.min(windowWidth, 1600); // Respect the 1600px maxWidth of the parent constraints
-  const COLS = Math.max(1, Math.floor((containerWidth - PADDING_X * 2) / 200));
-  const COL_WIDTH = COLS > 1 ? (containerWidth - PADDING_X * 2) / (COLS - 1) : 0;
+  const paddingX = windowWidth < 768 ? 40 : 100;
+  const colSpacing = windowWidth < 768 ? 140 : 200;
+  // Ensure at least 2 columns on mobile so it snakes instead of rendering a straight vertical line
+  const COLS = Math.max(windowWidth < 768 ? 2 : 1, Math.floor((containerWidth - paddingX * 2) / colSpacing));
+  const COL_WIDTH = COLS > 1 ? (containerWidth - paddingX * 2) / (COLS - 1) : 0;
 
   const layout = useMemo(() => {
     let baseTimeline = [...starWarsTimeline];
@@ -390,7 +393,7 @@ const SnakeTimelineOverlay = ({ onClose }) => {
          }
       }
       
-      const x = PADDING_X + col * COL_WIDTH;
+      const x = paddingX + col * COL_WIDTH;
       points.push({ x, y, item, color: '#FFE81F', movingRight: currentMovingRight });
       
       if (index > 0) {
@@ -431,7 +434,7 @@ const SnakeTimelineOverlay = ({ onClose }) => {
        pathSegments,
        totalHeight: y + ROW_HEIGHT + 100
     };
-  }, [windowWidth, COLS, COL_WIDTH, selectedTypes]);
+  }, [windowWidth, COLS, COL_WIDTH, selectedTypes, paddingX]);
 
   return (
     <motion.div
