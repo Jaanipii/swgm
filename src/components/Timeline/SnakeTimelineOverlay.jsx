@@ -153,7 +153,7 @@ const HoverCard = ({ item, color }) => {
 const InfoModal = ({ item, color, onClose }) => {
    return (
      <div 
-       style={{ position: 'fixed', inset: 0, zIndex: 1000000, background: 'rgba(0,0,0,0.85)', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }} 
+       style={{ position: 'fixed', inset: 0, zIndex: 1000000, background: 'rgba(0,0,0,0.85)', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 'clamp(8px, 3vw, 20px)' }} 
        onClick={onClose}
      >
         <motion.div
@@ -165,7 +165,7 @@ const InfoModal = ({ item, color, onClose }) => {
            style={{
               width: '100%',
               maxWidth: '800px',
-              maxHeight: '85vh',
+              maxHeight: '95dvh',
               overflowY: 'auto',
               boxSizing: 'border-box',
               background: 'rgba(5, 15, 30, 0.98)',
