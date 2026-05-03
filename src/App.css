@@ -801,7 +801,7 @@
 
   .crawl-content {
     width: 96% !important;
-    padding-top: 100px !important; /* Reduced since no top-fade mask exists */
+    padding-top: 220px !important; /* Restore padding so cards clear the sticky buttons */
   }
 
   .timeline-list {
