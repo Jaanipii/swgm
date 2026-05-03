@@ -232,7 +232,7 @@ function App() {
       {/* The star background should only be visible during intro mode, but stay mounted while jumping to animate out */}
       {(isIntroMode || isJumping) && (
         <div className="map-container intro-stars" style={{ 
-          position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', 
+          position: 'fixed', top: 0, left: 0, width: '100vw', height: '100%', 
           zIndex: 0, pointerEvents: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center',
           opacity: isJumping ? 0 : 1,
           transform: isJumping ? 'scale(4)' : 'scale(1)',
@@ -736,38 +736,49 @@ function App() {
             position: 'fixed',
             top: 0, left: 0, right: 0, bottom: 0,
             zIndex: 10,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
             pointerEvents: 'none',
           }}>
-            <h1 style={{
-              fontFamily: 'Orbitron, sans-serif',
-              fontSize: 'clamp(1.6rem, 5vw, 2.8rem)',
-              letterSpacing: '6px',
-              color: '#FFE81F',
-              textShadow: '0 4px 10px rgba(0, 0, 0, 0.8)',
-              margin: '0 0 6px 0',
-              textAlign: 'center',
-            }}>GALACTIC ARCHIVES</h1>
-            <p style={{
-              fontFamily: 'Orbitron, sans-serif',
-              fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
-              color: '#aaa',
-              textTransform: 'uppercase',
-              letterSpacing: '5px',
-              textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)',
-              margin: '0 0 0 0',
-            }}>Canon Timeline</p>
+            <div style={{
+              position: 'absolute',
+              top: 'clamp(15%, 20vh, 25%)',
+              left: 0,
+              right: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}>
+              <h1 style={{
+                fontFamily: 'Orbitron, sans-serif',
+                fontSize: 'clamp(1.6rem, 5vw, 2.8rem)',
+                letterSpacing: '6px',
+                color: '#FFE81F',
+                textShadow: '0 4px 10px rgba(0, 0, 0, 0.8)',
+                margin: '0 0 6px 0',
+                textAlign: 'center',
+              }}>GALACTIC ARCHIVES</h1>
+              <p style={{
+                fontFamily: 'Orbitron, sans-serif',
+                fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
+                color: '#aaa',
+                textTransform: 'uppercase',
+                letterSpacing: '5px',
+                textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)',
+                margin: '0 0 0 0',
+              }}>Canon Timeline</p>
+            </div>
 
-            {/* Spacer for the mini galaxy (rendered in the stars layer behind) */}
-            <div style={{ height: '120px' }} />
-
-            <style>{`
-              @keyframes cta-glow {
-                0%, 100% { box-shadow: 0 0 15px rgba(255, 232, 31, 0.15), inset 0 0 15px rgba(255, 232, 31, 0.05); }
-                50% { box-shadow: 0 0 25px rgba(255, 232, 31, 0.3), inset 0 0 20px rgba(255, 232, 31, 0.08); }
+            <div style={{
+              position: 'absolute',
+              bottom: 'clamp(15%, 20vh, 25%)',
+              left: 0,
+              right: 0,
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+              <style>{`
+                @keyframes cta-glow {
+                  0%, 100% { box-shadow: 0 0 15px rgba(255, 232, 31, 0.15), inset 0 0 15px rgba(255, 232, 31, 0.05); }
+                  50% { box-shadow: 0 0 25px rgba(255, 232, 31, 0.3), inset 0 0 20px rgba(255, 232, 31, 0.08); }
               }
             `}</style>
             <button
