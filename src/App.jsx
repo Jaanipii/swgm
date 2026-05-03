@@ -250,13 +250,51 @@ function App() {
 
       {/* Hide UI elements while physically jumping into the map */}
       <div className={`ui-elements-container ${isMapTransitioning ? 'transitioning' : ''}`}>
-        {/* Timeline: hidden in map-only mode; shown in guide mode or on desktop (unless exploring) */}
-        {(isIntroMode || (isMobile ? mobileViewMode === 'guide' : mobileViewMode !== 'map')) && (
-          <>
+
+        {/* Mobile: Sliding Legend Panel (from left) */}
+        {isMobile && !isIntroMode && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '85vw',
+            maxWidth: '320px',
+            height: '100vh',
+            zIndex: 9997,
+            background: 'rgba(5, 10, 20, 0.95)',
+            backdropFilter: 'blur(12px)',
+            borderRight: '1px solid rgba(130, 220, 255, 0.2)',
+            transform: mobileViewMode === 'legend' ? 'translateX(0)' : 'translateX(-100%)',
+            transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+            overflowY: 'auto',
+            pointerEvents: mobileViewMode === 'legend' ? 'auto' : 'none',
+          }}>
+            {/* We render GalaxyMap's controls here via the hideControls=false when legend mode */}
+          </div>
+        )}
+
+        {/* Mobile: Sliding Episode Guide Panel (from right) */}
+        {isMobile && !isIntroMode && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            right: 0,
+            width: '100vw',
+            height: '100vh',
+            zIndex: 9997,
+            background: 'rgba(5, 10, 20, 0.97)',
+            backdropFilter: 'blur(12px)',
+            borderLeft: '1px solid rgba(130, 220, 255, 0.2)',
+            transform: mobileViewMode === 'guide' ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+            overflowY: 'auto',
+            paddingBottom: '80px',
+            pointerEvents: mobileViewMode === 'guide' ? 'auto' : 'none',
+          }}>
             <TimelineCrawl 
               activeItemId={activeEpisodeId} 
-              onSelect={handleTimelineSelect} 
-              isFullscreen={isIntroMode}
+              onSelect={(id) => { handleTimelineSelect(id); setMobileViewMode('map'); }}
+              isFullscreen={true}
               onEraChange={handleEraChange}
               onHistoricalEventSelect={handleEventMarkerSelect}
               onItemFocus={handleTimelineFocus}
@@ -268,7 +306,26 @@ function App() {
               showLogCheckmarks={showLogCheckmarks}
               onToggleShowCheckmarks={() => setShowLogCheckmarks(!showLogCheckmarks)}
             />
-          </>
+          </div>
+        )}
+
+        {/* Desktop: Timeline (always visible unless map-only explore mode) */}
+        {!isMobile && (isIntroMode || mobileViewMode !== 'map') && (
+          <TimelineCrawl 
+            activeItemId={activeEpisodeId} 
+            onSelect={handleTimelineSelect} 
+            isFullscreen={isIntroMode}
+            onEraChange={handleEraChange}
+            onHistoricalEventSelect={handleEventMarkerSelect}
+            onItemFocus={handleTimelineFocus}
+            onJumpToHyperspace={jumpToHyperspace}
+            watchedIds={watchedIds}
+            onToggleWatched={toggleWatchedStatus}
+            onResetWatched={resetWatchedHistory}
+            onSyncHistory={syncHistoryUpTo}
+            showLogCheckmarks={showLogCheckmarks}
+            onToggleShowCheckmarks={() => setShowLogCheckmarks(!showLogCheckmarks)}
+          />
         )}
 
         <LoreCard 
@@ -286,63 +343,81 @@ function App() {
           watchedIds={watchedIds}
         />
 
-        {/* Mobile Bottom Nav Bar — 3 tabs: Legend / Map / Guide */}
+        {/* Mobile: 3 circular toggle buttons at bottom */}
         {isMobile && !isIntroMode && (
           <div style={{
             position: 'fixed',
-            bottom: 0,
+            bottom: 'max(16px, env(safe-area-inset-bottom))',
             left: 0,
             right: 0,
             zIndex: 9998,
             display: 'flex',
             justifyContent: 'center',
-            gap: '2px',
-            background: 'rgba(5, 10, 20, 0.95)',
-            borderTop: '1px solid rgba(130, 220, 255, 0.2)',
-            backdropFilter: 'blur(10px)',
-            padding: '8px 0 max(8px, env(safe-area-inset-bottom))',
+            gap: '16px',
+            pointerEvents: 'none',
           }}>
-            {[
-              { mode: 'legend', label: 'LEGEND', icon: (
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/>
-                </svg>
-              )},
-              { mode: 'map', label: 'MAP', icon: (
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><ellipse cx="12" cy="12" rx="4" ry="10"/>
-                </svg>
-              )},
-              { mode: 'guide', label: 'GUIDE', icon: (
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                </svg>
-              )}
-            ].map(({ mode, label, icon }) => (
-              <button
-                key={mode}
-                onClick={() => setMobileViewMode(mode)}
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '3px',
-                  padding: '6px 0',
-                  background: 'transparent',
-                  border: 'none',
-                  color: mobileViewMode === mode ? '#ffe81f' : 'rgba(130, 220, 255, 0.5)',
-                  cursor: 'pointer',
-                  transition: 'color 0.2s ease',
-                  fontSize: '0.6rem',
-                  letterSpacing: '1.5px',
-                  fontFamily: 'Orbitron, sans-serif',
-                }}
-              >
-                {icon}
-                {label}
-              </button>
-            ))}
+            {/* Legend button */}
+            <button
+              onClick={() => setMobileViewMode(mobileViewMode === 'legend' ? 'map' : 'legend')}
+              style={{
+                pointerEvents: 'auto',
+                width: '44px', height: '44px', borderRadius: '50%',
+                border: `1px solid ${mobileViewMode === 'legend' ? '#ffe81f' : 'rgba(255, 232, 31, 0.4)'}`,
+                background: mobileViewMode === 'legend' ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.85)',
+                color: mobileViewMode === 'legend' ? '#ffe81f' : 'rgba(255, 232, 31, 0.6)',
+                cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.6)',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/>
+              </svg>
+            </button>
+
+            {/* Map button (center) */}
+            <button
+              onClick={() => setMobileViewMode('map')}
+              style={{
+                pointerEvents: 'auto',
+                width: '44px', height: '44px', borderRadius: '50%',
+                border: `1px solid ${mobileViewMode === 'map' ? '#ffe81f' : 'rgba(255, 232, 31, 0.4)'}`,
+                background: mobileViewMode === 'map' ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.85)',
+                color: mobileViewMode === 'map' ? '#ffe81f' : 'rgba(255, 232, 31, 0.6)',
+                cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.6)',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><ellipse cx="12" cy="12" rx="4" ry="10"/>
+              </svg>
+            </button>
+
+            {/* Guide button */}
+            <button
+              onClick={() => setMobileViewMode(mobileViewMode === 'guide' ? 'map' : 'guide')}
+              style={{
+                pointerEvents: 'auto',
+                width: '44px', height: '44px', borderRadius: '50%',
+                border: `1px solid ${mobileViewMode === 'guide' ? '#ffe81f' : 'rgba(255, 232, 31, 0.4)'}`,
+                background: mobileViewMode === 'guide' ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.85)',
+                color: mobileViewMode === 'guide' ? '#ffe81f' : 'rgba(255, 232, 31, 0.6)',
+                cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.6)',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </button>
           </div>
         )}
 
