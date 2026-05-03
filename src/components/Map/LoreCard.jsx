@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useDragControls } from 'framer-motion';
 import { fetchWikiData } from '../../utils/wikiApi';
 import { getDisneyPlusUrl } from '../../utils/disneyPlusLinks';
 import { starWarsTimeline, planets } from '../../data/timeline';
@@ -56,17 +56,24 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
     return () => { isMounted = false; };
   }, [activeItemId, activePlanetId, activeHistoricalEvent, activeRoute, loreMode]);
 
-  // Drag handle for mobile swipe-down-to-dismiss
+  // Drag handle
+  const dragControls = useDragControls();
+
   const dragHandle = isMobile ? (
-    <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 0 4px 0', cursor: 'grab' }}>
-      <div style={{ width: '40px', height: '4px', borderRadius: '2px', background: 'rgba(255, 255, 255, 0.3)' }} />
+    <div 
+      onPointerDown={(e) => dragControls.start(e)}
+      style={{ display: 'flex', justifyContent: 'center', padding: '15px 0 10px 0', cursor: 'grab', touchAction: 'none' }}
+    >
+      <div style={{ width: '50px', height: '5px', borderRadius: '3px', background: 'rgba(255, 255, 255, 0.4)' }} />
     </div>
   ) : null;
 
   const dragProps = isMobile ? {
     drag: 'y',
+    dragControls,
+    dragListener: false,
     dragConstraints: { top: 0, bottom: 0 },
-    dragElastic: { top: 0, bottom: 0.6 },
+    dragElastic: { top: 0, bottom: 1 },
     onDragEnd: (_, info) => { if (info.offset.y > 100) onClose(); },
   } : {};
 
