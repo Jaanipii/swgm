@@ -842,7 +842,7 @@ function App() {
                   fontSize: 'clamp(0.7rem, 2vw, 0.95rem)',
                   color: '#38bdf8',
                   fontStyle: 'italic',
-                  margin: '0 0 -4px 0',
+                  margin: '0 0 4px 0',
                   opacity: 0.8
                 }}>In a galaxy far, far away...</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
