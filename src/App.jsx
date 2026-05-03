@@ -34,8 +34,8 @@ function App() {
   const [showGdprNotice, setShowGdprNotice] = useState(() => {
     try { return !localStorage.getItem('sw_gdpr_dismissed'); } catch { return true; }
   });
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
-  const [mobileViewMode, setMobileViewMode] = useState('map'); // 'map' | 'legend' | 'guide'
+  const [showLegend, setShowLegend] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
 
   // Phase 10: Persistent Progress Tracking State
   const [watchedIds, setWatchedIds] = useState(() => {
@@ -225,7 +225,7 @@ function App() {
           isMapTransitioning={isMapTransitioning}
           onPlanetHighlight={handlePlanetHighlight}
           panTrigger={panTrigger}
-          hideControls={!isIntroMode && mobileViewMode !== 'legend'}
+          hideControls={!isIntroMode && !showLegend}
         />
       </motion.div>
 
@@ -251,7 +251,7 @@ function App() {
       {/* Hide UI elements while physically jumping into the map */}
       <div className={`ui-elements-container ${isMapTransitioning ? 'transitioning' : ''}`}>
 
-        {/* Sliding Episode Guide Panel (from right) — all screen sizes */}
+        {/* Sliding Episode Guide Panel (from right) — pointer-events pass through to map */}
         {!isIntroMode && (
           <div style={{
             position: 'fixed',
@@ -261,15 +261,15 @@ function App() {
             height: '100vh',
             zIndex: 9997,
             background: 'transparent',
-            transform: mobileViewMode === 'guide' ? 'translateX(0)' : 'translateX(100%)',
+            transform: showGuide ? 'translateX(0)' : 'translateX(100%)',
             transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
             overflowY: 'auto',
             paddingBottom: '80px',
-            pointerEvents: mobileViewMode === 'guide' ? 'auto' : 'none',
+            pointerEvents: 'none',
           }}>
             <TimelineCrawl 
               activeItemId={activeEpisodeId} 
-              onSelect={(id) => { handleTimelineSelect(id); setMobileViewMode('map'); }}
+              onSelect={(id) => { handleTimelineSelect(id); }}
               isFullscreen={false}
               onEraChange={handleEraChange}
               onHistoricalEventSelect={handleEventMarkerSelect}
@@ -334,13 +334,13 @@ function App() {
           }}>
             {/* Legend button */}
             <button
-              onClick={() => setMobileViewMode(mobileViewMode === 'legend' ? 'map' : 'legend')}
+              onClick={() => setShowLegend(!showLegend)}
               style={{
                 pointerEvents: 'auto',
                 width: '44px', height: '44px', borderRadius: '50%',
-                border: `1px solid ${mobileViewMode === 'legend' ? '#ffe81f' : 'rgba(255, 232, 31, 0.4)'}`,
-                background: mobileViewMode === 'legend' ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.85)',
-                color: mobileViewMode === 'legend' ? '#ffe81f' : 'rgba(255, 232, 31, 0.6)',
+                border: `1px solid ${showLegend ? '#ffe81f' : 'rgba(255, 232, 31, 0.4)'}`,
+                background: showLegend ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.85)',
+                color: showLegend ? '#ffe81f' : 'rgba(255, 232, 31, 0.6)',
                 cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backdropFilter: 'blur(8px)',
@@ -353,15 +353,15 @@ function App() {
               </svg>
             </button>
 
-            {/* Map button (center) */}
+            {/* Map button (center) — hides both panels */}
             <button
-              onClick={() => setMobileViewMode('map')}
+              onClick={() => { setShowLegend(false); setShowGuide(false); }}
               style={{
                 pointerEvents: 'auto',
                 width: '44px', height: '44px', borderRadius: '50%',
-                border: `1px solid ${mobileViewMode === 'map' ? '#ffe81f' : 'rgba(255, 232, 31, 0.4)'}`,
-                background: mobileViewMode === 'map' ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.85)',
-                color: mobileViewMode === 'map' ? '#ffe81f' : 'rgba(255, 232, 31, 0.6)',
+                border: `1px solid ${!showLegend && !showGuide ? '#ffe81f' : 'rgba(255, 232, 31, 0.4)'}`,
+                background: !showLegend && !showGuide ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.85)',
+                color: !showLegend && !showGuide ? '#ffe81f' : 'rgba(255, 232, 31, 0.6)',
                 cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backdropFilter: 'blur(8px)',
@@ -376,13 +376,13 @@ function App() {
 
             {/* Guide button */}
             <button
-              onClick={() => setMobileViewMode(mobileViewMode === 'guide' ? 'map' : 'guide')}
+              onClick={() => setShowGuide(!showGuide)}
               style={{
                 pointerEvents: 'auto',
                 width: '44px', height: '44px', borderRadius: '50%',
-                border: `1px solid ${mobileViewMode === 'guide' ? '#ffe81f' : 'rgba(255, 232, 31, 0.4)'}`,
-                background: mobileViewMode === 'guide' ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.85)',
-                color: mobileViewMode === 'guide' ? '#ffe81f' : 'rgba(255, 232, 31, 0.6)',
+                border: `1px solid ${showGuide ? '#ffe81f' : 'rgba(255, 232, 31, 0.4)'}`,
+                background: showGuide ? 'rgba(255, 232, 31, 0.2)' : 'rgba(10, 20, 40, 0.85)',
+                color: showGuide ? '#ffe81f' : 'rgba(255, 232, 31, 0.6)',
                 cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backdropFilter: 'blur(8px)',

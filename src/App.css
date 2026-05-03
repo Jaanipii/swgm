@@ -94,7 +94,7 @@
   align-items: flex-start;
   overflow: visible;
   padding-top: 0;
-  pointer-events: none;
+  pointer-events: auto;
   transition: all 1s ease-in-out;
 }
 
