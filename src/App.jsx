@@ -836,14 +836,17 @@ function App() {
               flexDirection: 'column',
               alignItems: 'center',
             }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', position: 'relative' }}>
                 <p style={{
+                  position: 'absolute',
+                  top: '-20px',
                   fontFamily: 'Inter, sans-serif',
                   fontSize: 'clamp(0.7rem, 2vw, 0.95rem)',
                   color: '#38bdf8',
                   fontStyle: 'italic',
-                  margin: '0 0 4px 0',
-                  opacity: 0.8
+                  margin: 0,
+                  opacity: 0.8,
+                  whiteSpace: 'nowrap'
                 }}>In a galaxy far, far away...</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                   {/* Decorative Jedi Diamond */}
