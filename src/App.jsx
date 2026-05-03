@@ -284,47 +284,386 @@ function App() {
                   {/* Background dense dust disk */}
                   <circle cx="50" cy="50" r="45" fill="url(#galaxyDisk)" filter="blur(4px)" />
                   <circle cx="50" cy="50" r="30" fill="url(#galaxyDisk)" filter="blur(2px)" />
-                  
-                  <g filter="blur(3px)">
-                    {/* Outer main arms */}
-                    <path d="M 50 50 L 50.0 50.3 L 49.8 50.7 L 49.5 51.1 L 49.0 51.5 L 48.4 51.8 L 47.6 51.9 L 46.8 51.8 L 45.9 51.6 L 45.0 51.1 L 44.1 50.4 L 43.3 49.4 L 42.7 48.2 L 42.3 46.8 L 42.1 45.3 L 42.3 43.6 L 42.7 41.9 L 43.5 40.1 L 44.7 38.4 L 46.3 36.9 L 48.2 35.5 L 50.4 34.5 L 52.9 33.7 L 55.6 33.4 L 58.5 33.6 L 61.5 34.2 L 64.4 35.4 L 67.3 37.1 L 69.9 39.4 L 72.3 42.1 L 74.3 45.4 L 75.8 49.0 L 76.7 53.0 L 77.0 57.3 L 76.6 61.7 L 75.5 66.2 L 73.6 70.6 L 71.0 74.7 L 67.6 78.6 L 63.6 82.0 L 58.9 84.8 L 53.7 86.9 L 48.1 88.2 L 42.1 88.7 L 36.0 88.2 L 29.8 86.7 L 23.8 84.2 L 18.1 80.7 L 12.8 76.3 L 8.2 71.0 L 4.3 64.8" fill="none" stroke="rgba(130, 220, 255, 0.4)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 50 50 L 49.7 50.0 L 49.3 49.8 L 48.9 49.5 L 48.5 49.0 L 48.2 48.4 L 48.1 47.6 L 48.2 46.8 L 48.4 45.9 L 48.9 45.0 L 49.6 44.1 L 50.6 43.3 L 51.8 42.7 L 53.2 42.3 L 54.7 42.1 L 56.4 42.3 L 58.1 42.7 L 59.9 43.5 L 61.6 44.7 L 63.1 46.3 L 64.5 48.2 L 65.5 50.4 L 66.3 52.9 L 66.6 55.6 L 66.4 58.5 L 65.8 61.5 L 64.6 64.4 L 62.9 67.3 L 60.6 69.9 L 57.9 72.3 L 54.6 74.3 L 51.0 75.8 L 47.0 76.7 L 42.7 77.0 L 38.3 76.6 L 33.8 75.5 L 29.4 73.6 L 25.3 71.0 L 21.4 67.6 L 18.0 63.6 L 15.2 58.9 L 13.1 53.7 L 11.8 48.1 L 11.3 42.1 L 11.8 36.0 L 13.3 29.8 L 15.8 23.8 L 19.3 18.1 L 23.7 12.8 L 29.0 8.2 L 35.2 4.3" fill="none" stroke="rgba(130, 220, 255, 0.4)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 50 50 L 50.0 49.7 L 50.2 49.3 L 50.5 48.9 L 51.0 48.5 L 51.6 48.2 L 52.4 48.1 L 53.2 48.2 L 54.1 48.4 L 55.0 48.9 L 55.9 49.6 L 56.7 50.6 L 57.3 51.8 L 57.7 53.2 L 57.9 54.7 L 57.7 56.4 L 57.3 58.1 L 56.5 59.9 L 55.3 61.6 L 53.7 63.1 L 51.8 64.5 L 49.6 65.5 L 47.1 66.3 L 44.4 66.6 L 41.5 66.4 L 38.5 65.8 L 35.6 64.6 L 32.7 62.9 L 30.1 60.6 L 27.7 57.9 L 25.7 54.6 L 24.2 51.0 L 23.3 47.0 L 23.0 42.7 L 23.4 38.3 L 24.5 33.8 L 26.4 29.4 L 29.0 25.3 L 32.4 21.4 L 36.4 18.0 L 41.1 15.2 L 46.3 13.1 L 51.9 11.8 L 57.9 11.3 L 64.0 11.8 L 70.2 13.3 L 76.2 15.8 L 81.9 19.3 L 87.2 23.7 L 91.8 29.0 L 95.7 35.2" fill="none" stroke="rgba(130, 220, 255, 0.4)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 50 50 L 50.3 50.0 L 50.7 50.2 L 51.1 50.5 L 51.5 51.0 L 51.8 51.6 L 51.9 52.4 L 51.8 53.2 L 51.6 54.1 L 51.1 55.0 L 50.4 55.9 L 49.4 56.7 L 48.2 57.3 L 46.8 57.7 L 45.3 57.9 L 43.6 57.7 L 41.9 57.3 L 40.1 56.5 L 38.4 55.3 L 36.9 53.7 L 35.5 51.8 L 34.5 49.6 L 33.7 47.1 L 33.4 44.4 L 33.6 41.5 L 34.2 38.5 L 35.4 35.6 L 37.1 32.7 L 39.4 30.1 L 42.1 27.7 L 45.4 25.7 L 49.0 24.2 L 53.0 23.3 L 57.3 23.0 L 61.7 23.4 L 66.2 24.5 L 70.6 26.4 L 74.7 29.0 L 78.6 32.4 L 82.0 36.4 L 84.8 41.1 L 86.9 46.3 L 88.2 51.9 L 88.7 57.9 L 88.2 64.0 L 86.7 70.2 L 84.2 76.2 L 80.7 81.9 L 76.3 87.2 L 71.0 91.8 L 64.8 95.7" fill="none" stroke="rgba(130, 220, 255, 0.4)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
-                  </g>
-                  
-                  <g filter="blur(2px)">
-                    {/* Secondary arms/spurs */}
-                    <path d="M 50 50 L 50.2 50.3 L 50.3 50.7 L 50.3 51.3 L 50.2 51.9 L 49.8 52.5 L 49.2 53.1 L 48.4 53.6 L 47.4 53.9 L 46.2 53.9 L 44.9 53.7 L 43.6 53.1 L 42.4 52.2 L 41.2 51.0 L 40.3 49.4 L 39.7 47.5 L 39.4 45.4 L 39.6 43.1 L 40.2 40.8 L 41.3 38.5 L 43.0 36.2 L 45.2 34.3 L 47.8 32.7 L 50.9 31.5 L 54.3 30.9 L 57.9 30.9 L 61.6 31.7 L 65.3 33.1 L 68.9 35.4 L 72.1 38.3 L 74.9 41.9 L 77.0 46.2 L 78.4 50.9 L 79.0 56.0 L 78.6 61.3 L 77.2 66.7 L 74.9 71.9 L 71.5 76.8 L 67.1 81.2 L 61.9 84.8 L 55.9 87.5" fill="none" stroke="rgba(100, 160, 255, 0.5)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 50 50 L 49.7 50.2 L 49.3 50.3 L 48.7 50.3 L 48.1 50.2 L 47.5 49.8 L 46.9 49.2 L 46.4 48.4 L 46.1 47.4 L 46.1 46.2 L 46.3 44.9 L 46.9 43.6 L 47.8 42.4 L 49.0 41.2 L 50.6 40.3 L 52.5 39.7 L 54.6 39.4 L 56.9 39.6 L 59.2 40.2 L 61.5 41.3 L 63.8 43.0 L 65.7 45.2 L 67.3 47.8 L 68.5 50.9 L 69.1 54.3 L 69.1 57.9 L 68.3 61.6 L 66.9 65.3 L 64.6 68.9 L 61.7 72.1 L 58.1 74.9 L 53.8 77.0 L 49.1 78.4 L 44.0 79.0 L 38.7 78.6 L 33.3 77.2 L 28.1 74.9 L 23.2 71.5 L 18.8 67.1 L 15.2 61.9 L 12.5 55.9" fill="none" stroke="rgba(100, 160, 255, 0.5)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 50 50 L 49.8 49.7 L 49.7 49.3 L 49.7 48.7 L 49.8 48.1 L 50.2 47.5 L 50.8 46.9 L 51.6 46.4 L 52.6 46.1 L 53.8 46.1 L 55.1 46.3 L 56.4 46.9 L 57.6 47.8 L 58.8 49.0 L 59.7 50.6 L 60.3 52.5 L 60.6 54.6 L 60.4 56.9 L 59.8 59.2 L 58.7 61.5 L 57.0 63.8 L 54.8 65.7 L 52.2 67.3 L 49.1 68.5 L 45.7 69.1 L 42.1 69.1 L 38.4 68.3 L 34.7 66.9 L 31.1 64.6 L 27.9 61.7 L 25.1 58.1 L 23.0 53.8 L 21.6 49.1 L 21.0 44.0 L 21.4 38.7 L 22.8 33.3 L 25.1 28.1 L 28.5 23.2 L 32.9 18.8 L 38.1 15.2 L 44.1 12.5" fill="none" stroke="rgba(100, 160, 255, 0.5)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 50 50 L 50.3 49.8 L 50.7 49.7 L 51.3 49.7 L 51.9 49.8 L 52.5 50.2 L 53.1 50.8 L 53.6 51.6 L 53.9 52.6 L 53.9 53.8 L 53.7 55.1 L 53.1 56.4 L 52.2 57.6 L 51.0 58.8 L 49.4 59.7 L 47.5 60.3 L 45.4 60.6 L 43.1 60.4 L 40.8 59.8 L 38.5 58.7 L 36.2 57.0 L 34.3 54.8 L 32.7 52.2 L 31.5 49.1 L 30.9 45.7 L 30.9 42.1 L 31.7 38.4 L 33.1 34.7 L 35.4 31.1 L 38.3 27.9 L 41.9 25.1 L 46.2 23.0 L 50.9 21.6 L 56.0 21.0 L 61.3 21.4 L 66.7 22.8 L 71.9 25.1 L 76.8 28.5 L 81.2 32.9 L 84.8 38.1 L 87.5 44.1" fill="none" stroke="rgba(100, 160, 255, 0.5)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
-                  </g>
-                  
-                  <g filter="blur(1.5px)">
-                    {/* Inner dense golden arms */}
-                    <path d="M 50 50 L 50.3 50.0 L 50.7 50.1 L 51.2 50.4 L 51.6 50.8 L 52.0 51.4 L 52.1 52.2 L 52.1 53.1 L 51.9 54.1 L 51.4 55.0 L 50.6 56.0 L 49.5 56.8 L 48.2 57.4 L 46.7 57.7 L 45.0 57.8 L 43.1 57.5 L 41.3 56.8 L 39.5 55.7 L 37.8 54.1 L 36.4 52.2 L 35.2 49.9 L 34.5 47.2 L 34.3 44.4 L 34.6 41.3 L 35.5 38.2 L 36.9 35.2 L 39.0 32.4 L 41.7 29.8 L 45.0 27.7 L 48.7 26.1 L 52.8 25.2" fill="none" stroke="rgba(255, 232, 31, 0.6)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 50 50 L 50.0 50.3 L 49.9 50.7 L 49.6 51.2 L 49.2 51.6 L 48.6 52.0 L 47.8 52.1 L 46.9 52.1 L 45.9 51.9 L 45.0 51.4 L 44.0 50.6 L 43.2 49.5 L 42.6 48.2 L 42.3 46.7 L 42.2 45.0 L 42.5 43.1 L 43.2 41.3 L 44.3 39.5 L 45.9 37.8 L 47.8 36.4 L 50.1 35.2 L 52.8 34.5 L 55.6 34.3 L 58.7 34.6 L 61.8 35.5 L 64.8 36.9 L 67.6 39.0 L 70.2 41.7 L 72.3 45.0 L 73.9 48.7 L 74.8 52.8" fill="none" stroke="rgba(255, 232, 31, 0.6)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 50 50 L 49.7 50.0 L 49.3 49.9 L 48.8 49.6 L 48.4 49.2 L 48.0 48.6 L 47.9 47.8 L 47.9 46.9 L 48.1 45.9 L 48.6 45.0 L 49.4 44.0 L 50.5 43.2 L 51.8 42.6 L 53.3 42.3 L 55.0 42.2 L 56.9 42.5 L 58.7 43.2 L 60.5 44.3 L 62.2 45.9 L 63.6 47.8 L 64.8 50.1 L 65.5 52.8 L 65.7 55.6 L 65.4 58.7 L 64.5 61.8 L 63.1 64.8 L 61.0 67.6 L 58.3 70.2 L 55.0 72.3 L 51.3 73.9 L 47.2 74.8" fill="none" stroke="rgba(255, 232, 31, 0.6)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 50 50 L 50.0 49.7 L 50.1 49.3 L 50.4 48.8 L 50.8 48.4 L 51.4 48.0 L 52.2 47.9 L 53.1 47.9 L 54.1 48.1 L 55.0 48.6 L 56.0 49.4 L 56.8 50.5 L 57.4 51.8 L 57.7 53.3 L 57.8 55.0 L 57.5 56.9 L 56.8 58.7 L 55.7 60.5 L 54.1 62.2 L 52.2 63.6 L 49.9 64.8 L 47.2 65.5 L 44.4 65.7 L 41.3 65.4 L 38.2 64.5 L 35.2 63.1 L 32.4 61.0 L 29.8 58.3 L 27.7 55.0 L 26.1 51.3 L 25.2 47.2" fill="none" stroke="rgba(255, 232, 31, 0.6)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+<g filter="blur(3px)">
+  <line x1="50.0" y1="50.0" x2="50.5" y2="50.1" stroke="rgba(130, 220, 255, 0.50)" strokeWidth="15.6" strokeLinecap="round" />
+  <line x1="50.5" y1="50.1" x2="51.1" y2="50.5" stroke="rgba(130, 220, 255, 0.49)" strokeWidth="15.2" strokeLinecap="round" />
+  <line x1="51.1" y1="50.5" x2="51.6" y2="51.2" stroke="rgba(130, 220, 255, 0.49)" strokeWidth="14.8" strokeLinecap="round" />
+  <line x1="51.6" y1="51.2" x2="51.9" y2="52.2" stroke="rgba(130, 220, 255, 0.48)" strokeWidth="14.4" strokeLinecap="round" />
+  <line x1="51.9" y1="52.2" x2="51.8" y2="53.4" stroke="rgba(130, 220, 255, 0.47)" strokeWidth="14.0" strokeLinecap="round" />
+  <line x1="51.8" y1="53.4" x2="51.3" y2="54.7" stroke="rgba(130, 220, 255, 0.46)" strokeWidth="13.6" strokeLinecap="round" />
+  <line x1="51.3" y1="54.7" x2="50.4" y2="55.9" stroke="rgba(130, 220, 255, 0.46)" strokeWidth="13.2" strokeLinecap="round" />
+  <line x1="50.4" y1="55.9" x2="48.9" y2="57.0" stroke="rgba(130, 220, 255, 0.45)" strokeWidth="12.8" strokeLinecap="round" />
+  <line x1="48.9" y1="57.0" x2="47.0" y2="57.7" stroke="rgba(130, 220, 255, 0.43)" strokeWidth="12.4" strokeLinecap="round" />
+  <line x1="47.0" y1="57.7" x2="44.8" y2="57.9" stroke="rgba(130, 220, 255, 0.42)" strokeWidth="12.0" strokeLinecap="round" />
+  <line x1="44.8" y1="57.9" x2="42.4" y2="57.4" stroke="rgba(130, 220, 255, 0.41)" strokeWidth="11.6" strokeLinecap="round" />
+  <line x1="42.4" y1="57.4" x2="39.9" y2="56.3" stroke="rgba(130, 220, 255, 0.40)" strokeWidth="11.2" strokeLinecap="round" />
+  <line x1="39.9" y1="56.3" x2="37.5" y2="54.4" stroke="rgba(130, 220, 255, 0.39)" strokeWidth="10.8" strokeLinecap="round" />
+  <line x1="37.5" y1="54.4" x2="35.5" y2="51.8" stroke="rgba(130, 220, 255, 0.37)" strokeWidth="10.4" strokeLinecap="round" />
+  <line x1="35.5" y1="51.8" x2="34.1" y2="48.6" stroke="rgba(130, 220, 255, 0.36)" strokeWidth="10.0" strokeLinecap="round" />
+  <line x1="34.1" y1="48.6" x2="33.5" y2="44.8" stroke="rgba(130, 220, 255, 0.35)" strokeWidth="9.6" strokeLinecap="round" />
+  <line x1="33.5" y1="44.8" x2="33.7" y2="40.7" stroke="rgba(130, 220, 255, 0.33)" strokeWidth="9.2" strokeLinecap="round" />
+  <line x1="33.7" y1="40.7" x2="35.0" y2="36.4" stroke="rgba(130, 220, 255, 0.32)" strokeWidth="8.8" strokeLinecap="round" />
+  <line x1="35.0" y1="36.4" x2="37.4" y2="32.3" stroke="rgba(130, 220, 255, 0.30)" strokeWidth="8.4" strokeLinecap="round" />
+  <line x1="37.4" y1="32.3" x2="40.9" y2="28.7" stroke="rgba(130, 220, 255, 0.28)" strokeWidth="8.0" strokeLinecap="round" />
+  <line x1="40.9" y1="28.7" x2="45.4" y2="25.7" stroke="rgba(130, 220, 255, 0.27)" strokeWidth="7.6" strokeLinecap="round" />
+  <line x1="45.4" y1="25.7" x2="50.7" y2="23.8" stroke="rgba(130, 220, 255, 0.25)" strokeWidth="7.2" strokeLinecap="round" />
+  <line x1="50.7" y1="23.8" x2="56.7" y2="23.0" stroke="rgba(130, 220, 255, 0.23)" strokeWidth="6.8" strokeLinecap="round" />
+  <line x1="56.7" y1="23.0" x2="63.0" y2="23.6" stroke="rgba(130, 220, 255, 0.22)" strokeWidth="6.4" strokeLinecap="round" />
+  <line x1="63.0" y1="23.6" x2="69.3" y2="25.8" stroke="rgba(130, 220, 255, 0.20)" strokeWidth="6.0" strokeLinecap="round" />
+  <line x1="69.3" y1="25.8" x2="75.3" y2="29.4" stroke="rgba(130, 220, 255, 0.18)" strokeWidth="5.6" strokeLinecap="round" />
+  <line x1="75.3" y1="29.4" x2="80.6" y2="34.6" stroke="rgba(130, 220, 255, 0.16)" strokeWidth="5.2" strokeLinecap="round" />
+  <line x1="80.6" y1="34.6" x2="84.8" y2="41.1" stroke="rgba(130, 220, 255, 0.14)" strokeWidth="4.8" strokeLinecap="round" />
+  <line x1="84.8" y1="41.1" x2="87.6" y2="48.7" stroke="rgba(130, 220, 255, 0.12)" strokeWidth="4.4" strokeLinecap="round" />
+  <line x1="87.6" y1="48.7" x2="88.7" y2="57.0" stroke="rgba(130, 220, 255, 0.10)" strokeWidth="4.0" strokeLinecap="round" />
+  <line x1="88.7" y1="57.0" x2="87.8" y2="65.8" stroke="rgba(130, 220, 255, 0.08)" strokeWidth="3.6" strokeLinecap="round" />
+  <line x1="87.8" y1="65.8" x2="85.0" y2="74.5" stroke="rgba(130, 220, 255, 0.06)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="85.0" y1="74.5" x2="80.1" y2="82.7" stroke="rgba(130, 220, 255, 0.04)" strokeWidth="2.8" strokeLinecap="round" />
+  <line x1="80.1" y1="82.7" x2="73.4" y2="89.9" stroke="rgba(130, 220, 255, 0.02)" strokeWidth="2.4" strokeLinecap="round" />
+  <line x1="50.0" y1="50.0" x2="49.9" y2="50.5" stroke="rgba(130, 220, 255, 0.50)" strokeWidth="15.6" strokeLinecap="round" />
+  <line x1="49.9" y1="50.5" x2="49.5" y2="51.1" stroke="rgba(130, 220, 255, 0.49)" strokeWidth="15.2" strokeLinecap="round" />
+  <line x1="49.5" y1="51.1" x2="48.8" y2="51.6" stroke="rgba(130, 220, 255, 0.49)" strokeWidth="14.8" strokeLinecap="round" />
+  <line x1="48.8" y1="51.6" x2="47.8" y2="51.9" stroke="rgba(130, 220, 255, 0.48)" strokeWidth="14.4" strokeLinecap="round" />
+  <line x1="47.8" y1="51.9" x2="46.6" y2="51.8" stroke="rgba(130, 220, 255, 0.47)" strokeWidth="14.0" strokeLinecap="round" />
+  <line x1="46.6" y1="51.8" x2="45.3" y2="51.3" stroke="rgba(130, 220, 255, 0.46)" strokeWidth="13.6" strokeLinecap="round" />
+  <line x1="45.3" y1="51.3" x2="44.1" y2="50.4" stroke="rgba(130, 220, 255, 0.46)" strokeWidth="13.2" strokeLinecap="round" />
+  <line x1="44.1" y1="50.4" x2="43.0" y2="48.9" stroke="rgba(130, 220, 255, 0.45)" strokeWidth="12.8" strokeLinecap="round" />
+  <line x1="43.0" y1="48.9" x2="42.3" y2="47.0" stroke="rgba(130, 220, 255, 0.43)" strokeWidth="12.4" strokeLinecap="round" />
+  <line x1="42.3" y1="47.0" x2="42.1" y2="44.8" stroke="rgba(130, 220, 255, 0.42)" strokeWidth="12.0" strokeLinecap="round" />
+  <line x1="42.1" y1="44.8" x2="42.6" y2="42.4" stroke="rgba(130, 220, 255, 0.41)" strokeWidth="11.6" strokeLinecap="round" />
+  <line x1="42.6" y1="42.4" x2="43.7" y2="39.9" stroke="rgba(130, 220, 255, 0.40)" strokeWidth="11.2" strokeLinecap="round" />
+  <line x1="43.7" y1="39.9" x2="45.6" y2="37.5" stroke="rgba(130, 220, 255, 0.39)" strokeWidth="10.8" strokeLinecap="round" />
+  <line x1="45.6" y1="37.5" x2="48.2" y2="35.5" stroke="rgba(130, 220, 255, 0.37)" strokeWidth="10.4" strokeLinecap="round" />
+  <line x1="48.2" y1="35.5" x2="51.4" y2="34.1" stroke="rgba(130, 220, 255, 0.36)" strokeWidth="10.0" strokeLinecap="round" />
+  <line x1="51.4" y1="34.1" x2="55.2" y2="33.5" stroke="rgba(130, 220, 255, 0.35)" strokeWidth="9.6" strokeLinecap="round" />
+  <line x1="55.2" y1="33.5" x2="59.3" y2="33.7" stroke="rgba(130, 220, 255, 0.33)" strokeWidth="9.2" strokeLinecap="round" />
+  <line x1="59.3" y1="33.7" x2="63.6" y2="35.0" stroke="rgba(130, 220, 255, 0.32)" strokeWidth="8.8" strokeLinecap="round" />
+  <line x1="63.6" y1="35.0" x2="67.7" y2="37.4" stroke="rgba(130, 220, 255, 0.30)" strokeWidth="8.4" strokeLinecap="round" />
+  <line x1="67.7" y1="37.4" x2="71.3" y2="40.9" stroke="rgba(130, 220, 255, 0.28)" strokeWidth="8.0" strokeLinecap="round" />
+  <line x1="71.3" y1="40.9" x2="74.3" y2="45.4" stroke="rgba(130, 220, 255, 0.27)" strokeWidth="7.6" strokeLinecap="round" />
+  <line x1="74.3" y1="45.4" x2="76.2" y2="50.7" stroke="rgba(130, 220, 255, 0.25)" strokeWidth="7.2" strokeLinecap="round" />
+  <line x1="76.2" y1="50.7" x2="77.0" y2="56.7" stroke="rgba(130, 220, 255, 0.23)" strokeWidth="6.8" strokeLinecap="round" />
+  <line x1="77.0" y1="56.7" x2="76.4" y2="63.0" stroke="rgba(130, 220, 255, 0.22)" strokeWidth="6.4" strokeLinecap="round" />
+  <line x1="76.4" y1="63.0" x2="74.2" y2="69.3" stroke="rgba(130, 220, 255, 0.20)" strokeWidth="6.0" strokeLinecap="round" />
+  <line x1="74.2" y1="69.3" x2="70.6" y2="75.3" stroke="rgba(130, 220, 255, 0.18)" strokeWidth="5.6" strokeLinecap="round" />
+  <line x1="70.6" y1="75.3" x2="65.4" y2="80.6" stroke="rgba(130, 220, 255, 0.16)" strokeWidth="5.2" strokeLinecap="round" />
+  <line x1="65.4" y1="80.6" x2="58.9" y2="84.8" stroke="rgba(130, 220, 255, 0.14)" strokeWidth="4.8" strokeLinecap="round" />
+  <line x1="58.9" y1="84.8" x2="51.3" y2="87.6" stroke="rgba(130, 220, 255, 0.12)" strokeWidth="4.4" strokeLinecap="round" />
+  <line x1="51.3" y1="87.6" x2="43.0" y2="88.7" stroke="rgba(130, 220, 255, 0.10)" strokeWidth="4.0" strokeLinecap="round" />
+  <line x1="43.0" y1="88.7" x2="34.2" y2="87.8" stroke="rgba(130, 220, 255, 0.08)" strokeWidth="3.6" strokeLinecap="round" />
+  <line x1="34.2" y1="87.8" x2="25.5" y2="85.0" stroke="rgba(130, 220, 255, 0.06)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="25.5" y1="85.0" x2="17.3" y2="80.1" stroke="rgba(130, 220, 255, 0.04)" strokeWidth="2.8" strokeLinecap="round" />
+  <line x1="17.3" y1="80.1" x2="10.1" y2="73.4" stroke="rgba(130, 220, 255, 0.02)" strokeWidth="2.4" strokeLinecap="round" />
+  <line x1="50.0" y1="50.0" x2="49.5" y2="49.9" stroke="rgba(130, 220, 255, 0.50)" strokeWidth="15.6" strokeLinecap="round" />
+  <line x1="49.5" y1="49.9" x2="48.9" y2="49.5" stroke="rgba(130, 220, 255, 0.49)" strokeWidth="15.2" strokeLinecap="round" />
+  <line x1="48.9" y1="49.5" x2="48.4" y2="48.8" stroke="rgba(130, 220, 255, 0.49)" strokeWidth="14.8" strokeLinecap="round" />
+  <line x1="48.4" y1="48.8" x2="48.1" y2="47.8" stroke="rgba(130, 220, 255, 0.48)" strokeWidth="14.4" strokeLinecap="round" />
+  <line x1="48.1" y1="47.8" x2="48.2" y2="46.6" stroke="rgba(130, 220, 255, 0.47)" strokeWidth="14.0" strokeLinecap="round" />
+  <line x1="48.2" y1="46.6" x2="48.7" y2="45.3" stroke="rgba(130, 220, 255, 0.46)" strokeWidth="13.6" strokeLinecap="round" />
+  <line x1="48.7" y1="45.3" x2="49.6" y2="44.1" stroke="rgba(130, 220, 255, 0.46)" strokeWidth="13.2" strokeLinecap="round" />
+  <line x1="49.6" y1="44.1" x2="51.1" y2="43.0" stroke="rgba(130, 220, 255, 0.45)" strokeWidth="12.8" strokeLinecap="round" />
+  <line x1="51.1" y1="43.0" x2="53.0" y2="42.3" stroke="rgba(130, 220, 255, 0.43)" strokeWidth="12.4" strokeLinecap="round" />
+  <line x1="53.0" y1="42.3" x2="55.2" y2="42.1" stroke="rgba(130, 220, 255, 0.42)" strokeWidth="12.0" strokeLinecap="round" />
+  <line x1="55.2" y1="42.1" x2="57.6" y2="42.6" stroke="rgba(130, 220, 255, 0.41)" strokeWidth="11.6" strokeLinecap="round" />
+  <line x1="57.6" y1="42.6" x2="60.1" y2="43.7" stroke="rgba(130, 220, 255, 0.40)" strokeWidth="11.2" strokeLinecap="round" />
+  <line x1="60.1" y1="43.7" x2="62.5" y2="45.6" stroke="rgba(130, 220, 255, 0.39)" strokeWidth="10.8" strokeLinecap="round" />
+  <line x1="62.5" y1="45.6" x2="64.5" y2="48.2" stroke="rgba(130, 220, 255, 0.37)" strokeWidth="10.4" strokeLinecap="round" />
+  <line x1="64.5" y1="48.2" x2="65.9" y2="51.4" stroke="rgba(130, 220, 255, 0.36)" strokeWidth="10.0" strokeLinecap="round" />
+  <line x1="65.9" y1="51.4" x2="66.5" y2="55.2" stroke="rgba(130, 220, 255, 0.35)" strokeWidth="9.6" strokeLinecap="round" />
+  <line x1="66.5" y1="55.2" x2="66.3" y2="59.3" stroke="rgba(130, 220, 255, 0.33)" strokeWidth="9.2" strokeLinecap="round" />
+  <line x1="66.3" y1="59.3" x2="65.0" y2="63.6" stroke="rgba(130, 220, 255, 0.32)" strokeWidth="8.8" strokeLinecap="round" />
+  <line x1="65.0" y1="63.6" x2="62.6" y2="67.7" stroke="rgba(130, 220, 255, 0.30)" strokeWidth="8.4" strokeLinecap="round" />
+  <line x1="62.6" y1="67.7" x2="59.1" y2="71.3" stroke="rgba(130, 220, 255, 0.28)" strokeWidth="8.0" strokeLinecap="round" />
+  <line x1="59.1" y1="71.3" x2="54.6" y2="74.3" stroke="rgba(130, 220, 255, 0.27)" strokeWidth="7.6" strokeLinecap="round" />
+  <line x1="54.6" y1="74.3" x2="49.3" y2="76.2" stroke="rgba(130, 220, 255, 0.25)" strokeWidth="7.2" strokeLinecap="round" />
+  <line x1="49.3" y1="76.2" x2="43.3" y2="77.0" stroke="rgba(130, 220, 255, 0.23)" strokeWidth="6.8" strokeLinecap="round" />
+  <line x1="43.3" y1="77.0" x2="37.0" y2="76.4" stroke="rgba(130, 220, 255, 0.22)" strokeWidth="6.4" strokeLinecap="round" />
+  <line x1="37.0" y1="76.4" x2="30.7" y2="74.2" stroke="rgba(130, 220, 255, 0.20)" strokeWidth="6.0" strokeLinecap="round" />
+  <line x1="30.7" y1="74.2" x2="24.7" y2="70.6" stroke="rgba(130, 220, 255, 0.18)" strokeWidth="5.6" strokeLinecap="round" />
+  <line x1="24.7" y1="70.6" x2="19.4" y2="65.4" stroke="rgba(130, 220, 255, 0.16)" strokeWidth="5.2" strokeLinecap="round" />
+  <line x1="19.4" y1="65.4" x2="15.2" y2="58.9" stroke="rgba(130, 220, 255, 0.14)" strokeWidth="4.8" strokeLinecap="round" />
+  <line x1="15.2" y1="58.9" x2="12.4" y2="51.3" stroke="rgba(130, 220, 255, 0.12)" strokeWidth="4.4" strokeLinecap="round" />
+  <line x1="12.4" y1="51.3" x2="11.3" y2="43.0" stroke="rgba(130, 220, 255, 0.10)" strokeWidth="4.0" strokeLinecap="round" />
+  <line x1="11.3" y1="43.0" x2="12.2" y2="34.2" stroke="rgba(130, 220, 255, 0.08)" strokeWidth="3.6" strokeLinecap="round" />
+  <line x1="12.2" y1="34.2" x2="15.0" y2="25.5" stroke="rgba(130, 220, 255, 0.06)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="15.0" y1="25.5" x2="19.9" y2="17.3" stroke="rgba(130, 220, 255, 0.04)" strokeWidth="2.8" strokeLinecap="round" />
+  <line x1="19.9" y1="17.3" x2="26.6" y2="10.1" stroke="rgba(130, 220, 255, 0.02)" strokeWidth="2.4" strokeLinecap="round" />
+  <line x1="50.0" y1="50.0" x2="50.1" y2="49.5" stroke="rgba(130, 220, 255, 0.50)" strokeWidth="15.6" strokeLinecap="round" />
+  <line x1="50.1" y1="49.5" x2="50.5" y2="48.9" stroke="rgba(130, 220, 255, 0.49)" strokeWidth="15.2" strokeLinecap="round" />
+  <line x1="50.5" y1="48.9" x2="51.2" y2="48.4" stroke="rgba(130, 220, 255, 0.49)" strokeWidth="14.8" strokeLinecap="round" />
+  <line x1="51.2" y1="48.4" x2="52.2" y2="48.1" stroke="rgba(130, 220, 255, 0.48)" strokeWidth="14.4" strokeLinecap="round" />
+  <line x1="52.2" y1="48.1" x2="53.4" y2="48.2" stroke="rgba(130, 220, 255, 0.47)" strokeWidth="14.0" strokeLinecap="round" />
+  <line x1="53.4" y1="48.2" x2="54.7" y2="48.7" stroke="rgba(130, 220, 255, 0.46)" strokeWidth="13.6" strokeLinecap="round" />
+  <line x1="54.7" y1="48.7" x2="55.9" y2="49.6" stroke="rgba(130, 220, 255, 0.46)" strokeWidth="13.2" strokeLinecap="round" />
+  <line x1="55.9" y1="49.6" x2="57.0" y2="51.1" stroke="rgba(130, 220, 255, 0.45)" strokeWidth="12.8" strokeLinecap="round" />
+  <line x1="57.0" y1="51.1" x2="57.7" y2="53.0" stroke="rgba(130, 220, 255, 0.43)" strokeWidth="12.4" strokeLinecap="round" />
+  <line x1="57.7" y1="53.0" x2="57.9" y2="55.2" stroke="rgba(130, 220, 255, 0.42)" strokeWidth="12.0" strokeLinecap="round" />
+  <line x1="57.9" y1="55.2" x2="57.4" y2="57.6" stroke="rgba(130, 220, 255, 0.41)" strokeWidth="11.6" strokeLinecap="round" />
+  <line x1="57.4" y1="57.6" x2="56.3" y2="60.1" stroke="rgba(130, 220, 255, 0.40)" strokeWidth="11.2" strokeLinecap="round" />
+  <line x1="56.3" y1="60.1" x2="54.4" y2="62.5" stroke="rgba(130, 220, 255, 0.39)" strokeWidth="10.8" strokeLinecap="round" />
+  <line x1="54.4" y1="62.5" x2="51.8" y2="64.5" stroke="rgba(130, 220, 255, 0.37)" strokeWidth="10.4" strokeLinecap="round" />
+  <line x1="51.8" y1="64.5" x2="48.6" y2="65.9" stroke="rgba(130, 220, 255, 0.36)" strokeWidth="10.0" strokeLinecap="round" />
+  <line x1="48.6" y1="65.9" x2="44.8" y2="66.5" stroke="rgba(130, 220, 255, 0.35)" strokeWidth="9.6" strokeLinecap="round" />
+  <line x1="44.8" y1="66.5" x2="40.7" y2="66.3" stroke="rgba(130, 220, 255, 0.33)" strokeWidth="9.2" strokeLinecap="round" />
+  <line x1="40.7" y1="66.3" x2="36.4" y2="65.0" stroke="rgba(130, 220, 255, 0.32)" strokeWidth="8.8" strokeLinecap="round" />
+  <line x1="36.4" y1="65.0" x2="32.3" y2="62.6" stroke="rgba(130, 220, 255, 0.30)" strokeWidth="8.4" strokeLinecap="round" />
+  <line x1="32.3" y1="62.6" x2="28.7" y2="59.1" stroke="rgba(130, 220, 255, 0.28)" strokeWidth="8.0" strokeLinecap="round" />
+  <line x1="28.7" y1="59.1" x2="25.7" y2="54.6" stroke="rgba(130, 220, 255, 0.27)" strokeWidth="7.6" strokeLinecap="round" />
+  <line x1="25.7" y1="54.6" x2="23.8" y2="49.3" stroke="rgba(130, 220, 255, 0.25)" strokeWidth="7.2" strokeLinecap="round" />
+  <line x1="23.8" y1="49.3" x2="23.0" y2="43.3" stroke="rgba(130, 220, 255, 0.23)" strokeWidth="6.8" strokeLinecap="round" />
+  <line x1="23.0" y1="43.3" x2="23.6" y2="37.0" stroke="rgba(130, 220, 255, 0.22)" strokeWidth="6.4" strokeLinecap="round" />
+  <line x1="23.6" y1="37.0" x2="25.8" y2="30.7" stroke="rgba(130, 220, 255, 0.20)" strokeWidth="6.0" strokeLinecap="round" />
+  <line x1="25.8" y1="30.7" x2="29.4" y2="24.7" stroke="rgba(130, 220, 255, 0.18)" strokeWidth="5.6" strokeLinecap="round" />
+  <line x1="29.4" y1="24.7" x2="34.6" y2="19.4" stroke="rgba(130, 220, 255, 0.16)" strokeWidth="5.2" strokeLinecap="round" />
+  <line x1="34.6" y1="19.4" x2="41.1" y2="15.2" stroke="rgba(130, 220, 255, 0.14)" strokeWidth="4.8" strokeLinecap="round" />
+  <line x1="41.1" y1="15.2" x2="48.7" y2="12.4" stroke="rgba(130, 220, 255, 0.12)" strokeWidth="4.4" strokeLinecap="round" />
+  <line x1="48.7" y1="12.4" x2="57.0" y2="11.3" stroke="rgba(130, 220, 255, 0.10)" strokeWidth="4.0" strokeLinecap="round" />
+  <line x1="57.0" y1="11.3" x2="65.8" y2="12.2" stroke="rgba(130, 220, 255, 0.08)" strokeWidth="3.6" strokeLinecap="round" />
+  <line x1="65.8" y1="12.2" x2="74.5" y2="15.0" stroke="rgba(130, 220, 255, 0.06)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="74.5" y1="15.0" x2="82.7" y2="19.9" stroke="rgba(130, 220, 255, 0.04)" strokeWidth="2.8" strokeLinecap="round" />
+  <line x1="82.7" y1="19.9" x2="89.9" y2="26.6" stroke="rgba(130, 220, 255, 0.02)" strokeWidth="2.4" strokeLinecap="round" />
+</g>
+<g filter="blur(2px)">
+  <line x1="50.0" y1="50.0" x2="50.2" y2="50.4" stroke="rgba(100, 160, 255, 0.40)" strokeWidth="11.6" strokeLinecap="round" />
+  <line x1="50.2" y1="50.4" x2="50.4" y2="51.1" stroke="rgba(100, 160, 255, 0.39)" strokeWidth="11.3" strokeLinecap="round" />
+  <line x1="50.4" y1="51.1" x2="50.2" y2="51.9" stroke="rgba(100, 160, 255, 0.39)" strokeWidth="10.9" strokeLinecap="round" />
+  <line x1="50.2" y1="51.9" x2="49.6" y2="52.7" stroke="rgba(100, 160, 255, 0.38)" strokeWidth="10.5" strokeLinecap="round" />
+  <line x1="49.6" y1="52.7" x2="48.7" y2="53.5" stroke="rgba(100, 160, 255, 0.37)" strokeWidth="10.2" strokeLinecap="round" />
+  <line x1="48.7" y1="53.5" x2="47.4" y2="53.9" stroke="rgba(100, 160, 255, 0.36)" strokeWidth="9.8" strokeLinecap="round" />
+  <line x1="47.4" y1="53.9" x2="45.8" y2="53.9" stroke="rgba(100, 160, 255, 0.35)" strokeWidth="9.4" strokeLinecap="round" />
+  <line x1="45.8" y1="53.9" x2="44.1" y2="53.3" stroke="rgba(100, 160, 255, 0.34)" strokeWidth="9.1" strokeLinecap="round" />
+  <line x1="44.1" y1="53.3" x2="42.4" y2="52.2" stroke="rgba(100, 160, 255, 0.33)" strokeWidth="8.7" strokeLinecap="round" />
+  <line x1="42.4" y1="52.2" x2="40.9" y2="50.5" stroke="rgba(100, 160, 255, 0.32)" strokeWidth="8.3" strokeLinecap="round" />
+  <line x1="40.9" y1="50.5" x2="39.9" y2="48.2" stroke="rgba(100, 160, 255, 0.31)" strokeWidth="8.0" strokeLinecap="round" />
+  <line x1="39.9" y1="48.2" x2="39.4" y2="45.4" stroke="rgba(100, 160, 255, 0.30)" strokeWidth="7.6" strokeLinecap="round" />
+  <line x1="39.4" y1="45.4" x2="39.7" y2="42.4" stroke="rgba(100, 160, 255, 0.29)" strokeWidth="7.2" strokeLinecap="round" />
+  <line x1="39.7" y1="42.4" x2="40.9" y2="39.2" stroke="rgba(100, 160, 255, 0.27)" strokeWidth="6.9" strokeLinecap="round" />
+  <line x1="40.9" y1="39.2" x2="43.0" y2="36.2" stroke="rgba(100, 160, 255, 0.26)" strokeWidth="6.5" strokeLinecap="round" />
+  <line x1="43.0" y1="36.2" x2="46.0" y2="33.7" stroke="rgba(100, 160, 255, 0.24)" strokeWidth="6.1" strokeLinecap="round" />
+  <line x1="46.0" y1="33.7" x2="49.8" y2="31.8" stroke="rgba(100, 160, 255, 0.23)" strokeWidth="5.8" strokeLinecap="round" />
+  <line x1="49.8" y1="31.8" x2="54.3" y2="30.9" stroke="rgba(100, 160, 255, 0.21)" strokeWidth="5.4" strokeLinecap="round" />
+  <line x1="54.3" y1="30.9" x2="59.1" y2="31.1" stroke="rgba(100, 160, 255, 0.20)" strokeWidth="5.0" strokeLinecap="round" />
+  <line x1="59.1" y1="31.1" x2="64.1" y2="32.6" stroke="rgba(100, 160, 255, 0.18)" strokeWidth="4.7" strokeLinecap="round" />
+  <line x1="64.1" y1="32.6" x2="68.9" y2="35.4" stroke="rgba(100, 160, 255, 0.17)" strokeWidth="4.3" strokeLinecap="round" />
+  <line x1="68.9" y1="35.4" x2="73.1" y2="39.4" stroke="rgba(100, 160, 255, 0.15)" strokeWidth="3.9" strokeLinecap="round" />
+  <line x1="73.1" y1="39.4" x2="76.4" y2="44.7" stroke="rgba(100, 160, 255, 0.13)" strokeWidth="3.6" strokeLinecap="round" />
+  <line x1="76.4" y1="44.7" x2="78.4" y2="50.9" stroke="rgba(100, 160, 255, 0.11)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="78.4" y1="50.9" x2="79.0" y2="57.8" stroke="rgba(100, 160, 255, 0.10)" strokeWidth="2.8" strokeLinecap="round" />
+  <line x1="79.0" y1="57.8" x2="77.8" y2="64.9" stroke="rgba(100, 160, 255, 0.08)" strokeWidth="2.5" strokeLinecap="round" />
+  <line x1="77.8" y1="64.9" x2="74.9" y2="71.9" stroke="rgba(100, 160, 255, 0.06)" strokeWidth="2.1" strokeLinecap="round" />
+  <line x1="74.9" y1="71.9" x2="70.1" y2="78.3" stroke="rgba(100, 160, 255, 0.04)" strokeWidth="1.7" strokeLinecap="round" />
+  <line x1="70.1" y1="78.3" x2="63.7" y2="83.7" stroke="rgba(100, 160, 255, 0.02)" strokeWidth="1.4" strokeLinecap="round" />
+  <line x1="50.0" y1="50.0" x2="49.6" y2="50.2" stroke="rgba(100, 160, 255, 0.40)" strokeWidth="11.6" strokeLinecap="round" />
+  <line x1="49.6" y1="50.2" x2="48.9" y2="50.4" stroke="rgba(100, 160, 255, 0.39)" strokeWidth="11.3" strokeLinecap="round" />
+  <line x1="48.9" y1="50.4" x2="48.1" y2="50.2" stroke="rgba(100, 160, 255, 0.39)" strokeWidth="10.9" strokeLinecap="round" />
+  <line x1="48.1" y1="50.2" x2="47.3" y2="49.6" stroke="rgba(100, 160, 255, 0.38)" strokeWidth="10.5" strokeLinecap="round" />
+  <line x1="47.3" y1="49.6" x2="46.5" y2="48.7" stroke="rgba(100, 160, 255, 0.37)" strokeWidth="10.2" strokeLinecap="round" />
+  <line x1="46.5" y1="48.7" x2="46.1" y2="47.4" stroke="rgba(100, 160, 255, 0.36)" strokeWidth="9.8" strokeLinecap="round" />
+  <line x1="46.1" y1="47.4" x2="46.1" y2="45.8" stroke="rgba(100, 160, 255, 0.35)" strokeWidth="9.4" strokeLinecap="round" />
+  <line x1="46.1" y1="45.8" x2="46.7" y2="44.1" stroke="rgba(100, 160, 255, 0.34)" strokeWidth="9.1" strokeLinecap="round" />
+  <line x1="46.7" y1="44.1" x2="47.8" y2="42.4" stroke="rgba(100, 160, 255, 0.33)" strokeWidth="8.7" strokeLinecap="round" />
+  <line x1="47.8" y1="42.4" x2="49.5" y2="40.9" stroke="rgba(100, 160, 255, 0.32)" strokeWidth="8.3" strokeLinecap="round" />
+  <line x1="49.5" y1="40.9" x2="51.8" y2="39.9" stroke="rgba(100, 160, 255, 0.31)" strokeWidth="8.0" strokeLinecap="round" />
+  <line x1="51.8" y1="39.9" x2="54.6" y2="39.4" stroke="rgba(100, 160, 255, 0.30)" strokeWidth="7.6" strokeLinecap="round" />
+  <line x1="54.6" y1="39.4" x2="57.6" y2="39.7" stroke="rgba(100, 160, 255, 0.29)" strokeWidth="7.2" strokeLinecap="round" />
+  <line x1="57.6" y1="39.7" x2="60.8" y2="40.9" stroke="rgba(100, 160, 255, 0.27)" strokeWidth="6.9" strokeLinecap="round" />
+  <line x1="60.8" y1="40.9" x2="63.8" y2="43.0" stroke="rgba(100, 160, 255, 0.26)" strokeWidth="6.5" strokeLinecap="round" />
+  <line x1="63.8" y1="43.0" x2="66.3" y2="46.0" stroke="rgba(100, 160, 255, 0.24)" strokeWidth="6.1" strokeLinecap="round" />
+  <line x1="66.3" y1="46.0" x2="68.2" y2="49.8" stroke="rgba(100, 160, 255, 0.23)" strokeWidth="5.8" strokeLinecap="round" />
+  <line x1="68.2" y1="49.8" x2="69.1" y2="54.3" stroke="rgba(100, 160, 255, 0.21)" strokeWidth="5.4" strokeLinecap="round" />
+  <line x1="69.1" y1="54.3" x2="68.9" y2="59.1" stroke="rgba(100, 160, 255, 0.20)" strokeWidth="5.0" strokeLinecap="round" />
+  <line x1="68.9" y1="59.1" x2="67.4" y2="64.1" stroke="rgba(100, 160, 255, 0.18)" strokeWidth="4.7" strokeLinecap="round" />
+  <line x1="67.4" y1="64.1" x2="64.6" y2="68.9" stroke="rgba(100, 160, 255, 0.17)" strokeWidth="4.3" strokeLinecap="round" />
+  <line x1="64.6" y1="68.9" x2="60.6" y2="73.1" stroke="rgba(100, 160, 255, 0.15)" strokeWidth="3.9" strokeLinecap="round" />
+  <line x1="60.6" y1="73.1" x2="55.3" y2="76.4" stroke="rgba(100, 160, 255, 0.13)" strokeWidth="3.6" strokeLinecap="round" />
+  <line x1="55.3" y1="76.4" x2="49.1" y2="78.4" stroke="rgba(100, 160, 255, 0.11)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="49.1" y1="78.4" x2="42.2" y2="79.0" stroke="rgba(100, 160, 255, 0.10)" strokeWidth="2.8" strokeLinecap="round" />
+  <line x1="42.2" y1="79.0" x2="35.1" y2="77.8" stroke="rgba(100, 160, 255, 0.08)" strokeWidth="2.5" strokeLinecap="round" />
+  <line x1="35.1" y1="77.8" x2="28.1" y2="74.9" stroke="rgba(100, 160, 255, 0.06)" strokeWidth="2.1" strokeLinecap="round" />
+  <line x1="28.1" y1="74.9" x2="21.7" y2="70.1" stroke="rgba(100, 160, 255, 0.04)" strokeWidth="1.7" strokeLinecap="round" />
+  <line x1="21.7" y1="70.1" x2="16.3" y2="63.7" stroke="rgba(100, 160, 255, 0.02)" strokeWidth="1.4" strokeLinecap="round" />
+  <line x1="50.0" y1="50.0" x2="49.8" y2="49.6" stroke="rgba(100, 160, 255, 0.40)" strokeWidth="11.6" strokeLinecap="round" />
+  <line x1="49.8" y1="49.6" x2="49.6" y2="48.9" stroke="rgba(100, 160, 255, 0.39)" strokeWidth="11.3" strokeLinecap="round" />
+  <line x1="49.6" y1="48.9" x2="49.8" y2="48.1" stroke="rgba(100, 160, 255, 0.39)" strokeWidth="10.9" strokeLinecap="round" />
+  <line x1="49.8" y1="48.1" x2="50.4" y2="47.3" stroke="rgba(100, 160, 255, 0.38)" strokeWidth="10.5" strokeLinecap="round" />
+  <line x1="50.4" y1="47.3" x2="51.3" y2="46.5" stroke="rgba(100, 160, 255, 0.37)" strokeWidth="10.2" strokeLinecap="round" />
+  <line x1="51.3" y1="46.5" x2="52.6" y2="46.1" stroke="rgba(100, 160, 255, 0.36)" strokeWidth="9.8" strokeLinecap="round" />
+  <line x1="52.6" y1="46.1" x2="54.2" y2="46.1" stroke="rgba(100, 160, 255, 0.35)" strokeWidth="9.4" strokeLinecap="round" />
+  <line x1="54.2" y1="46.1" x2="55.9" y2="46.7" stroke="rgba(100, 160, 255, 0.34)" strokeWidth="9.1" strokeLinecap="round" />
+  <line x1="55.9" y1="46.7" x2="57.6" y2="47.8" stroke="rgba(100, 160, 255, 0.33)" strokeWidth="8.7" strokeLinecap="round" />
+  <line x1="57.6" y1="47.8" x2="59.1" y2="49.5" stroke="rgba(100, 160, 255, 0.32)" strokeWidth="8.3" strokeLinecap="round" />
+  <line x1="59.1" y1="49.5" x2="60.1" y2="51.8" stroke="rgba(100, 160, 255, 0.31)" strokeWidth="8.0" strokeLinecap="round" />
+  <line x1="60.1" y1="51.8" x2="60.6" y2="54.6" stroke="rgba(100, 160, 255, 0.30)" strokeWidth="7.6" strokeLinecap="round" />
+  <line x1="60.6" y1="54.6" x2="60.3" y2="57.6" stroke="rgba(100, 160, 255, 0.29)" strokeWidth="7.2" strokeLinecap="round" />
+  <line x1="60.3" y1="57.6" x2="59.1" y2="60.8" stroke="rgba(100, 160, 255, 0.27)" strokeWidth="6.9" strokeLinecap="round" />
+  <line x1="59.1" y1="60.8" x2="57.0" y2="63.8" stroke="rgba(100, 160, 255, 0.26)" strokeWidth="6.5" strokeLinecap="round" />
+  <line x1="57.0" y1="63.8" x2="54.0" y2="66.3" stroke="rgba(100, 160, 255, 0.24)" strokeWidth="6.1" strokeLinecap="round" />
+  <line x1="54.0" y1="66.3" x2="50.2" y2="68.2" stroke="rgba(100, 160, 255, 0.23)" strokeWidth="5.8" strokeLinecap="round" />
+  <line x1="50.2" y1="68.2" x2="45.7" y2="69.1" stroke="rgba(100, 160, 255, 0.21)" strokeWidth="5.4" strokeLinecap="round" />
+  <line x1="45.7" y1="69.1" x2="40.9" y2="68.9" stroke="rgba(100, 160, 255, 0.20)" strokeWidth="5.0" strokeLinecap="round" />
+  <line x1="40.9" y1="68.9" x2="35.9" y2="67.4" stroke="rgba(100, 160, 255, 0.18)" strokeWidth="4.7" strokeLinecap="round" />
+  <line x1="35.9" y1="67.4" x2="31.1" y2="64.6" stroke="rgba(100, 160, 255, 0.17)" strokeWidth="4.3" strokeLinecap="round" />
+  <line x1="31.1" y1="64.6" x2="26.9" y2="60.6" stroke="rgba(100, 160, 255, 0.15)" strokeWidth="3.9" strokeLinecap="round" />
+  <line x1="26.9" y1="60.6" x2="23.6" y2="55.3" stroke="rgba(100, 160, 255, 0.13)" strokeWidth="3.6" strokeLinecap="round" />
+  <line x1="23.6" y1="55.3" x2="21.6" y2="49.1" stroke="rgba(100, 160, 255, 0.11)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="21.6" y1="49.1" x2="21.0" y2="42.2" stroke="rgba(100, 160, 255, 0.10)" strokeWidth="2.8" strokeLinecap="round" />
+  <line x1="21.0" y1="42.2" x2="22.2" y2="35.1" stroke="rgba(100, 160, 255, 0.08)" strokeWidth="2.5" strokeLinecap="round" />
+  <line x1="22.2" y1="35.1" x2="25.1" y2="28.1" stroke="rgba(100, 160, 255, 0.06)" strokeWidth="2.1" strokeLinecap="round" />
+  <line x1="25.1" y1="28.1" x2="29.9" y2="21.7" stroke="rgba(100, 160, 255, 0.04)" strokeWidth="1.7" strokeLinecap="round" />
+  <line x1="29.9" y1="21.7" x2="36.3" y2="16.3" stroke="rgba(100, 160, 255, 0.02)" strokeWidth="1.4" strokeLinecap="round" />
+  <line x1="50.0" y1="50.0" x2="50.4" y2="49.8" stroke="rgba(100, 160, 255, 0.40)" strokeWidth="11.6" strokeLinecap="round" />
+  <line x1="50.4" y1="49.8" x2="51.1" y2="49.6" stroke="rgba(100, 160, 255, 0.39)" strokeWidth="11.3" strokeLinecap="round" />
+  <line x1="51.1" y1="49.6" x2="51.9" y2="49.8" stroke="rgba(100, 160, 255, 0.39)" strokeWidth="10.9" strokeLinecap="round" />
+  <line x1="51.9" y1="49.8" x2="52.7" y2="50.4" stroke="rgba(100, 160, 255, 0.38)" strokeWidth="10.5" strokeLinecap="round" />
+  <line x1="52.7" y1="50.4" x2="53.5" y2="51.3" stroke="rgba(100, 160, 255, 0.37)" strokeWidth="10.2" strokeLinecap="round" />
+  <line x1="53.5" y1="51.3" x2="53.9" y2="52.6" stroke="rgba(100, 160, 255, 0.36)" strokeWidth="9.8" strokeLinecap="round" />
+  <line x1="53.9" y1="52.6" x2="53.9" y2="54.2" stroke="rgba(100, 160, 255, 0.35)" strokeWidth="9.4" strokeLinecap="round" />
+  <line x1="53.9" y1="54.2" x2="53.3" y2="55.9" stroke="rgba(100, 160, 255, 0.34)" strokeWidth="9.1" strokeLinecap="round" />
+  <line x1="53.3" y1="55.9" x2="52.2" y2="57.6" stroke="rgba(100, 160, 255, 0.33)" strokeWidth="8.7" strokeLinecap="round" />
+  <line x1="52.2" y1="57.6" x2="50.5" y2="59.1" stroke="rgba(100, 160, 255, 0.32)" strokeWidth="8.3" strokeLinecap="round" />
+  <line x1="50.5" y1="59.1" x2="48.2" y2="60.1" stroke="rgba(100, 160, 255, 0.31)" strokeWidth="8.0" strokeLinecap="round" />
+  <line x1="48.2" y1="60.1" x2="45.4" y2="60.6" stroke="rgba(100, 160, 255, 0.30)" strokeWidth="7.6" strokeLinecap="round" />
+  <line x1="45.4" y1="60.6" x2="42.4" y2="60.3" stroke="rgba(100, 160, 255, 0.29)" strokeWidth="7.2" strokeLinecap="round" />
+  <line x1="42.4" y1="60.3" x2="39.2" y2="59.1" stroke="rgba(100, 160, 255, 0.27)" strokeWidth="6.9" strokeLinecap="round" />
+  <line x1="39.2" y1="59.1" x2="36.2" y2="57.0" stroke="rgba(100, 160, 255, 0.26)" strokeWidth="6.5" strokeLinecap="round" />
+  <line x1="36.2" y1="57.0" x2="33.7" y2="54.0" stroke="rgba(100, 160, 255, 0.24)" strokeWidth="6.1" strokeLinecap="round" />
+  <line x1="33.7" y1="54.0" x2="31.8" y2="50.2" stroke="rgba(100, 160, 255, 0.23)" strokeWidth="5.8" strokeLinecap="round" />
+  <line x1="31.8" y1="50.2" x2="30.9" y2="45.7" stroke="rgba(100, 160, 255, 0.21)" strokeWidth="5.4" strokeLinecap="round" />
+  <line x1="30.9" y1="45.7" x2="31.1" y2="40.9" stroke="rgba(100, 160, 255, 0.20)" strokeWidth="5.0" strokeLinecap="round" />
+  <line x1="31.1" y1="40.9" x2="32.6" y2="35.9" stroke="rgba(100, 160, 255, 0.18)" strokeWidth="4.7" strokeLinecap="round" />
+  <line x1="32.6" y1="35.9" x2="35.4" y2="31.1" stroke="rgba(100, 160, 255, 0.17)" strokeWidth="4.3" strokeLinecap="round" />
+  <line x1="35.4" y1="31.1" x2="39.4" y2="26.9" stroke="rgba(100, 160, 255, 0.15)" strokeWidth="3.9" strokeLinecap="round" />
+  <line x1="39.4" y1="26.9" x2="44.7" y2="23.6" stroke="rgba(100, 160, 255, 0.13)" strokeWidth="3.6" strokeLinecap="round" />
+  <line x1="44.7" y1="23.6" x2="50.9" y2="21.6" stroke="rgba(100, 160, 255, 0.11)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="50.9" y1="21.6" x2="57.8" y2="21.0" stroke="rgba(100, 160, 255, 0.10)" strokeWidth="2.8" strokeLinecap="round" />
+  <line x1="57.8" y1="21.0" x2="64.9" y2="22.2" stroke="rgba(100, 160, 255, 0.08)" strokeWidth="2.5" strokeLinecap="round" />
+  <line x1="64.9" y1="22.2" x2="71.9" y2="25.1" stroke="rgba(100, 160, 255, 0.06)" strokeWidth="2.1" strokeLinecap="round" />
+  <line x1="71.9" y1="25.1" x2="78.3" y2="29.9" stroke="rgba(100, 160, 255, 0.04)" strokeWidth="1.7" strokeLinecap="round" />
+  <line x1="78.3" y1="29.9" x2="83.7" y2="36.3" stroke="rgba(100, 160, 255, 0.02)" strokeWidth="1.4" strokeLinecap="round" />
+</g>
+<g filter="blur(1.5px)">
+  <line x1="50.0" y1="50.0" x2="50.4" y2="50.0" stroke="rgba(255, 232, 31, 0.69)" strokeWidth="7.7" strokeLinecap="round" />
+  <line x1="50.4" y1="50.0" x2="50.9" y2="50.2" stroke="rgba(255, 232, 31, 0.68)" strokeWidth="7.4" strokeLinecap="round" />
+  <line x1="50.9" y1="50.2" x2="51.5" y2="50.6" stroke="rgba(255, 232, 31, 0.67)" strokeWidth="7.1" strokeLinecap="round" />
+  <line x1="51.5" y1="50.6" x2="51.9" y2="51.3" stroke="rgba(255, 232, 31, 0.66)" strokeWidth="6.8" strokeLinecap="round" />
+  <line x1="51.9" y1="51.3" x2="52.1" y2="52.2" stroke="rgba(255, 232, 31, 0.64)" strokeWidth="6.5" strokeLinecap="round" />
+  <line x1="52.1" y1="52.2" x2="52.1" y2="53.3" stroke="rgba(255, 232, 31, 0.62)" strokeWidth="6.2" strokeLinecap="round" />
+  <line x1="52.1" y1="53.3" x2="51.7" y2="54.5" stroke="rgba(255, 232, 31, 0.60)" strokeWidth="5.9" strokeLinecap="round" />
+  <line x1="51.7" y1="54.5" x2="50.9" y2="55.6" stroke="rgba(255, 232, 31, 0.57)" strokeWidth="5.6" strokeLinecap="round" />
+  <line x1="50.9" y1="55.6" x2="49.7" y2="56.6" stroke="rgba(255, 232, 31, 0.55)" strokeWidth="5.3" strokeLinecap="round" />
+  <line x1="49.7" y1="56.6" x2="48.2" y2="57.4" stroke="rgba(255, 232, 31, 0.52)" strokeWidth="5.0" strokeLinecap="round" />
+  <line x1="48.2" y1="57.4" x2="46.3" y2="57.8" stroke="rgba(255, 232, 31, 0.50)" strokeWidth="4.7" strokeLinecap="round" />
+  <line x1="46.3" y1="57.8" x2="44.2" y2="57.7" stroke="rgba(255, 232, 31, 0.47)" strokeWidth="4.4" strokeLinecap="round" />
+  <line x1="44.2" y1="57.7" x2="42.0" y2="57.1" stroke="rgba(255, 232, 31, 0.44)" strokeWidth="4.1" strokeLinecap="round" />
+  <line x1="42.0" y1="57.1" x2="39.8" y2="55.9" stroke="rgba(255, 232, 31, 0.41)" strokeWidth="3.8" strokeLinecap="round" />
+  <line x1="39.8" y1="55.9" x2="37.8" y2="54.1" stroke="rgba(255, 232, 31, 0.37)" strokeWidth="3.5" strokeLinecap="round" />
+  <line x1="37.8" y1="54.1" x2="36.1" y2="51.7" stroke="rgba(255, 232, 31, 0.34)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="36.1" y1="51.7" x2="34.9" y2="48.8" stroke="rgba(255, 232, 31, 0.31)" strokeWidth="2.9" strokeLinecap="round" />
+  <line x1="34.9" y1="48.8" x2="34.3" y2="45.5" stroke="rgba(255, 232, 31, 0.27)" strokeWidth="2.6" strokeLinecap="round" />
+  <line x1="34.3" y1="45.5" x2="34.5" y2="41.9" stroke="rgba(255, 232, 31, 0.24)" strokeWidth="2.3" strokeLinecap="round" />
+  <line x1="34.5" y1="41.9" x2="35.5" y2="38.2" stroke="rgba(255, 232, 31, 0.20)" strokeWidth="2.0" strokeLinecap="round" />
+  <line x1="35.5" y1="38.2" x2="37.3" y2="34.6" stroke="rgba(255, 232, 31, 0.16)" strokeWidth="1.7" strokeLinecap="round" />
+  <line x1="37.3" y1="34.6" x2="40.1" y2="31.3" stroke="rgba(255, 232, 31, 0.12)" strokeWidth="1.4" strokeLinecap="round" />
+  <line x1="40.1" y1="31.3" x2="43.6" y2="28.5" stroke="rgba(255, 232, 31, 0.08)" strokeWidth="1.1" strokeLinecap="round" />
+  <line x1="43.6" y1="28.5" x2="47.9" y2="26.4" stroke="rgba(255, 232, 31, 0.04)" strokeWidth="0.8" strokeLinecap="round" />
+  <line x1="50.0" y1="50.0" x2="50.0" y2="50.4" stroke="rgba(255, 232, 31, 0.69)" strokeWidth="7.7" strokeLinecap="round" />
+  <line x1="50.0" y1="50.4" x2="49.8" y2="50.9" stroke="rgba(255, 232, 31, 0.68)" strokeWidth="7.4" strokeLinecap="round" />
+  <line x1="49.8" y1="50.9" x2="49.4" y2="51.5" stroke="rgba(255, 232, 31, 0.67)" strokeWidth="7.1" strokeLinecap="round" />
+  <line x1="49.4" y1="51.5" x2="48.7" y2="51.9" stroke="rgba(255, 232, 31, 0.66)" strokeWidth="6.8" strokeLinecap="round" />
+  <line x1="48.7" y1="51.9" x2="47.8" y2="52.1" stroke="rgba(255, 232, 31, 0.64)" strokeWidth="6.5" strokeLinecap="round" />
+  <line x1="47.8" y1="52.1" x2="46.7" y2="52.1" stroke="rgba(255, 232, 31, 0.62)" strokeWidth="6.2" strokeLinecap="round" />
+  <line x1="46.7" y1="52.1" x2="45.5" y2="51.7" stroke="rgba(255, 232, 31, 0.60)" strokeWidth="5.9" strokeLinecap="round" />
+  <line x1="45.5" y1="51.7" x2="44.4" y2="50.9" stroke="rgba(255, 232, 31, 0.57)" strokeWidth="5.6" strokeLinecap="round" />
+  <line x1="44.4" y1="50.9" x2="43.4" y2="49.7" stroke="rgba(255, 232, 31, 0.55)" strokeWidth="5.3" strokeLinecap="round" />
+  <line x1="43.4" y1="49.7" x2="42.6" y2="48.2" stroke="rgba(255, 232, 31, 0.52)" strokeWidth="5.0" strokeLinecap="round" />
+  <line x1="42.6" y1="48.2" x2="42.2" y2="46.3" stroke="rgba(255, 232, 31, 0.50)" strokeWidth="4.7" strokeLinecap="round" />
+  <line x1="42.2" y1="46.3" x2="42.3" y2="44.2" stroke="rgba(255, 232, 31, 0.47)" strokeWidth="4.4" strokeLinecap="round" />
+  <line x1="42.3" y1="44.2" x2="42.9" y2="42.0" stroke="rgba(255, 232, 31, 0.44)" strokeWidth="4.1" strokeLinecap="round" />
+  <line x1="42.9" y1="42.0" x2="44.1" y2="39.8" stroke="rgba(255, 232, 31, 0.41)" strokeWidth="3.8" strokeLinecap="round" />
+  <line x1="44.1" y1="39.8" x2="45.9" y2="37.8" stroke="rgba(255, 232, 31, 0.37)" strokeWidth="3.5" strokeLinecap="round" />
+  <line x1="45.9" y1="37.8" x2="48.3" y2="36.1" stroke="rgba(255, 232, 31, 0.34)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="48.3" y1="36.1" x2="51.2" y2="34.9" stroke="rgba(255, 232, 31, 0.31)" strokeWidth="2.9" strokeLinecap="round" />
+  <line x1="51.2" y1="34.9" x2="54.5" y2="34.3" stroke="rgba(255, 232, 31, 0.27)" strokeWidth="2.6" strokeLinecap="round" />
+  <line x1="54.5" y1="34.3" x2="58.1" y2="34.5" stroke="rgba(255, 232, 31, 0.24)" strokeWidth="2.3" strokeLinecap="round" />
+  <line x1="58.1" y1="34.5" x2="61.8" y2="35.5" stroke="rgba(255, 232, 31, 0.20)" strokeWidth="2.0" strokeLinecap="round" />
+  <line x1="61.8" y1="35.5" x2="65.4" y2="37.3" stroke="rgba(255, 232, 31, 0.16)" strokeWidth="1.7" strokeLinecap="round" />
+  <line x1="65.4" y1="37.3" x2="68.7" y2="40.1" stroke="rgba(255, 232, 31, 0.12)" strokeWidth="1.4" strokeLinecap="round" />
+  <line x1="68.7" y1="40.1" x2="71.5" y2="43.6" stroke="rgba(255, 232, 31, 0.08)" strokeWidth="1.1" strokeLinecap="round" />
+  <line x1="71.5" y1="43.6" x2="73.6" y2="47.9" stroke="rgba(255, 232, 31, 0.04)" strokeWidth="0.8" strokeLinecap="round" />
+  <line x1="50.0" y1="50.0" x2="49.6" y2="50.0" stroke="rgba(255, 232, 31, 0.69)" strokeWidth="7.7" strokeLinecap="round" />
+  <line x1="49.6" y1="50.0" x2="49.1" y2="49.8" stroke="rgba(255, 232, 31, 0.68)" strokeWidth="7.4" strokeLinecap="round" />
+  <line x1="49.1" y1="49.8" x2="48.5" y2="49.4" stroke="rgba(255, 232, 31, 0.67)" strokeWidth="7.1" strokeLinecap="round" />
+  <line x1="48.5" y1="49.4" x2="48.1" y2="48.7" stroke="rgba(255, 232, 31, 0.66)" strokeWidth="6.8" strokeLinecap="round" />
+  <line x1="48.1" y1="48.7" x2="47.9" y2="47.8" stroke="rgba(255, 232, 31, 0.64)" strokeWidth="6.5" strokeLinecap="round" />
+  <line x1="47.9" y1="47.8" x2="47.9" y2="46.7" stroke="rgba(255, 232, 31, 0.62)" strokeWidth="6.2" strokeLinecap="round" />
+  <line x1="47.9" y1="46.7" x2="48.3" y2="45.5" stroke="rgba(255, 232, 31, 0.60)" strokeWidth="5.9" strokeLinecap="round" />
+  <line x1="48.3" y1="45.5" x2="49.1" y2="44.4" stroke="rgba(255, 232, 31, 0.57)" strokeWidth="5.6" strokeLinecap="round" />
+  <line x1="49.1" y1="44.4" x2="50.3" y2="43.4" stroke="rgba(255, 232, 31, 0.55)" strokeWidth="5.3" strokeLinecap="round" />
+  <line x1="50.3" y1="43.4" x2="51.8" y2="42.6" stroke="rgba(255, 232, 31, 0.52)" strokeWidth="5.0" strokeLinecap="round" />
+  <line x1="51.8" y1="42.6" x2="53.7" y2="42.2" stroke="rgba(255, 232, 31, 0.50)" strokeWidth="4.7" strokeLinecap="round" />
+  <line x1="53.7" y1="42.2" x2="55.8" y2="42.3" stroke="rgba(255, 232, 31, 0.47)" strokeWidth="4.4" strokeLinecap="round" />
+  <line x1="55.8" y1="42.3" x2="58.0" y2="42.9" stroke="rgba(255, 232, 31, 0.44)" strokeWidth="4.1" strokeLinecap="round" />
+  <line x1="58.0" y1="42.9" x2="60.2" y2="44.1" stroke="rgba(255, 232, 31, 0.41)" strokeWidth="3.8" strokeLinecap="round" />
+  <line x1="60.2" y1="44.1" x2="62.2" y2="45.9" stroke="rgba(255, 232, 31, 0.37)" strokeWidth="3.5" strokeLinecap="round" />
+  <line x1="62.2" y1="45.9" x2="63.9" y2="48.3" stroke="rgba(255, 232, 31, 0.34)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="63.9" y1="48.3" x2="65.1" y2="51.2" stroke="rgba(255, 232, 31, 0.31)" strokeWidth="2.9" strokeLinecap="round" />
+  <line x1="65.1" y1="51.2" x2="65.7" y2="54.5" stroke="rgba(255, 232, 31, 0.27)" strokeWidth="2.6" strokeLinecap="round" />
+  <line x1="65.7" y1="54.5" x2="65.5" y2="58.1" stroke="rgba(255, 232, 31, 0.24)" strokeWidth="2.3" strokeLinecap="round" />
+  <line x1="65.5" y1="58.1" x2="64.5" y2="61.8" stroke="rgba(255, 232, 31, 0.20)" strokeWidth="2.0" strokeLinecap="round" />
+  <line x1="64.5" y1="61.8" x2="62.7" y2="65.4" stroke="rgba(255, 232, 31, 0.16)" strokeWidth="1.7" strokeLinecap="round" />
+  <line x1="62.7" y1="65.4" x2="59.9" y2="68.7" stroke="rgba(255, 232, 31, 0.12)" strokeWidth="1.4" strokeLinecap="round" />
+  <line x1="59.9" y1="68.7" x2="56.4" y2="71.5" stroke="rgba(255, 232, 31, 0.08)" strokeWidth="1.1" strokeLinecap="round" />
+  <line x1="56.4" y1="71.5" x2="52.1" y2="73.6" stroke="rgba(255, 232, 31, 0.04)" strokeWidth="0.8" strokeLinecap="round" />
+  <line x1="50.0" y1="50.0" x2="50.0" y2="49.6" stroke="rgba(255, 232, 31, 0.69)" strokeWidth="7.7" strokeLinecap="round" />
+  <line x1="50.0" y1="49.6" x2="50.2" y2="49.1" stroke="rgba(255, 232, 31, 0.68)" strokeWidth="7.4" strokeLinecap="round" />
+  <line x1="50.2" y1="49.1" x2="50.6" y2="48.5" stroke="rgba(255, 232, 31, 0.67)" strokeWidth="7.1" strokeLinecap="round" />
+  <line x1="50.6" y1="48.5" x2="51.3" y2="48.1" stroke="rgba(255, 232, 31, 0.66)" strokeWidth="6.8" strokeLinecap="round" />
+  <line x1="51.3" y1="48.1" x2="52.2" y2="47.9" stroke="rgba(255, 232, 31, 0.64)" strokeWidth="6.5" strokeLinecap="round" />
+  <line x1="52.2" y1="47.9" x2="53.3" y2="47.9" stroke="rgba(255, 232, 31, 0.62)" strokeWidth="6.2" strokeLinecap="round" />
+  <line x1="53.3" y1="47.9" x2="54.5" y2="48.3" stroke="rgba(255, 232, 31, 0.60)" strokeWidth="5.9" strokeLinecap="round" />
+  <line x1="54.5" y1="48.3" x2="55.6" y2="49.1" stroke="rgba(255, 232, 31, 0.57)" strokeWidth="5.6" strokeLinecap="round" />
+  <line x1="55.6" y1="49.1" x2="56.6" y2="50.3" stroke="rgba(255, 232, 31, 0.55)" strokeWidth="5.3" strokeLinecap="round" />
+  <line x1="56.6" y1="50.3" x2="57.4" y2="51.8" stroke="rgba(255, 232, 31, 0.52)" strokeWidth="5.0" strokeLinecap="round" />
+  <line x1="57.4" y1="51.8" x2="57.8" y2="53.7" stroke="rgba(255, 232, 31, 0.50)" strokeWidth="4.7" strokeLinecap="round" />
+  <line x1="57.8" y1="53.7" x2="57.7" y2="55.8" stroke="rgba(255, 232, 31, 0.47)" strokeWidth="4.4" strokeLinecap="round" />
+  <line x1="57.7" y1="55.8" x2="57.1" y2="58.0" stroke="rgba(255, 232, 31, 0.44)" strokeWidth="4.1" strokeLinecap="round" />
+  <line x1="57.1" y1="58.0" x2="55.9" y2="60.2" stroke="rgba(255, 232, 31, 0.41)" strokeWidth="3.8" strokeLinecap="round" />
+  <line x1="55.9" y1="60.2" x2="54.1" y2="62.2" stroke="rgba(255, 232, 31, 0.37)" strokeWidth="3.5" strokeLinecap="round" />
+  <line x1="54.1" y1="62.2" x2="51.7" y2="63.9" stroke="rgba(255, 232, 31, 0.34)" strokeWidth="3.2" strokeLinecap="round" />
+  <line x1="51.7" y1="63.9" x2="48.8" y2="65.1" stroke="rgba(255, 232, 31, 0.31)" strokeWidth="2.9" strokeLinecap="round" />
+  <line x1="48.8" y1="65.1" x2="45.5" y2="65.7" stroke="rgba(255, 232, 31, 0.27)" strokeWidth="2.6" strokeLinecap="round" />
+  <line x1="45.5" y1="65.7" x2="41.9" y2="65.5" stroke="rgba(255, 232, 31, 0.24)" strokeWidth="2.3" strokeLinecap="round" />
+  <line x1="41.9" y1="65.5" x2="38.2" y2="64.5" stroke="rgba(255, 232, 31, 0.20)" strokeWidth="2.0" strokeLinecap="round" />
+  <line x1="38.2" y1="64.5" x2="34.6" y2="62.7" stroke="rgba(255, 232, 31, 0.16)" strokeWidth="1.7" strokeLinecap="round" />
+  <line x1="34.6" y1="62.7" x2="31.3" y2="59.9" stroke="rgba(255, 232, 31, 0.12)" strokeWidth="1.4" strokeLinecap="round" />
+  <line x1="31.3" y1="59.9" x2="28.5" y2="56.4" stroke="rgba(255, 232, 31, 0.08)" strokeWidth="1.1" strokeLinecap="round" />
+  <line x1="28.5" y1="56.4" x2="26.4" y2="52.1" stroke="rgba(255, 232, 31, 0.04)" strokeWidth="0.8" strokeLinecap="round" />
+  <circle cx="58.6" cy="56.9" r="2.0" fill="rgba(255,255,255,0.70)" />
+  <circle cx="27.2" cy="73.5" r="1.0" fill="rgba(255,255,255,0.30)" />
+  <circle cx="51.5" cy="48.5" r="2.4" fill="rgba(255,255,255,0.79)" />
+  <circle cx="89.3" cy="49.8" r="0.8" fill="rgba(255,255,255,0.15)" />
+  <circle cx="71.9" cy="78.1" r="0.9" fill="rgba(255,255,255,0.24)" />
+  <circle cx="22.7" cy="75.7" r="0.8" fill="rgba(255,255,255,0.19)" />
+  <circle cx="48.4" cy="58.1" r="2.1" fill="rgba(255,255,255,0.74)" />
+  <circle cx="32.6" cy="56.6" r="1.7" fill="rgba(255,255,255,0.59)" />
+  <circle cx="48.4" cy="51.6" r="2.4" fill="rgba(255,255,255,0.79)" />
+  <circle cx="33.1" cy="38.0" r="1.6" fill="rgba(255,255,255,0.55)" />
+  <circle cx="51.1" cy="60.5" r="2.0" fill="rgba(255,255,255,0.71)" />
+  <circle cx="29.7" cy="48.1" r="1.6" fill="rgba(255,255,255,0.56)" />
+  <circle cx="61.1" cy="69.5" r="1.5" fill="rgba(255,255,255,0.52)" />
+  <circle cx="53.5" cy="40.4" r="2.0" fill="rgba(255,255,255,0.71)" />
+  <circle cx="55.6" cy="18.0" r="1.1" fill="rgba(255,255,255,0.31)" />
+  <circle cx="62.2" cy="12.8" r="0.8" fill="rgba(255,255,255,0.15)" />
+  <circle cx="44.2" cy="53.4" r="2.2" fill="rgba(255,255,255,0.75)" />
+  <circle cx="64.9" cy="36.9" r="1.6" fill="rgba(255,255,255,0.57)" />
+  <circle cx="59.8" cy="62.0" r="1.8" fill="rgba(255,255,255,0.64)" />
+  <circle cx="49.2" cy="31.4" r="1.7" fill="rgba(255,255,255,0.59)" />
+  <circle cx="70.3" cy="70.4" r="1.2" fill="rgba(255,255,255,0.39)" />
+  <circle cx="19.6" cy="63.1" r="1.0" fill="rgba(255,255,255,0.29)" />
+  <circle cx="47.7" cy="67.8" r="1.7" fill="rgba(255,255,255,0.60)" />
+  <circle cx="22.6" cy="21.7" r="0.7" fill="rgba(255,255,255,0.14)" />
+</g>
 
-                    <circle cx="49.5" cy="50.5" r="2.7" fill="rgba(255,255,255,0.46)" />
-                    <circle cx="38.2" cy="59.6" r="2.7" fill="rgba(255,255,255,0.69)" />
-                    <circle cx="61.7" cy="34.2" r="2.7" fill="rgba(255,255,255,0.73)" />
-                    <circle cx="7.6" cy="58.3" r="2.8" fill="rgba(255,255,255,0.44)" />
-                    <circle cx="46.9" cy="62.3" r="1.6" fill="rgba(255,255,255,0.54)" />
-                    <circle cx="49.3" cy="18.5" r="2.7" fill="rgba(255,255,255,0.65)" />
-                    <circle cx="69.5" cy="13.9" r="2.5" fill="rgba(255,255,255,0.77)" />
-                    <circle cx="49.8" cy="42.7" r="2.7" fill="rgba(255,255,255,0.55)" />
-                    <circle cx="39.3" cy="56.5" r="2.0" fill="rgba(255,255,255,0.46)" />
-                    <circle cx="14.6" cy="55.0" r="1.6" fill="rgba(255,255,255,0.51)" />
-                    <circle cx="22.8" cy="50.6" r="2.1" fill="rgba(255,255,255,0.51)" />
-                    <circle cx="48.8" cy="91.2" r="1.5" fill="rgba(255,255,255,0.42)" />
-                    <circle cx="38.9" cy="77.7" r="1.2" fill="rgba(255,255,255,0.61)" />
-                    <circle cx="21.8" cy="20.5" r="2.4" fill="rgba(255,255,255,0.45)" />
-                    <circle cx="39.8" cy="72.2" r="1.5" fill="rgba(255,255,255,0.48)" />
-                  </g>
-                </svg>
+              </svg>
               </div>
             </div>
 
