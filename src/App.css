@@ -787,10 +787,9 @@
     width: 100vw !important;
   }
 
-  /* GPU bottleneck relief: Flatten the 3D Star Wars crawl on mobile and remove the alpha mask */
+  /* GPU bottleneck relief: Keep the alpha mask disabled for performance */
   /* Mobile GPUs cannot composite 400 blurred cards through an alpha mask while scrolling */
   .crawl-tilt {
-    transform: none !important;
     margin-left: 0 !important;
     padding-left: 0 !important;
     width: 100% !important;
