@@ -956,15 +956,4 @@ body[data-intro-mode="false"] [class*="kofi-"] {
   pointer-events: none !important;
 }
 
-/* Center the Ko-fi button on mobile devices */
-@media (max-width: 768px) {
-  body[data-intro-mode="true"] iframe.floatingchat-container-mobi,
-  body[data-intro-mode="true"] [id*="kofi-wo-container"] {
-    position: fixed !important;
-    left: 50% !important;
-    right: auto !important;
-    bottom: 20px !important;
-    margin: 0 !important;
-    transform: translateX(-50%) !important;
-  }
-}
+
