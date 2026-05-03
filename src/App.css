@@ -960,9 +960,11 @@ body[data-intro-mode="false"] [class*="kofi-"] {
 @media (max-width: 768px) {
   body[data-intro-mode="true"] iframe.floatingchat-container-mobi,
   body[data-intro-mode="true"] [id*="kofi-wo-container"] {
+    position: fixed !important;
     left: 50% !important;
     right: auto !important;
-    transform: translateX(-50%) !important;
     bottom: 20px !important;
+    margin: 0 !important;
+    transform: translateX(-50%) !important;
   }
 }
