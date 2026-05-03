@@ -509,14 +509,7 @@ export default function TimelineCrawl({ activeItemId, onSelect, isFullscreen, on
 
         <div className="crawl-title">
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', paddingTop: '10px' }}>
-            <p style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '0.65rem',
-              color: '#38bdf8',
-              fontStyle: 'italic',
-              margin: '0 0 -2px 0',
-              opacity: 0.8
-            }}>Historical Records Active</p>
+
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div style={{ width: '5px', height: '5px', background: '#38bdf8', transform: 'rotate(45deg)', boxShadow: '0 0 8px #38bdf8' }} />
               <h2 style={{
