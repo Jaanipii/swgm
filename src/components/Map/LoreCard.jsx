@@ -15,10 +15,10 @@ export default function LoreCard({ activeItemId, activePlanetId, activeHistorica
   const [isWikiLoading, setIsWikiLoading] = useState(false);
   const [showSyncModal, setShowSyncModal] = useState(false);
   const [syncTypes, setSyncTypes] = useState(['movie', 'series']);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1023);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1023 && window.innerHeight > window.innerWidth);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1023);
+    const handleResize = () => setIsMobile(window.innerWidth <= 1023 && window.innerHeight > window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
