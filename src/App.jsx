@@ -936,63 +936,97 @@ function App() {
           </div>
         )}
 
-        <button
-          onClick={() => {
-            if (!isIntroMode) {
+        {/* Back Button (Map View Only) */}
+        {!isIntroMode && (
+          <button
+            onClick={() => {
               setLoreMode(null);
               setIsJumping(true);
               setIsMapTransitioning(true);
               setTimeout(() => setIsJumping(false), 4000);
               setTimeout(() => setIsMapTransitioning(false), 4400);
               setIsIntroMode(true);
-            } else {
-              setIsSnakeTimelineOpen(true);
-            }
-          }}
-          style={{
-            position: 'absolute',
-            bottom: '20px',
-            left: '20px',
-            zIndex: 40,
-            background: 'rgba(10, 20, 40, 0.8)',
-            border: '1px solid rgba(255, 232, 31, 0.4)',
-            color: '#FFE81F',
-            padding: '0',
-            borderRadius: '50%',
-            width: '44px',
-            height: '44px',
-            cursor: 'pointer',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)',
-            transition: 'all 0.3s ease',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0
-          }}
-          title={!isIntroMode ? "Return to Archives" : "Open Full Timeline"}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(255, 232, 31, 0.15)';
-            e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 232, 31, 0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(10, 20, 40, 0.8)';
-            e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.5)';
-          }}
-        >
-          {!isIntroMode ? (
+            }}
+            style={{
+              position: 'fixed',
+              bottom: 'max(16px, env(safe-area-inset-bottom))',
+              left: '16px',
+              zIndex: 9998,
+              background: 'rgba(10, 20, 40, 0.8)',
+              border: '1px solid rgba(255, 232, 31, 0.4)',
+              color: '#FFE81F',
+              padding: '0',
+              borderRadius: '50%',
+              width: '44px',
+              height: '44px',
+              cursor: 'pointer',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)',
+              transition: 'all 0.3s ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}
+            title="Return to Archives"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 232, 31, 0.15)';
+              e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 232, 31, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(10, 20, 40, 0.8)';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.5)';
+            }}
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFE81F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="19" y1="12" x2="5" y2="12"></line>
               <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
-          ) : (
+          </button>
+        )}
+
+        {/* Snake Timeline Button (Map View Only) */}
+        {!isIntroMode && (
+          <button
+            onClick={() => setIsSnakeTimelineOpen(true)}
+            style={{
+              position: 'fixed',
+              bottom: 'max(16px, env(safe-area-inset-bottom))',
+              right: '16px',
+              zIndex: 9998,
+              background: 'rgba(10, 20, 40, 0.8)',
+              border: '1px solid rgba(255, 232, 31, 0.4)',
+              color: '#FFE81F',
+              padding: '0',
+              borderRadius: '50%',
+              width: '44px',
+              height: '44px',
+              cursor: 'pointer',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)',
+              transition: 'all 0.3s ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}
+            title="Open Full Timeline"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 232, 31, 0.15)';
+              e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 232, 31, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(10, 20, 40, 0.8)';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.5)';
+            }}
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFE81F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 4 L4 8 L20 8 L20 12 L4 12 L4 16 L20 16 L20 20" />
               <circle cx="4" cy="4" r="1.5" fill="#FFE81F" />
               <circle cx="20" cy="20" r="1.5" fill="#FFE81F" />
             </svg>
-          )}
-        </button>
+          </button>
+        )}
       </div>
 
       <AnimatePresence>
