@@ -225,7 +225,7 @@ function App() {
           isMapTransitioning={isMapTransitioning}
           onPlanetHighlight={handlePlanetHighlight}
           panTrigger={panTrigger}
-          hideControls={isMobile && !isIntroMode && mobileViewMode !== 'legend'}
+          hideControls={!isIntroMode && mobileViewMode !== 'legend'}
         />
       </motion.div>
 
@@ -251,8 +251,8 @@ function App() {
       {/* Hide UI elements while physically jumping into the map */}
       <div className={`ui-elements-container ${isMapTransitioning ? 'transitioning' : ''}`}>
 
-        {/* Mobile: Sliding Episode Guide Panel (from right) */}
-        {isMobile && !isIntroMode && (
+        {/* Sliding Episode Guide Panel (from right) — all screen sizes */}
+        {!isIntroMode && (
           <div style={{
             position: 'fixed',
             top: 0,
@@ -285,13 +285,12 @@ function App() {
           </div>
         )}
 
-        {/* Desktop: Timeline (always visible unless map-only explore mode) */}
-        {/* Also renders on mobile during intro mode (before jumping to map) */}
-        {(isIntroMode || (!isMobile && mobileViewMode !== 'map')) && (
+        {/* Intro mode: Timeline always visible (full crawl view) */}
+        {isIntroMode && (
           <TimelineCrawl 
             activeItemId={activeEpisodeId} 
             onSelect={handleTimelineSelect} 
-            isFullscreen={isIntroMode}
+            isFullscreen={true}
             onEraChange={handleEraChange}
             onHistoricalEventSelect={handleEventMarkerSelect}
             onItemFocus={handleTimelineFocus}
@@ -320,8 +319,8 @@ function App() {
           watchedIds={watchedIds}
         />
 
-        {/* Mobile: 3 circular toggle buttons at bottom */}
-        {isMobile && !isIntroMode && (
+        {/* 3 circular toggle buttons at bottom — all screen sizes */}
+        {!isIntroMode && (
           <div style={{
             position: 'fixed',
             bottom: 'max(16px, env(safe-area-inset-bottom))',
@@ -396,45 +395,6 @@ function App() {
               </svg>
             </button>
           </div>
-        )}
-
-        {/* Desktop: Explore Mode toggle (non-mobile only) */}
-        {!isMobile && !isIntroMode && (
-          <button
-            onClick={() => setMobileViewMode(mobileViewMode === 'map' ? 'guide' : 'map')}
-            title={mobileViewMode === 'map' ? 'Show Episode Guide' : 'Explore Map Only'}
-            style={{
-              position: 'fixed',
-              top: '20px',
-              left: '20px',
-              zIndex: 9998,
-              width: '44px',
-              height: '44px',
-              borderRadius: '50%',
-              border: `1px solid ${mobileViewMode === 'map' ? '#ffe81f' : 'rgba(130, 220, 255, 0.4)'}`,
-              background: mobileViewMode === 'map' ? 'rgba(255, 232, 31, 0.15)' : 'rgba(10, 20, 40, 0.8)',
-              color: mobileViewMode === 'map' ? '#ffe81f' : '#82dcff',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backdropFilter: 'blur(5px)',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)'
-            }}
-          >
-            {mobileViewMode === 'map' ? (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            ) : (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                <line x1="1" y1="1" x2="23" y2="23"></line>
-              </svg>
-            )}
-          </button>
         )}
 
         <button

@@ -291,10 +291,7 @@ export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra,
       const { setTransform } = transformComponentRef.current;
       const vw = window.innerWidth;
       const vh = window.innerHeight;
-      const sidebarOffset = vw >= 1024 ? 450 : 0;
-      
-      // Center over Galactic Core (Coruscant area = ~1250 native + 1200 offset) -> ~2450
-      const visibleCenterX = (vw - sidebarOffset) / 2;
+      const visibleCenterX = vw / 2;
       const visibleCenterY = vh / 2;
       const px = 2450;
       const py = 2450;
@@ -330,8 +327,7 @@ export default function GalaxyMap({ activePlanetId, previousPlanetId, activeEra,
       const targetScale = 3.3; 
       const vw = window.innerWidth;
       const vh = window.innerHeight;
-      const sidebarOffset = vw >= 1024 ? 450 : 0;
-      const visibleCenterX = (vw - sidebarOffset) / 2;
+      const visibleCenterX = vw / 2;
       const visibleCenterY = vh / 2;
       
       const px = activeStarSystem.x + 1200;
