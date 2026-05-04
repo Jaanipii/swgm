@@ -920,8 +920,8 @@ function App() {
               rel="noopener noreferrer"
               style={{
                 position: 'fixed',
-                bottom: '10px',
-                left: '20px',
+                bottom: '26px',
+                left: '180px',
                 color: 'rgba(255, 255, 255, 0.4)',
                 fontSize: '0.7rem',
                 fontFamily: 'Inter, sans-serif',
