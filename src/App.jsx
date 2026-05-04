@@ -912,6 +912,29 @@ function App() {
               <span className="holo-text">ENTER HYPERSPACE</span>
             </button>
             </div>
+            
+            {/* Fallback Direct Link below the widget */}
+            <a
+              href="https://ko-fi.com/thegalacticarchive"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                position: 'fixed',
+                bottom: '10px',
+                left: '20px',
+                color: 'rgba(255, 255, 255, 0.4)',
+                fontSize: '0.7rem',
+                fontFamily: 'Inter, sans-serif',
+                textDecoration: 'underline',
+                zIndex: 1000,
+                pointerEvents: 'auto',
+                transition: 'color 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.4)'}
+            >
+              Direct Support Link
+            </a>
           </div>
         )}
 
