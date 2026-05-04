@@ -818,6 +818,13 @@ function App() {
                         <li><strong style={{ color: '#38bdf8' }}>Disney+ Integration:</strong> Click the Disney+ icon on supported titles to launch directly into the episode or movie.</li>
                       </ul>
 
+                      <p style={{ marginTop: '10px', marginBottom: '5px', color: '#fff' }}><strong>Data Sources & Engine:</strong></p>
+                      <ul style={{ paddingLeft: '20px', margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <li><strong style={{ color: '#38bdf8' }}>Wookieepedia API:</strong> Lore card abstracts, summaries, and thumbnails are dynamically fetched in real-time from Wookieepedia.</li>
+                        <li><strong style={{ color: '#38bdf8' }}>Timeline Engine:</strong> The timeline database is compiled based on the official Star Wars canon continuity.</li>
+                        <li><strong style={{ color: '#38bdf8' }}>Astrometrics:</strong> Planet coordinates and hyperspace lanes are synthesized from published canon maps and the Star Wars Essential Atlas.</li>
+                      </ul>
+
                       <div style={{ marginTop: '10px', padding: '15px', background: 'rgba(56, 189, 248, 0.05)', borderLeft: '3px solid #38bdf8', fontSize: '0.8rem', color: '#94a3b8' }}>
                         <strong>DISCLAIMER:</strong> The Galactic Archives is an unofficial fan-made project. It is not endorsed by, sponsored by, or affiliated with Lucasfilm Ltd., The Walt Disney Company, or any of their affiliates. "Star Wars" and all related names, characters, vehicles, and locations are registered trademarks of their respective owners. This application is provided for free for educational and entertainment purposes only.
                       </div>
