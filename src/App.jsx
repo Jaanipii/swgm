@@ -912,6 +912,45 @@ function App() {
               <span className="holo-text">ENTER HYPERSPACE</span>
             </button>
             </div>
+            
+            {/* Native Support Us Button */}
+            <a
+              href="https://ko-fi.com/thegalacticarchive"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                position: 'fixed',
+                bottom: '30px',
+                right: '30px',
+                background: '#fcbf47',
+                color: '#323842',
+                padding: '12px 20px',
+                borderRadius: '30px',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: '600',
+                fontSize: '0.95rem',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                boxShadow: '0 4px 15px rgba(252, 191, 71, 0.3)',
+                zIndex: 1000,
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(252, 191, 71, 0.5)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(252, 191, 71, 0.3)';
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.051-3.954-1.094-1.465-1.066-2.846-1.066-2.846s-.067-1.646 1.631-2.45c1.782-.843 3.916.144 4.113 1.156.126.65.176.666.176.666s.05-.015.176-.666c.196-1.011 2.33-.119 4.111 1.156 1.698.804 1.633 2.45 1.633 2.45s.027 1.381-1.067 2.846h-.001zm5.992-1.386c-1.897 0-2.404-.002-2.404-.002s-.019-.854-.017-3.072c0 0 .507-.002 2.404-.002 2.766 0 2.827 3.076 2.827 3.076s.047 3.072-2.827 3.072z"/>
+              </svg>
+              Support Us
+            </a>
           </div>
         )}
 
